@@ -2,17 +2,16 @@
   import { latitude, longitude, forecast, isLoading } from '../stores/forecast.store';
 </script>
 
-<h4>Current Weather on {$latitude} | {$longitude}</h4>
 {#if $isLoading}
   <p>Loading...</p>
 {/if}
 
-{#if $forecast}
-  <pre>
-    {@html JSON.stringify($forecast.current, null, 2)}
-  </pre>
+{#if !$isLoading && $forecast}
+  <h3>Current Weather on {$latitude} | {$longitude}</h3>
+  <h4>Temperature: {$forecast.current.temperature_2m}</h4>
+  <h4>Feels like: {$forecast.current.apparent_temperature}</h4>  
 {/if}
 
-{#if $forecast === null}
+{#if !$isLoading && !$forecast}
   <p>No data available</p>
 {/if}
