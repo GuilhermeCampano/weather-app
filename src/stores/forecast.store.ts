@@ -1,6 +1,8 @@
 import { get, writable } from 'svelte/store';
 import type { ForecastApiResponse } from '../models/forecast.model';
+import { cities } from '../models/cities.model';
 
+export const selectedCity = writable(cities[0]);
 export const latitude = writable(0);
 export const longitude = writable(0);
 export const forecast = writable<ForecastApiResponse | null>(null);
