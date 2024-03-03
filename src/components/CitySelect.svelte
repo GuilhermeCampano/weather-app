@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { cities } from '../models/cities.model';
-  import { latitude, longitude, forecast, fetchForecast, selectedCity } from '../stores/forecast.store';
+  import { latitude, longitude, fetchForecast, selectedCity } from '../stores/forecast.store';
 
 	$: {
 		if($selectedCity.name !== 'Custom') {
-			latitude.set(<number>$selectedCity.latitude);
-			longitude.set(<number>$selectedCity.longitude);
+			latitude.set($selectedCity.latitude);
+			longitude.set($selectedCity.longitude);
 		}
 	}
 

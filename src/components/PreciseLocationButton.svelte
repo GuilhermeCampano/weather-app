@@ -3,7 +3,7 @@
   
   function getLocation() {
     try {
-      navigator.geolocation.getCurrentPosition((position: GeolocationPosition) => {
+      navigator.geolocation.getCurrentPosition((position) => {
         latitude.set(position.coords.latitude);
         longitude.set(position.coords.longitude);
         fetchForecast();

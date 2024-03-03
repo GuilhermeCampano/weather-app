@@ -1,11 +1,11 @@
 export interface CityOption {
   name: string;
-  latitude: number | null;
-  longitude: number | null;
+  latitude: number;
+  longitude: number;
 }
 
 export const cities: CityOption[] = [
-  {name: 'Custom', latitude: null, longitude: null},
+  {name: 'Custom', latitude: 0, longitude: 0},
   { name: 'New York', latitude: 40.7128, longitude: -74.006 },
   { name: 'London', latitude: 51.5074, longitude: -0.1278 },
   { name: 'Tokyo', latitude: 35.6895, longitude: 139.6917 },
