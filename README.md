@@ -1,38 +1,45 @@
-# create-svelte
+# Weather App
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+You can view the deployed app [here](https://guilhermecampano.github.io/weather-app/).
 
-## Creating a project
 
-If you're seeing this, you've probably already done this step. Congrats!
+## About
+
+This is an experimental project to get used to working with Svelte. It uses the [Open-Meteo](https://open-meteo.com/) API to create a simple weather application with the following features:
+
+- Display the current weather
+- Show the weather forecast for the next 7 days
+- Get the user's location to show local weather
+- Autocomplete location search
+
+## Local Development
+
+Follow these steps to serve the app locally:
+
+1. Clone the repository:
 
 ```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
+git clone https://github.com/Guilhermecampano/weather-app.git
 ```
 
-## Developing
+2. Install the dependencies:
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+```bash
+cd weather-app
+npm install
+```
+
+3. Serve the app:
 
 ```bash
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
 
-To create a production version of your app:
+## Build
 
 ```bash
 npm run build
+npm run preview
 ```
 
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
