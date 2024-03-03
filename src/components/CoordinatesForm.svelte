@@ -1,6 +1,7 @@
 
 <script lang="ts">
-  import { latitude, longitude, fetchForecast } from '../stores/forecast.store';
+	import { fetchForecast, latitude, longitude } from "$lib/stores/forecast.store";
+
 </script>
 
 <input type="number" bind:value={$latitude} />

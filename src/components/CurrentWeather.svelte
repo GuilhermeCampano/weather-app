@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { latitude, longitude, forecast, isLoading } from '../stores/forecast.store';
+	import { isLoading, forecast, latitude, longitude } from "$lib/stores/forecast.store";
 </script>
 
 {#if $isLoading}

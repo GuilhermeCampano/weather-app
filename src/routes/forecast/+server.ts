@@ -1,5 +1,5 @@
 import { json } from '@sveltejs/kit';
-import type { ForecastApiResponse } from '../../models';
+import type { ForecastApiResponse } from '../../lib/models';
 
 const FORECAST_ENDPOINT = 'https://api.open-meteo.com/v1/forecast';
 

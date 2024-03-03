@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { cities } from '../models/cities.model';
-  import { latitude, longitude, fetchForecast, selectedCity } from '../stores/forecast.store';
+	import { cities } from '$lib/models/';
 
+	import { latitude, longitude, selectedCity, fetchForecast } from '$lib/stores/forecast.store';
 	$: {
 		if($selectedCity.name !== 'Custom') {
 			latitude.set($selectedCity.latitude);

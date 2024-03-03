@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { latitude, longitude, fetchForecast } from '../stores/forecast.store';
+	import { latitude, longitude, fetchForecast } from "$lib/stores/forecast.store";
   
   function getLocation() {
     try {
