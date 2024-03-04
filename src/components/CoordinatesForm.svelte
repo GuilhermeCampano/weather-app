@@ -6,5 +6,5 @@
 
 <input type="number" bind:value={$latitude} />
 <input type="number" bind:value={$longitude} />
-
+<br />
 <button on:click={() => fetchForecast()}>Fetch Forecast</button>

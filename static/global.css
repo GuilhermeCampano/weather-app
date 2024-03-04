@@ -4,7 +4,10 @@
   --color-light-gray: #f8f9fa;
   --color-gray: #484848;
   --color-dark-gray: #343a40;
-  --color-peach: #FFC9AB;
+  --color-blue: #3768C6;
+  --color-orange: #F77C55;
+  --color-light-orange: #FFC9AB;
+  --color-yellow: #F7A655;
 
   /* Spacing */
   --default-spacing: 1rem;
@@ -22,12 +25,13 @@
 }
 
 body {
-  background-color: var(--color-peach);
+  background-color: var(--color-light-orange);
   color: var(--color-dark-gray);
   font-size: 16px;
   font-family: 'Open Sans', sans-serif;
   margin: 0.5rem;
   padding: 1rem;
+  overflow: hidden;
 }
 
 @media screen and (min-width: 768px) {
@@ -250,4 +254,46 @@ p {
 
 .text-right {
   text-align: right;
+}
+
+input {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007BFF;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+input {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+  font-size: 16px;
+  margin: 10px;
+}
+
+button, select {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  color: var(--color-light-gray);
+  background-color: var(--color-blue);
+  cursor: pointer;
+  margin: 10px 0;
 }

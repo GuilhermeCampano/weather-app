@@ -1,3 +1,5 @@
+import type { WeatherCode } from "./weather-code.model";
+
 export interface ForecastAPIRequest {
   latitude: number;
   longitude: number;
@@ -45,11 +47,13 @@ export interface Current {
   showers: number;
   snowfall: number;
   weather_code: number;
+  wind_speed_10m: number;
 }
 
 export interface Hourly {
   time: string[];
   temperature_2m: number[];
+  precipitation_probability: number[];
 }
 
 export interface DailyUnits {
@@ -61,6 +65,7 @@ export interface DailyUnits {
   apparent_temperature_min: string;
   precipitation_sum: string;
   snowfall_sum: string;
+  precipitation_probability_mean: string;
 }
 
 export interface Daily {
@@ -72,4 +77,15 @@ export interface Daily {
   apparent_temperature_min: number[];
   precipitation_sum: number[];
   snowfall_sum: number[];
+  precipitation_probability_mean: number[];
+}
+
+export interface CurrentWeatherCard {
+  temperature: number;
+  temperatureMax: number;
+  temperatureMin: number;
+  apparentTemperature: number;
+  precipitationChance: number;
+  weatherCode: WeatherCode;
+  windSpeed: number;
 }

@@ -5,9 +5,10 @@
 	import CurrentWeather from "../components/CurrentWeather.svelte";
 </script>
 
-<h1>Weather App</h1>
 
-<PreciseLocationButton />
 <CitySelect />
+<br />
 <CoordinatesForm />
+<PreciseLocationButton />
+
 <CurrentWeather /> 
