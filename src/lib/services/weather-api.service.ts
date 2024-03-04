@@ -44,10 +44,8 @@ export class WeatherApiService {
   }
 
   public async getForecast(latitude: string, longitude: string): Promise<ForecastApiResponse> {
-    console.log('GET /forecast');
     try {
       const request = this.getForecastUrl(latitude, longitude);
-      console.log(request);
       const response = await fetch(request);
       const data: ForecastApiResponse = await response.json();
       return data;
