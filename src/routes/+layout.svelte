@@ -1,11 +1,13 @@
 <script lang="ts">
+	import FloatingCircle from "../components/FloatingCircle.svelte";
+
 </script>
-<nav>
-  <ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/about">About</a></li>
-  </ul>
-</nav>
+
+
+<FloatingCircle size="400px" top="10%" left="70%"></FloatingCircle>
+<FloatingCircle size="100px" top="80%" left="5%"></FloatingCircle>
+<FloatingCircle size="40px" top="95%" left="5%"></FloatingCircle>
+
 <main>
   <slot></slot>
 </main>
