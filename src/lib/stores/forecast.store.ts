@@ -9,7 +9,6 @@ export const longitude = writable(0);
 export const forecast = writable<ForecastApiResponse | null>(null);
 export const isLoading = writable(false);
 
-
 export async function fetchForecast() {
   const weatherApiService = new WeatherApiService();
   isLoading.set(true);

@@ -1,4 +1,4 @@
-import { WeatherCode } from "$lib/models/weather-code-icon.model";
+import { WeatherCode } from "$lib/models/weather-code.model";
 import type { ForecastApiResponse } from "../models";
 export class WeatherApiService {
   constructor() {}

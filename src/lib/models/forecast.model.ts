@@ -1,4 +1,4 @@
-import type { WeatherCode } from "./weather-code-icon.model";
+import type { WeatherCode } from "./weather-code.model";
 
 export interface ForecastAPIRequest {
   latitude: number;

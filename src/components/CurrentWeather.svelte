@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { isLoading, currentWeather } from '$lib/stores/forecast.store';
 	import Card from './Card.svelte';
+	import WeatherIcon from './WeatherIcon.svelte';
 </script>
 
 
@@ -14,7 +15,10 @@
   <div class="weather__container">
     <div>
       <h5 class="my-1">Now</h5>
-      <div class="weather__temperature">{$currentWeather.temperature}°</div>
+      <div class="weather__temperature">
+				{$currentWeather.temperature}°
+				<WeatherIcon code={$currentWeather.weatherCode} size="large"/>
+			</div>
       <div class="weather__high-low">
         <div>High: {$currentWeather.temperatureMax}°</div>
         <div>Low: {$currentWeather.temperatureMin}°</div>
@@ -65,4 +69,11 @@
 	.weather__code-text {
 		text-transform: capitalize;
 	}
+
+	:global(.weather-icon) {
+		position: relative;
+		top: 0;
+		left: -30px
+	}
+
 </style>
