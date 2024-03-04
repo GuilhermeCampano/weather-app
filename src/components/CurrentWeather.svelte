@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { isLoading, forecast, latitude, longitude } from '$lib/stores/forecast.store';
+	import { isLoading, currentWeather } from '$lib/stores/forecast.store';
 	import Card from './Card.svelte';
 </script>
 
@@ -10,26 +10,26 @@
 		<p>Loading...</p>
 	{/if}
 
-	{#if !$isLoading && $forecast}
+	{#if !$isLoading && $currentWeather}
   <div class="weather__container">
     <div>
       <h5 class="my-1">Now</h5>
-      <div class="weather__temperature">{$forecast.current.temperature_2m}°</div>
+      <div class="weather__temperature">{$currentWeather.temperature}°</div>
       <div class="weather__high-low">
-        <div>High: 10</div>
-        <div>Low: 5</div>
+        <div>High: {$currentWeather.temperatureMax}°</div>
+        <div>Low: {$currentWeather.temperatureMin}°</div>
       </div>
     </div>
     <div class="text-right">
-      <strong>Partly Cloud</strong>
-      <div class="weather__feel-like mb-5">Feels Like <strong>{$forecast.current.apparent_temperature}°</strong></div>
-      <div>Rain: <strong>20%</strong></div>
-      <div>Wind: <strong>10km/h</strong></div>
+      <strong class="weather__code-text">{$currentWeather.weatherCode.replace(/-/g, ' ')}</strong>
+      <div class="weather__feel-like mb-5">Feels Like <strong>{$currentWeather.apparentTemperature}°</strong></div>
+      <div>Rain: <strong>{$currentWeather.precipitationChance}%</strong></div>	
+      <div>Wind: <strong>{$currentWeather.windSpeed}km/h</strong></div>
     </div>
   </div>
 	{/if}
 
-	{#if !$isLoading && !$forecast}
+	{#if !$isLoading && !$currentWeather}
 		<h2>Please select a location</h2>
 	{/if}
 </Card>
@@ -53,11 +53,16 @@
 		display: flex;
 		flex-direction: row;
 		align-items: start;
+		gap: 0.5rem;	
 		justify-content: space-between;
 	}
 
 	.weather__feel-like {
 		font-size: var(--font-sm);
 		text-align: right;
+	}
+
+	.weather__code-text {
+		text-transform: capitalize;
 	}
 </style>
