@@ -22,7 +22,7 @@ export const currentWeather = derived(forecast, ($forecast) => {
     return <CurrentWeatherCard>{
       temperature: Math.round($forecast.current.temperature_2m),
       apparentTemperature: Math.round($forecast.current.apparent_temperature),
-      precipitationChance: WeatherApiService.getCurrentPrecipitationChance($forecast),
+      precipitationChance: $forecast.current.precipitation_probability,
       windSpeed: Math.round($forecast.current.wind_speed_10m),
       weatherCode: WeatherApiService.geWeatherCode($forecast.current.weather_code),
       temperatureMax: Math.round($forecast.daily.temperature_2m_max[0]),

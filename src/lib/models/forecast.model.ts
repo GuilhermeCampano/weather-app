@@ -1,4 +1,4 @@
-import type { WeatherCode } from "./weather-code.model";
+import type { WeatherCodeDetails } from "./weather-code.model";
 
 export interface ForecastAPIRequest {
   latitude: number;
@@ -17,23 +17,10 @@ export interface ForecastApiResponse {
   current: Current;
   hourly_units: Units;
   hourly: Hourly;
-  daily_units: DailyUnits;
+  daily_units: Units;
   daily: Daily;
 }
 
-export interface Units {
-  time: string;
-  interval?: string;
-  temperature_2m: string;
-  relative_humidity_2m?: string;
-  apparent_temperature?: string;
-  is_day?: string;
-  precipitation?: string;
-  rain?: string;
-  showers?: string;
-  snowfall?: string;
-  weather_code: string;
-}
 
 export interface Current {
   time: string;
@@ -48,6 +35,7 @@ export interface Current {
   snowfall: number;
   weather_code: number;
   wind_speed_10m: number;
+  precipitation_probability: number;
 }
 
 export interface Hourly {
@@ -56,16 +44,26 @@ export interface Hourly {
   precipitation_probability: number[];
 }
 
-export interface DailyUnits {
+export interface Units {
   time: string;
+  interval?: string;
+  temperature_2m: string;
+  relative_humidity_2m?: string;
+  apparent_temperature?: string;
+  is_day?: string;
+  precipitation?: string;
+  rain?: string;
+  showers?: string;
+  snowfall?: string;
   weather_code: string;
-  temperature_2m_max: string;
-  temperature_2m_min: string;
-  apparent_temperature_max: string;
-  apparent_temperature_min: string;
-  precipitation_sum: string;
-  snowfall_sum: string;
-  precipitation_probability_mean: string;
+  precipitation_probability?: string;
+  temperature_2m_max?: string;
+  temperature_2m_min?: string;
+  apparent_temperature_max?: string;
+  apparent_temperature_min?: string;
+  precipitation_sum?: string;
+  snowfall_sum?: string;
+  precipitation_probability_mean?: string;
 }
 
 export interface Daily {
@@ -86,6 +84,6 @@ export interface CurrentWeatherCard {
   temperatureMin: number;
   apparentTemperature: number;
   precipitationChance: number;
-  weatherCode: WeatherCode;
+  weatherCode: WeatherCodeDetails;
   windSpeed: number;
 }
