@@ -8,11 +8,12 @@
 
 <style>
   .card {
-    background-color: rgba(255,255,255, 0.5);
+    background-color: var(--color-off-white);
     border: 1px solid var(--color-light-grey);
     border-radius: 20px;
     padding: 16px;
     margin: 1rem 0rem;
+    box-shadow: 0px 4px 4px 0px var(--color-shadow);
   }
 
   .card--small{
