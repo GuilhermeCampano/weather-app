@@ -8,6 +8,7 @@ export class WeatherApiService {
     'relative_humidity_2m',
     'apparent_temperature',
     'is_day',
+    'precipitation_probability',
     'rain',
     'showers',
     'snowfall', 
@@ -52,19 +53,6 @@ export class WeatherApiService {
       console.error(error);
       throw new Error('Error fetching forecast data');
     }
-  }
-  
-  static getTodayPrecipitationProbability(forecast: ForecastApiResponse): number {
-    return forecast.daily.precipitation_probability_mean[0];
-  }
-  
-  static getCurrentPrecipitationChance(forecast: ForecastApiResponse): number {
-    const timeLocal = forecast.current.time;
-    const findHourlyIndex = forecast.hourly.time.findIndex((time) => time === timeLocal);
-    if(findHourlyIndex === -1) {
-      return 0;
-    }
-    return forecast.hourly.precipitation_probability[findHourlyIndex] * 100;
   }
 
   static geWeatherCode(code: number): WeatherCode {
