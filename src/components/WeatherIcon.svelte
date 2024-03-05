@@ -1,25 +1,40 @@
 <script lang="ts">
-  import { WeatherCode, WeatherEmojis } from "$lib/models";
+	import type { WeatherCodeDetails } from "$lib/models";
 
-  export let code: WeatherCode;
+	export let iconDetails: WeatherCodeDetails;
 
-  export let size: "small" | "medium" | "large" = "small";
+	export let size: 'small' | 'medium' | 'large' = 'small';
+
+
 </script>
 
-<span class={`weather-icon weather-icon--${size}`}>
-  {WeatherEmojis[code]}
-</span>
+<i class={`material-symbols-outlined icon--${size} icon--${iconDetails.color}`} aria-label={iconDetails.description}>
+	{iconDetails.icon}
+</i>
+
 
 <style>
-  .weather-icon--small {
-    font-size: 1rem;
-  }
+	.icon--small {
+		font-size: 1rem;
+	}
 
-  .weather-icon--medium {
-    font-size: 2rem;
-  }
+	.icon--medium {
+		font-size: 2rem;
+	}
 
-  .weather-icon--large {
-    font-size: 3rem;
-  }
+	.icon--large {
+		font-size: 3rem;
+	}
+
+	.icon--yellow {
+		color: var(--color-yellow);
+	}
+
+	.icon--blue {
+		color: var(--color-blue);
+	}
+
+	.icon--orange {
+		color: var(--color-grey);
+	}
 </style>

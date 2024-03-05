@@ -1,4 +1,4 @@
-import type { WeatherCode } from "./weather-code.model";
+import type { WeatherCodeDetails } from "./weather-code.model";
 
 export interface ForecastAPIRequest {
   latitude: number;
@@ -84,6 +84,6 @@ export interface CurrentWeatherCard {
   temperatureMin: number;
   apparentTemperature: number;
   precipitationChance: number;
-  weatherCode: WeatherCode;
+  weatherCode: WeatherCodeDetails;
   windSpeed: number;
 }

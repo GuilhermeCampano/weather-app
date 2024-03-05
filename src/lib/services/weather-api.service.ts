@@ -1,5 +1,5 @@
-import { WeatherCode } from "$lib/models/weather-code.model";
-import type { ForecastApiResponse } from "../models";
+import { WeatherCode, WeatherCodeDetailsMap } from "$lib/models/weather-code.model";
+import type { ForecastApiResponse, WeatherCodeDetails } from "../models";
 export class WeatherApiService {
   constructor() {}
   private readonly FORECAST_ENDPOINT = 'https://api.open-meteo.com/v1/forecast';
@@ -55,27 +55,29 @@ export class WeatherApiService {
     }
   }
 
-  static geWeatherCode(code: number): WeatherCode {
+  static geWeatherCode(code: number): WeatherCodeDetails {
+    let weatherCode;
     if (code >= 0 && code <= 19) {
-      return WeatherCode.ClearSky;
+      weatherCode = WeatherCode.ClearSky;
     } else if (code >= 20 && code <= 29) {
-      return WeatherCode.PartlyCloudy;
+      weatherCode = WeatherCode.PartlyCloudy;
     } else if (code >= 30 && code <= 39) {
-      return WeatherCode.Cloudy;
+      weatherCode = WeatherCode.Cloudy;
     } else if (code >= 40 && code <= 49) {
-      return WeatherCode.Overcast;
+      weatherCode = WeatherCode.Overcast;
     } else if (code >= 50 && code <= 59) {
-      return WeatherCode.Fog;
+      weatherCode = WeatherCode.Fog;
     } else if (code >= 60 && code <= 69) {
-      return WeatherCode.FreezingFog;
+      weatherCode = WeatherCode.FreezingFog;
     } else if (code >= 70 && code <= 79) {
-      return WeatherCode.Drizzle;
+      weatherCode = WeatherCode.Drizzle;
     } else if (code >= 80 && code <= 89) {
-      return WeatherCode.Rain;
+      weatherCode = WeatherCode.Rain;
     } else if (code >= 90 && code <= 99) {
-      return WeatherCode.Snow;
+      weatherCode = WeatherCode.Snow;
     } else {
       throw new Error('Invalid weather code');
     }
+    return WeatherCodeDetailsMap.get(weatherCode) as WeatherCodeDetails;
   }
 }

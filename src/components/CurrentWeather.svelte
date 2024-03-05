@@ -17,7 +17,7 @@
       <h5 class="my-1">Now</h5>
       <div class="weather__temperature">
 				{$currentWeather.temperature}°
-				<WeatherIcon code={$currentWeather.weatherCode} size="large"/>
+				<WeatherIcon iconDetails={$currentWeather.weatherCode} size="large"/>
 			</div>
       <div class="weather__high-low">
         <div>High: {$currentWeather.temperatureMax}°</div>
@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="text-right">
-      <strong class="weather__code-text">{$currentWeather.weatherCode.replace(/-/g, ' ')}</strong>
+      <strong class="weather__code-text">{$currentWeather.weatherCode.description.replace(/-/g, ' ')}</strong>
       <div class="weather__feel-like mb-5">Feels Like <strong>{$currentWeather.apparentTemperature}°</strong></div>
       <div>Rain: <strong>{$currentWeather.precipitationChance}%</strong></div>	
       <div>Wind: <strong>{$currentWeather.windSpeed}km/h</strong></div>
