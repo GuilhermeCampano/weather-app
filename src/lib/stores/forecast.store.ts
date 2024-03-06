@@ -1,5 +1,5 @@
-import { derived, get, writable } from 'svelte/store';
-import type { CurrentWeatherCard, ForecastApiResponse } from '../models/forecast.model';
+import { derived, get, writable, type Readable } from 'svelte/store';
+import type { CurrentWeatherCard, ForecastApiResponse, ForecastDayCard } from '../models/forecast.model';
 import { cities } from '../models/cities.model';
 import { WeatherApiService } from '../services/weather-api.service';
 
@@ -17,18 +17,29 @@ export async function fetchForecast() {
   isLoading.set(false);
 }
 
-export const currentWeather = derived(forecast, ($forecast) => {
-  if ($forecast) {
-    return <CurrentWeatherCard>{
-      temperature: Math.round($forecast.current.temperature_2m),
-      apparentTemperature: Math.round($forecast.current.apparent_temperature),
-      precipitationChance: $forecast.current.precipitation_probability,
-      windSpeed: Math.round($forecast.current.wind_speed_10m),
-      weatherCode: WeatherApiService.geWeatherCode($forecast.current.weather_code),
-      temperatureMax: Math.round($forecast.daily.temperature_2m_max[0]),
-      temperatureMin: Math.round($forecast.daily.temperature_2m_min[0])
-    };
-  }
-  return null;
+export const currentWeather: Readable<CurrentWeatherCard | null> = derived(forecast, ($forecast) => {
+  if (!$forecast) return null;
+  return <CurrentWeatherCard>{
+    temperature: Math.round($forecast.current.temperature_2m),
+    apparentTemperature: Math.round($forecast.current.apparent_temperature),
+    precipitationChance: $forecast.current.precipitation_probability,
+    windSpeed: Math.round($forecast.current.wind_speed_10m),
+    weatherCode: WeatherApiService.geWeatherCode($forecast.current.weather_code),
+    temperatureMax: Math.round($forecast.daily.temperature_2m_max[0]),
+    temperatureMin: Math.round($forecast.daily.temperature_2m_min[0])
+  };
 });
+
+export const weekForecast: Readable<ForecastDayCard[]> = derived(forecast, ($forecast) => {
+  if (!$forecast) return [];
+  
+  return $forecast.daily.time.map((day, index) => {
+    return <ForecastDayCard>{
+      dayOfWeek: new Date(day).toLocaleDateString('en-US', { weekday: 'long' }),
+      temperature: Math.round($forecast.daily.temperature_2m_max[index]),
+      weatherCode: WeatherApiService.geWeatherCode($forecast.daily.weather_code[index])
+    };
+  });
+});
+
 

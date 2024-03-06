@@ -37,14 +37,10 @@ body {
   overflow: hidden;
   min-height: 100vh;
   width: 100%;
+  max-width: 920px;
+  margin-inline: auto;
 }
 
-@media screen and (min-width: 768px) {
-  body {
-    max-width: 900px;
-    margin-inline: auto;
-  }
-}
 
 * {
   box-sizing: border-box;

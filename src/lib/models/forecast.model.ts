@@ -87,3 +87,9 @@ export interface CurrentWeatherCard {
   weatherCode: WeatherCodeDetails;
   windSpeed: number;
 }
+
+export interface ForecastDayCard {
+  dayOfWeek: string;
+  temperature: number;
+  weatherCode: WeatherCodeDetails;
+}
