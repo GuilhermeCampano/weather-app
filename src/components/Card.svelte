@@ -17,8 +17,8 @@
   }
 
   .card--small{
-    width: min-content;
-    min-height: 100px;
+    width: auto;
+    height: 168px;
   }
 
   .card--large {

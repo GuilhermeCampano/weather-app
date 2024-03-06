@@ -2,14 +2,12 @@
 	import PreciseLocationButton from '../components/PreciseLocationButton.svelte';
 	import CitySelect from '../components/CitySelect.svelte';
 	import CurrentWeather from '../components/CurrentWeather.svelte';
-	import FloatingCircle from '../components/FloatingCircle.svelte';
+	import ForecastNextDays from '../components/ForecastNextDays.svelte';
 
 </script>
 
 <CitySelect />
 <PreciseLocationButton />
 <CurrentWeather />
-
-<FloatingCircle size="300px" top="15%" left="70%"></FloatingCircle>
-<FloatingCircle size="100px" top="80%" left="5%"></FloatingCircle>
-<FloatingCircle size="40px" top="90%" left="5%"></FloatingCircle>
+<div class="my-5"></div>
+<ForecastNextDays />
