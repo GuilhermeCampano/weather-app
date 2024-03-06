@@ -1,11 +1,11 @@
 <script lang="ts">
 	export let size = '200px';
-	export let top = '0px';
-	export let left = '0px';
-
-	const circleTop = `calc(min(100vh - ${size}, ${top}))`;
-	const circleLeft = `calc(min(100vw - ${size}, ${left}))`;
-	const circleStyle = `width: ${size}; height: ${size}; top: ${circleTop}; left: ${circleLeft};`
+	export let top = 'auto';
+	export let left = 'auto';
+	export let right = 'auto';
+	export let bottom = 'auto';
+	
+	const circleStyle = `width: ${size}; height: ${size}; top: ${top}; left: ${left}; right: min(${right}, 300px); bottom: ${bottom}`
 </script>
 
 <div class="floating-circle" style={circleStyle}></div>
