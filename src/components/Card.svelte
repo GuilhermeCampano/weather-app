@@ -21,21 +21,23 @@
     height: 168px;
   }
 
-  .card--large {
-    width: auto;
+  .card--large{
     min-height: 200px;
     margin: 0 auto;
-    margin-right: -10%;
-    padding-right: 10%;
+    position: relative;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
+    width: calc(100vw - 1rem);
+    right: auto;
   }
 
   @media screen and (min-width: 768px) {
     .card--large {
+      width: auto;
       border-radius: 20px;
       margin-right: auto;
       padding-right: 1rem;
+      right: 0;
     }
 	}
 

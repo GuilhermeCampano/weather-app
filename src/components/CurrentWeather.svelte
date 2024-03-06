@@ -4,7 +4,6 @@
 	import WeatherIcon from './WeatherIcon.svelte';
 </script>
 
-
 <p>Today</p>
 <Card size="large">
 	{#if $isLoading}
@@ -12,25 +11,33 @@
 	{/if}
 
 	{#if !$isLoading && $currentWeather}
-  <div class="weather__container">
-    <div>
-      <h5 class="my-1">Now</h5>
-      <div class="weather__temperature">
-				{$currentWeather.temperature}°
-				<WeatherIcon iconDetails={$currentWeather.weatherCode} size="large"/>
+		<div class="weather__container">
+			<div>
+				<h5 class="my-1">Now</h5>
+				<div class="weather__temperature">
+					{$currentWeather.temperature}°
+					<span
+						class="weather__icon"
+						class:weather__icon--two-digits={$currentWeather.temperature > 9}
+						><WeatherIcon iconDetails={$currentWeather.weatherCode} size="large" /></span
+					>
+				</div>
+				<div class="weather__high-low">
+					<div>High: {$currentWeather.temperatureMax}°</div>
+					<div>Low: {$currentWeather.temperatureMin}°</div>
+				</div>
 			</div>
-      <div class="weather__high-low">
-        <div>High: {$currentWeather.temperatureMax}°</div>
-        <div>Low: {$currentWeather.temperatureMin}°</div>
-      </div>
-    </div>
-    <div class="text-right">
-      <strong class="weather__code-text">{$currentWeather.weatherCode.description.replace(/-/g, ' ')}</strong>
-      <div class="weather__feel-like mb-5">Feels Like <strong>{$currentWeather.apparentTemperature}°</strong></div>
-      <div>Rain: <strong>{$currentWeather.precipitationChance}%</strong></div>	
-      <div>Wind: <strong>{$currentWeather.windSpeed}km/h</strong></div>
-    </div>
-  </div>
+			<div class="text-right">
+				<strong class="weather__code-text"
+					>{$currentWeather.weatherCode.description.replace(/-/g, ' ')}</strong
+				>
+				<div class="weather__feel-like mb-5">
+					Feels Like <strong>{$currentWeather.apparentTemperature}°</strong>
+				</div>
+				<div>Rain: <strong>{$currentWeather.precipitationChance}%</strong></div>
+				<div>Wind: <strong>{$currentWeather.windSpeed}km/h</strong></div>
+			</div>
+		</div>
 	{/if}
 
 	{#if !$isLoading && !$currentWeather}
@@ -57,7 +64,7 @@
 		display: flex;
 		flex-direction: row;
 		align-items: start;
-		gap: 0.5rem;	
+		gap: 0.5rem;
 		justify-content: space-between;
 	}
 
@@ -70,10 +77,13 @@
 		text-transform: capitalize;
 	}
 
-	:global(.weather-icon) {
-		position: relative;
-		top: 0;
-		left: -30px
+	.weather__icon {
+		position: absolute;
+		top: 30%;
+		left: 80px;
 	}
 
+	.weather__icon--two-digits {
+		left: 130px;
+	}
 </style>

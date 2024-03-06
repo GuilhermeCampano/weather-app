@@ -16,7 +16,7 @@
 		background: linear-gradient(#f78a95, #f8b36f);
 		animation: float 5s ease-in-out infinite;
 		z-index: -1;
-		position: absolute;
+		position: fixed;
 	}	
 
 	@keyframes float {
