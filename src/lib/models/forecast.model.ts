@@ -1,5 +1,3 @@
-import type { WeatherCodeDetails } from "./weather-code.model";
-
 export interface ForecastAPIRequest {
   latitude: number;
   longitude: number;
@@ -69,26 +67,4 @@ export interface Units {
   precipitation_sum?: string;
   snowfall_sum?: string;
   precipitation_probability_mean?: string;
-}
-
-export interface CurrentWeatherCard {
-  temperature: number;
-  temperatureMax: number;
-  temperatureMin: number;
-  apparentTemperature: number;
-  precipitationChance: number;
-  weatherCode: WeatherCodeDetails;
-  windSpeed: number;
-}
-
-export interface ForecastDayCard {
-  dayOfWeek: string;
-  temperature: number;
-  weatherCode: WeatherCodeDetails;
-}
-
-export interface ForecastHourCard {
-  time: string;
-  temperature: number;
-  weatherCode: WeatherCodeDetails;
 }

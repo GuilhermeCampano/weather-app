@@ -1,7 +1,7 @@
 import { derived, get, writable, type Readable } from 'svelte/store';
-import type { CurrentWeatherCard, ForecastApiResponse, ForecastDayCard, ForecastHourCard } from '../models/forecast.model';
 import { cities } from '../models/cities.model';
 import { WeatherApiService } from '../services/weather-api.service';
+import type { ForecastApiResponse, ForecastCurrentCard, ForecastDayCard, ForecastHourCard } from '$lib/models';
 
 export const selectedCity = writable(cities[0]);
 export const latitude = writable(0);
@@ -17,9 +17,9 @@ export async function fetchForecast() {
   isLoading.set(false);
 }
 
-export const currentWeather: Readable<CurrentWeatherCard | null> = derived(forecast, ($forecast) => {
+export const currentWeather: Readable<ForecastCurrentCard | null> = derived(forecast, ($forecast) => {
   if (!$forecast) return null;
-  return <CurrentWeatherCard>{
+  return <ForecastCurrentCard>{
     temperature: Math.round($forecast.current.temperature_2m),
     apparentTemperature: Math.round($forecast.current.apparent_temperature),
     precipitationChance: $forecast.current.precipitation_probability,
