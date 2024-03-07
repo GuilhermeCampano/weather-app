@@ -1,18 +1,18 @@
 <script lang="ts">
-	import { isLoading, weekForecast } from '$lib/stores/forecast.store';
+	import { isLoading, weekForecastCards } from '$lib/stores/forecast.store';
 	import Card from './Card.svelte';
 	import WeatherIcon from './WeatherIcon.svelte';
 </script>
 
-{#if !$isLoading && $weekForecast.length}
+{#if !$isLoading && $weekForecastCards.length}
 	<p>7 Day Forecast</p>
 	<div class="forecast">
-		{#each $weekForecast as forecastCard, i}
+		{#each $weekForecastCards as dayForecastCard, i}
 			<Card size="small">
 				<div class="forecast__card">
-					<div class="forecast__text"></div>{forecastCard.dayOfWeek}
-					<WeatherIcon iconDetails={forecastCard.weatherCode} size="large"/>
-					<div class="forecast__text">{forecastCard.temperature}°</div>
+					<div class="forecast__text"></div>{dayForecastCard.dayOfWeek}
+					<WeatherIcon iconDetails={dayForecastCard.weatherCode} size="large"/>
+					<div class="forecast__text">{dayForecastCard.temperature}°</div>
 				</div>
 			</Card>
 		{/each}

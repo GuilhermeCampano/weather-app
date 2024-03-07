@@ -30,12 +30,12 @@ export const currentWeather: Readable<CurrentWeatherCard | null> = derived(forec
   };
 });
 
-export const weekForecast: Readable<ForecastDayCard[]> = derived(forecast, ($forecast) => {
+export const weekForecastCards: Readable<ForecastDayCard[]> = derived(forecast, ($forecast) => {
   if (!$forecast) return [];
   
   return $forecast.daily.time.map((day, index) => {
     return <ForecastDayCard>{
-      dayOfWeek: new Date(day).toLocaleDateString('en-US', { weekday: 'long' }),
+      dayOfWeek: index === 0 ? 'Today' : new Date(day).toLocaleDateString('en-US', { weekday: 'long' }),
       temperature: Math.round($forecast.daily.temperature_2m_max[index]),
       weatherCode: WeatherApiService.geWeatherCode($forecast.daily.weather_code[index])
     };
