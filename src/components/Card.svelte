@@ -1,9 +1,11 @@
 <script lang="ts">
   export let size: 'small' | 'large' = 'small';
+  export let isCompact: boolean = false;
 
+  const cardClasses = `card card--${size} ${isCompact ? 'card--compact' : ''}`
 </script>
 
-<div class={`card card--${size}`}>
+<div class={cardClasses}>
   <slot></slot>
 </div>
 
@@ -17,6 +19,7 @@
     box-shadow: var(--box-shadow);
     background-color: var(--color-off-white);
   }
+
   .card--small {
     display: flex;
     flex-direction: column;
@@ -27,6 +30,7 @@
     flex-grow: 1;
     flex-basis: 100px;
     gap: 0 0.5rem;
+    padding: 1rem 0px;
   }
 
   .card--large {
@@ -51,6 +55,10 @@
       border-radius: 20px;
       right: 0;
     }
+  }
+
+  .card--compact {
+    min-height: fit-content;
   }
 
 </style>
