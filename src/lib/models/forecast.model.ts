@@ -23,25 +23,30 @@ export interface ForecastApiResponse {
 
 
 export interface Current {
-  time: string;
-  interval: number;
-  temperature_2m: number;
-  relative_humidity_2m?: number;
   apparent_temperature: number;
+  interval: number;
   is_day: number;
-  precipitation: number;
-  rain: number;
-  showers: number;
-  snowfall: number;
+  time: string;
+  precipitation_probability: number;
+  temperature_2m: number;
   weather_code: number;
   wind_speed_10m: number;
-  precipitation_probability: number;
 }
 
 export interface Hourly {
   time: string[];
   temperature_2m: number[];
+  weather_code: number[];
   precipitation_probability: number[];
+}
+
+export interface Daily {
+  time: string[];
+  weather_code: number[];
+  temperature_2m_max: number[];
+  temperature_2m_min: number[];
+  apparent_temperature_max: number[];
+  apparent_temperature_min: number[];
 }
 
 export interface Units {
@@ -66,18 +71,6 @@ export interface Units {
   precipitation_probability_mean?: string;
 }
 
-export interface Daily {
-  time: string[];
-  weather_code: number[];
-  temperature_2m_max: number[];
-  temperature_2m_min: number[];
-  apparent_temperature_max: number[];
-  apparent_temperature_min: number[];
-  precipitation_sum: number[];
-  snowfall_sum: number[];
-  precipitation_probability_mean: number[];
-}
-
 export interface CurrentWeatherCard {
   temperature: number;
   temperatureMax: number;
@@ -90,6 +83,12 @@ export interface CurrentWeatherCard {
 
 export interface ForecastDayCard {
   dayOfWeek: string;
+  temperature: number;
+  weatherCode: WeatherCodeDetails;
+}
+
+export interface ForecastHourCard {
+  time: string;
   temperature: number;
   weatherCode: WeatherCodeDetails;
 }

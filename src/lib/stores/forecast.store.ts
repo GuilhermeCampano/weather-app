@@ -1,5 +1,5 @@
 import { derived, get, writable, type Readable } from 'svelte/store';
-import type { CurrentWeatherCard, ForecastApiResponse, ForecastDayCard } from '../models/forecast.model';
+import type { CurrentWeatherCard, ForecastApiResponse, ForecastDayCard, ForecastHourCard } from '../models/forecast.model';
 import { cities } from '../models/cities.model';
 import { WeatherApiService } from '../services/weather-api.service';
 
@@ -43,3 +43,14 @@ export const weekForecastCards: Readable<ForecastDayCard[]> = derived(forecast, 
 });
 
 
+export const hourlyForecast: Readable<ForecastHourCard[]> = derived(forecast, ($forecast) => {
+  if (!$forecast) return [];
+  
+  return $forecast.hourly.time.map((hour, index) => {
+    return <ForecastHourCard>{
+      time: new Date(hour).toLocaleTimeString('en-US', { hour: 'numeric', hour12: true }),
+      temperature: Math.round($forecast.hourly.temperature_2m[index]),
+      weatherCode: WeatherApiService.geWeatherCodeDetails($forecast.hourly.weather_code[index]),
+    };
+  });
+});
