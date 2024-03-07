@@ -4,12 +4,10 @@
 	import CurrentWeather from '../components/CurrentWeather.svelte';
 	import ForecastNextDays from '../components/ForecastNextDays.svelte';
 	import ForecastHourly from '../components/ForecastHourly.svelte';
-
 </script>
 
 <CitySelect />
 <PreciseLocationButton />
 <CurrentWeather />
-<div class="my-5"></div>
 <ForecastHourly />
 <ForecastNextDays />

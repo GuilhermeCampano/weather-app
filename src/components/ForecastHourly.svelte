@@ -5,32 +5,32 @@
 </script>
 
 {#if !$isLoading && $hourlyForecastCards.length}
-    <p>Hourly Forecast</p>
-		<Card size="large" isCompact>
-      <div class="hourly-card__content">
-			{#each $hourlyForecastCards as hourForecastCard, i}
-        <div class="hourly-card__item">
-          <div>{hourForecastCard.time}</div>
-          <WeatherIcon iconDetails={hourForecastCard.weatherCode} size="medium" />
-          <div>{hourForecastCard.temperature}°</div>
-        </div>
+	<h6>Hourly Forecast</h6>
+	<Card size="large" isCompact>
+		<div class="hourly-card__content">
+			{#each $hourlyForecastCards as hourForecastCard}
+				<div class="hourly-card__item">
+					<div>{hourForecastCard.time}</div>
+					<WeatherIcon iconDetails={hourForecastCard.weatherCode} size="medium" />
+					<div>{hourForecastCard.temperature}°</div>
+				</div>
 			{/each}
-		</Card>
+		</div>
+	</Card>
 {/if}
 
 <style>
+	.hourly-card__content {
+		display: flex;
+		flex-direction: row;
+		gap: 1rem;
+		overflow-x: auto;
+		padding-bottom: 0.5rem;
+	}
 
-  .hourly-card__content{
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
-    overflow-x: auto;
-    padding-bottom: 0.5rem; 
-  }
-
-  .hourly-card__item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+	.hourly-card__item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
 </style>

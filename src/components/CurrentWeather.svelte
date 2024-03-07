@@ -4,7 +4,7 @@
 	import WeatherIcon from './WeatherIcon.svelte';
 </script>
 
-<p>Today</p>
+<h6>Today</h6>
 <Card size="large">
 	{#if $isLoading}
 		<p>Loading...</p>
