@@ -24,7 +24,7 @@ export const currentWeather: Readable<CurrentWeatherCard | null> = derived(forec
     apparentTemperature: Math.round($forecast.current.apparent_temperature),
     precipitationChance: $forecast.current.precipitation_probability,
     windSpeed: Math.round($forecast.current.wind_speed_10m),
-    weatherCode: WeatherApiService.geWeatherCode($forecast.current.weather_code),
+    weatherCode: WeatherApiService.geWeatherCodeDetails($forecast.current.weather_code),
     temperatureMax: Math.round($forecast.daily.temperature_2m_max[0]),
     temperatureMin: Math.round($forecast.daily.temperature_2m_min[0])
   };
@@ -37,7 +37,7 @@ export const weekForecastCards: Readable<ForecastDayCard[]> = derived(forecast, 
     return <ForecastDayCard>{
       dayOfWeek: index === 0 ? 'Today' : new Date(day).toLocaleDateString('en-US', { weekday: 'long' }),
       temperature: Math.round($forecast.daily.temperature_2m_max[index]),
-      weatherCode: WeatherApiService.geWeatherCode($forecast.daily.weather_code[index])
+      weatherCode: WeatherApiService.geWeatherCodeDetails($forecast.daily.weather_code[index])
     };
   });
 });
