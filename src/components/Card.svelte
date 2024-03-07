@@ -13,7 +13,7 @@
     border-radius: 20px;
     padding: 16px;
     margin: 1rem 0rem;
-    box-shadow: 0px 4px 4px 0px var(--color-shadow);
+    box-shadow: var(--box-shadow);
   }
 
   .card--small{
