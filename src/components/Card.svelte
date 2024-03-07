@@ -1,8 +1,10 @@
 <script lang="ts">
+  import {fly} from 'svelte/transition';
   export let size: 'small' | 'large' = 'small';
+
 </script>
 
-<div class={`card card--${size}`}>
+<div class={`card card--${size}`} in:fly={{ y: 200, duration: 500 }}>
   <slot></slot>
 </div>
 
@@ -14,6 +16,7 @@
     padding: 16px;
     margin: 1rem 0rem;
     box-shadow: var(--box-shadow);
+    backdrop-filter: blur(4px);  
   }
 
   .card--small{
