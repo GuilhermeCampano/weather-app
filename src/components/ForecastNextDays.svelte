@@ -9,11 +9,9 @@
 	<div class="forecast">
 		{#each $weekForecastCards as dayForecastCard, i}
 			<Card size="small">
-				<div class="forecast__card">
 					<div class="forecast__text"></div>{dayForecastCard.dayOfWeek}
 					<WeatherIcon iconDetails={dayForecastCard.weatherCode} size="large"/>
 					<div class="forecast__text">{dayForecastCard.temperature}°</div>
-				</div>
 			</Card>
 		{/each}
 	</div>
@@ -27,16 +25,6 @@
 		overflow-x: auto;
 	}
 
-	.forecast__card {
-		display: flex;
-		flex-shrink: 0;
-		flex-direction: column;
-		align-items: center;
-		justify-content: space-between;
-		height: 100%;
-		width: 80px;
-		gap: 0 0.5rem;
-	}
 
 	.forecast__text {
 		font-size: 1.5rem;

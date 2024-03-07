@@ -16,4 +16,5 @@ export const cities: CityOption[] = [
   { name: 'Ho Chi Minh', latitude: 10.7769, longitude: 106.7009 },
   { name: 'Dubai', latitude: 25.276987, longitude: 55.296249 },
   {name : 'Cherrapunji', latitude: 25.3005, longitude: 91.6964},
+  
 ];
