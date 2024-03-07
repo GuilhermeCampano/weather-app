@@ -1,47 +1,56 @@
 <script lang="ts">
-  import {fly} from 'svelte/transition';
   export let size: 'small' | 'large' = 'small';
 
 </script>
 
-<div class={`card card--${size}`} in:fly={{ y: 200, duration: 500 }}>
+<div class={`card card--${size}`}>
   <slot></slot>
 </div>
 
 <style>
   .card {
-    background-color: var(--color-off-white);
-    border: 1px solid var(--color-light-grey);
+    display: flex;
+    padding: 1rem;
+    margin: 1rem 0;
     border-radius: 20px;
-    padding: 16px;
-    margin: 1rem 0rem;
+    border: 1px solid var(--color-light-grey);
     box-shadow: var(--box-shadow);
-    backdrop-filter: blur(4px);  
+    background-color: var(--color-off-white);
+  }
+  .card--small {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    flex-shrink: 0;
+    flex-grow: 1;
+    flex-basis: 100px;
+    gap: 0 0.5rem;
   }
 
-  .card--small{
-    width: auto;
-    height: 168px;
-  }
-
-  .card--large{
+  .card--large {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: space-between;
+    position: relative;
+    right: auto;
+    width: calc(100vw - 1rem);
     min-height: 200px;
     margin: 0 auto;
-    position: relative;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
-    width: calc(100vw - 1rem);
-    right: auto;
   }
 
   @media screen and (min-width: 768px) {
     .card--large {
       width: auto;
-      border-radius: 20px;
       margin-right: auto;
       padding-right: 1rem;
+      border-radius: 20px;
       right: 0;
     }
-	}
+  }
 
 </style>
