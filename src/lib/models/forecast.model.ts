@@ -1,5 +1,3 @@
-import type { WeatherCodeDetails } from "./weather-code.model";
-
 export interface ForecastAPIRequest {
   latitude: number;
   longitude: number;
@@ -23,25 +21,30 @@ export interface ForecastApiResponse {
 
 
 export interface Current {
-  time: string;
-  interval: number;
-  temperature_2m: number;
-  relative_humidity_2m?: number;
   apparent_temperature: number;
+  interval: number;
   is_day: number;
-  precipitation: number;
-  rain: number;
-  showers: number;
-  snowfall: number;
+  time: string;
+  precipitation_probability: number;
+  temperature_2m: number;
   weather_code: number;
   wind_speed_10m: number;
-  precipitation_probability: number;
 }
 
 export interface Hourly {
   time: string[];
   temperature_2m: number[];
+  weather_code: number[];
   precipitation_probability: number[];
+}
+
+export interface Daily {
+  time: string[];
+  weather_code: number[];
+  temperature_2m_max: number[];
+  temperature_2m_min: number[];
+  apparent_temperature_max: number[];
+  apparent_temperature_min: number[];
 }
 
 export interface Units {
@@ -64,32 +67,4 @@ export interface Units {
   precipitation_sum?: string;
   snowfall_sum?: string;
   precipitation_probability_mean?: string;
-}
-
-export interface Daily {
-  time: string[];
-  weather_code: number[];
-  temperature_2m_max: number[];
-  temperature_2m_min: number[];
-  apparent_temperature_max: number[];
-  apparent_temperature_min: number[];
-  precipitation_sum: number[];
-  snowfall_sum: number[];
-  precipitation_probability_mean: number[];
-}
-
-export interface CurrentWeatherCard {
-  temperature: number;
-  temperatureMax: number;
-  temperatureMin: number;
-  apparentTemperature: number;
-  precipitationChance: number;
-  weatherCode: WeatherCodeDetails;
-  windSpeed: number;
-}
-
-export interface ForecastDayCard {
-  dayOfWeek: string;
-  temperature: number;
-  weatherCode: WeatherCodeDetails;
 }

@@ -5,22 +5,15 @@ export class WeatherApiService {
   private readonly FORECAST_ENDPOINT = 'https://api.open-meteo.com/v1/forecast';
   private readonly CURRENT_PARAMS = [
     'temperature_2m',
-    'relative_humidity_2m',
     'apparent_temperature',
     'is_day',
     'precipitation_probability',
-    'rain',
-    'showers',
-    'snowfall',
     'weather_code',
     'wind_speed_10m',
   ];
   private readonly HOURLY_PARAMS = [
     'temperature_2m',
     'precipitation_probability',
-    'rain',
-    'showers',
-    'snowfall',
     'weather_code'
   ];
   private readonly DAILY_PARAMS = [
@@ -28,7 +21,6 @@ export class WeatherApiService {
     'temperature_2m_min',
     'apparent_temperature_max',
     'apparent_temperature_min',
-    'precipitation_probability_mean',
     'weather_code'
   ];
 

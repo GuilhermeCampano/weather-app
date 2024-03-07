@@ -5,7 +5,7 @@
 </script>
 
 {#if !$isLoading && $weekForecastCards.length}
-	<p>7 Day Forecast</p>
+	<h6>7 Day Forecast</h6>
 	<div class="forecast">
 		{#each $weekForecastCards as dayForecastCard, i}
 			<Card size="small">
