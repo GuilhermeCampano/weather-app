@@ -2,6 +2,7 @@
 	import { onMount, onDestroy } from 'svelte';
 	import { writable } from 'svelte/store';
 	import { fetchForecast, latitude, longitude } from '$lib/stores/forecast.store';
+	import { slide } from 'svelte/transition';
 
 	type AutocompletePrediction = google.maps.places.AutocompletePrediction;
 	type PlacesServiceStatus = google.maps.places.PlacesServiceStatus;
@@ -81,8 +82,8 @@
 	/>
 
 	{#if isInputFocused}
-		<div class="autocomplete__results">
-			{#each $results as result, index}
+		<div class="autocomplete__results" transition:slide={{ delay: 100, duration: 300 }}>
+			{#each $results as result, index (result.place_id)}
 				<div
 					tabindex={index}
 					class="autocomplete__result"
@@ -114,7 +115,7 @@
 		overflow-y: auto;
 		position: absolute;
 		z-index: 10;
-		top: 63px;
+		top: 55px;
 		border-top-right-radius: 0px;
 		border-top-left-radius: 0px;
 		width: 100%;
@@ -139,6 +140,11 @@
 		font-size: var(--font-lg);
 		border: none;
 		margin: 0px;
+		transition: border-radius ease 0.8s;
+	}
+
+	.autocomplete__input:focus {
+		outline: none;
 	}
 
 	.autocomplete__input--open {
