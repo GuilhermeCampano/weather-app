@@ -52,7 +52,7 @@ export const hourlyForecastCards: Readable<ForecastHourCard[]> = derived(forecas
   const endIndex = startIndex + 25;
   return $forecast.hourly.time.slice(startIndex, endIndex).map((hour, index) => {
     return <ForecastHourCard>{
-      time: LocalizationService.formatHourMinute(hour),
+      time: index === 0 ? 'Now' : LocalizationService.formatHourMinute(hour),
       temperature: Math.round($forecast.hourly.temperature_2m[startIndex + index]),
       weatherCode: WeatherApiService.geWeatherCodeDetails($forecast.hourly.weather_code[startIndex + index]),
     };
