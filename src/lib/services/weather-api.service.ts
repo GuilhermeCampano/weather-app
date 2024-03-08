@@ -29,6 +29,7 @@ export class WeatherApiService {
       `${this.FORECAST_ENDPOINT}`,
       `?latitude=${latitude}`,
       `&longitude=${longitude}`,
+      `&timezone=auto`,
       `&current=${this.CURRENT_PARAMS.join(',')}`,
       `&hourly=${this.HOURLY_PARAMS.join(',')}`,
       `&daily=${this.DAILY_PARAMS.join(',')}`
