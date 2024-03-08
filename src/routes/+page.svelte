@@ -1,12 +1,12 @@
 <script lang="ts">
 	import PreciseLocationButton from '../components/PreciseLocationButton.svelte';
-	import CitySelect from '../components/CitySelect.svelte';
 	import CurrentWeather from '../components/CurrentWeather.svelte';
 	import ForecastNextDays from '../components/ForecastNextDays.svelte';
 	import ForecastHourly from '../components/ForecastHourly.svelte';
+	import LocationSearchAutocomplete from '../components/LocationSearchAutocomplete.svelte';
 </script>
 
-<CitySelect />
+<LocationSearchAutocomplete />
 <PreciseLocationButton />
 <CurrentWeather />
 <ForecastHourly />

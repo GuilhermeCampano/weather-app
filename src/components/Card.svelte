@@ -17,7 +17,7 @@
     border-radius: 20px;
     border: 1px solid var(--color-light-grey);
     box-shadow: var(--box-shadow);
-    background-color: var(--color-off-white);
+    background-color: var(--color-off-white-transparent);
   }
 
   .card--small {
