@@ -50,6 +50,9 @@
 		font-weight: var(--font-weight-bold);
 		letter-spacing: -5px;
 		margin-bottom: 1rem;
+		position: relative;
+		width: auto;
+		padding-right: 48px;
 	}
 	.weather__high-low {
 		display: flex;
@@ -70,8 +73,8 @@
 
 	.weather__icon {
 		position: absolute;
-		top: 30%;
-		left: 80px;
+		top: 10px;
+		right: 10px;
 	}
 
 	.weather__icon--two-digits {
