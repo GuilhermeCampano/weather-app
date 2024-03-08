@@ -1,83 +1,97 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { writable } from 'svelte/store';
-	import { fetchForecast, latitude, longitude } from '$lib/stores/forecast.store';
+  import { onMount, onDestroy } from 'svelte';
+  import { writable } from 'svelte/store';
+  import { fetchForecast, latitude, longitude } from '$lib/stores/forecast.store';
 
-	type AutocompletePrediction = google.maps.places.AutocompletePrediction;
+  type AutocompletePrediction = google.maps.places.AutocompletePrediction;
+	type PlacesServiceStatus = google.maps.places.PlacesServiceStatus;
+	type PlaceResult = google.maps.places.PlaceResult;
 
-	let searchInput = '';
-	let results = writable([] as AutocompletePrediction[]);
-	let isInputFocused = false;
+  let searchInput = '';
+  let results = writable([] as AutocompletePrediction[]);
+  let isInputFocused = false;
+  let autocompleteService: google.maps.places.AutocompleteService;
+  let placesService: google.maps.places.PlacesService;
 
-	let autocompleteService: google.maps.places.AutocompleteService;
-	let placesService: google.maps.places.PlacesService;
+  onMount(initializeGoogleServices);
 
-	onMount(() => {
-		autocompleteService = new google.maps.places.AutocompleteService();
-		placesService = new google.maps.places.PlacesService(document.createElement('div'));
-	});
+  function initializeGoogleServices() {
+    autocompleteService = new google.maps.places.AutocompleteService();
+    placesService = new google.maps.places.PlacesService(document.createElement('div'));
+  }
 
-	const search = () => {
-		if (searchInput.length < 1) {
-			results.set([]);
-			return;
-		}
-		autocompleteService.getPlacePredictions({ input: searchInput }, (predictions) => {
-			results.set(predictions);
-		});
-	};
+  function search() {
+    if (searchInput.length < 1) {
+      results.set([]);
+      return;
+    }
+    autocompleteService.getPlacePredictions({ input: searchInput }, (predictions) => {
+      results.set(predictions || []);
+    });
+  }
 
-	const handleKeydown = (event: KeyboardEvent, result: AutocompletePrediction) => {
-		if (event.key === 'Enter' || event.key === ' ') {
-			selectLocation(result);
-			event.preventDefault();
-		}
-	};
+  function handleKeydown(event: KeyboardEvent, result: AutocompletePrediction) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      selectLocation(result);
+      event.preventDefault();
+    }
+  }
 
-	const selectLocation = (location: AutocompletePrediction) => {
-		placesService.getDetails({ placeId: location.place_id }, (place, status) => {
-			if (status === google.maps.places.PlacesServiceStatus.OK) {
-				if (!place.geometry) {
-					console.error('Location has no geometry');
-					return;
-				}
-				latitude.set(place.geometry.location.lat());
-				longitude.set(place.geometry.location.lng());
-				fetchForecast();
-				searchInput = location.description;
-			}
-		});
-		isInputFocused = false;
-	};
+  function selectLocation(location: AutocompletePrediction) {
+    placesService.getDetails({ placeId: location.place_id }, handlePlaceDetails);
+    isInputFocused = false;
+  }
 
+  function handlePlaceDetails(place: PlaceResult, status: PlacesServiceStatus) {
+    if (status === google.maps.places.PlacesServiceStatus.OK && place.geometry) {
+      latitude.set(place.geometry.location.lat());
+      longitude.set(place.geometry.location.lng());
+      fetchForecast();
+      searchInput = place.formatted_address || ''
+    }
+  }
+
+  function handleClickOutside(event: MouseEvent) {
+    if (!(event.target as Element).closest('.autocomplete')) {
+      isInputFocused = false;
+    }
+  }
+
+  onMount(() => {
+    window.addEventListener('click', handleClickOutside);
+  });
+
+  onDestroy(() => {
+    window.removeEventListener('click', handleClickOutside);
+  });
 </script>
 
 <div class="autocomplete">
-	<input
-		type="text"
-		bind:value={searchInput}
-		on:input={search}
-		on:focus={() => (isInputFocused = true)}
-		class="autocomplete__input"
-		class:autocomplete__input--open={isInputFocused && $results.length > 0}
-		placeholder="Search for a location"
-	/>
+  <input
+    type="text"
+    bind:value={searchInput}
+    on:input={search}
+    on:focus={() => (isInputFocused = true)}
+    class="autocomplete__input"
+    class:autocomplete__input--open={isInputFocused && $results.length > 0}
+    placeholder="Search for a location"
+  />
 
-	{#if isInputFocused}
-		<div class="autocomplete__results">
-			{#each $results as result, index}
-				<div
-					tabindex={index}
-					class="autocomplete__result"
-					on:click={() => selectLocation(result)}
-					on:keydown={(event) => handleKeydown(event, result)}
-					role="button"
-				>
-					{result.description}
-				</div>
-			{/each}
-		</div>
-	{/if}
+  {#if isInputFocused}
+    <div class="autocomplete__results">
+      {#each $results as result, index}
+        <div
+          tabindex={index}
+          class="autocomplete__result"
+          on:click={() => selectLocation(result)}
+          on:keydown={(event) => handleKeydown(event, result)}
+          role="button"
+        >
+          {result.description}
+        </div>
+      {/each}
+    </div>
+  {/if}
 </div>
 
 <style>
