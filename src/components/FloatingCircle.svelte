@@ -13,7 +13,7 @@
 <style>
 	.floating-circle {
 		border-radius: 50%;
-		background: linear-gradient(#f78a95, #f8b36f);
+		background: var(--color-gradient);
 		animation: float 5s ease-in-out infinite;
 		z-index: -1;
 		position: fixed;
