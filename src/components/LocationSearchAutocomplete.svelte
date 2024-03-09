@@ -1,13 +1,14 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 	import { writable } from 'svelte/store';
-	import { fetchForecast, latitude, longitude } from '$lib/stores/forecast.store';
+	import { fetchForecast } from '$lib/stores/forecast.store';
+	import { slide } from 'svelte/transition';
+	import { latitude, longitude, searchInput } from '$lib/stores/location.store';
 
 	type AutocompletePrediction = google.maps.places.AutocompletePrediction;
 	type PlacesServiceStatus = google.maps.places.PlacesServiceStatus;
 	type PlaceResult = google.maps.places.PlaceResult;
 
-	let searchInput = '';
 	let results = writable([] as AutocompletePrediction[]);
 	let isInputFocused = false;
 	let autocompleteService: google.maps.places.AutocompleteService;
@@ -19,11 +20,11 @@
 	}
 
 	function search() {
-		if (searchInput.length < 1) {
+		if ($searchInput.length < 1) {
 			results.set([]);
 			return;
 		}
-		autocompleteService.getPlacePredictions({ input: searchInput }, (predictions) => {
+		autocompleteService.getPlacePredictions({ input: $searchInput }, (predictions) => {
 			results.set(predictions || []);
 		});
 	}
@@ -45,7 +46,7 @@
 			latitude.set(place.geometry.location.lat());
 			longitude.set(place.geometry.location.lng());
 			fetchForecast();
-			searchInput = place.formatted_address || '';
+			searchInput.set(place.formatted_address || '');
 		}
 	}
 
@@ -72,7 +73,7 @@
 <div class="autocomplete">
 	<input
 		type="text"
-		bind:value={searchInput}
+		bind:value={$searchInput}
 		on:input={search}
 		on:focus={() => (isInputFocused = true)}
 		class="autocomplete__input"
@@ -81,8 +82,8 @@
 	/>
 
 	{#if isInputFocused}
-		<div class="autocomplete__results">
-			{#each $results as result, index}
+		<div class="autocomplete__results" transition:slide={{ delay: 100, duration: 300 }}>
+			{#each $results as result, index (result.place_id)}
 				<div
 					tabindex={index}
 					class="autocomplete__result"
@@ -114,7 +115,7 @@
 		overflow-y: auto;
 		position: absolute;
 		z-index: 10;
-		top: 63px;
+		top: 55px;
 		border-top-right-radius: 0px;
 		border-top-left-radius: 0px;
 		width: 100%;
@@ -139,6 +140,11 @@
 		font-size: var(--font-lg);
 		border: none;
 		margin: 0px;
+		transition: border-radius ease 0.8s;
+	}
+
+	.autocomplete__input:focus {
+		outline: none;
 	}
 
 	.autocomplete__input--open {

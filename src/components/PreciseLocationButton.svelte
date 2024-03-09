@@ -1,11 +1,13 @@
 <script lang="ts">
-	import { latitude, longitude, fetchForecast } from "$lib/stores/forecast.store";
+	import { fetchForecast } from "$lib/stores/forecast.store";
+	import { latitude, longitude, resetSearchInput } from "$lib/stores/location.store";
   
   function getLocation() {
     try {
       navigator.geolocation.getCurrentPosition((position) => {
         latitude.set(position.coords.latitude);
         longitude.set(position.coords.longitude);
+        resetSearchInput();
         fetchForecast();
       });
     } catch (error) {
