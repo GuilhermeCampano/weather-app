@@ -15,7 +15,7 @@
 			return;
 		}
 
-		const results = await autoCompleteService.search($searchInput);
+		const results = await autoCompleteService.searchLocations($searchInput);
 		autoCompleteResults.set(results);
 	}
 

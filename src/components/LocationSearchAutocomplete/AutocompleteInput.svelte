@@ -68,9 +68,10 @@
 		padding: 0px;
 		margin: 0px;
 		position: absolute;
-		right: 5px;
+		right: 1rem;
 		top: 30%;
 		cursor: pointer;
 		font-size: var(--font-lg);
+		min-width: max-content;
 	}
 </style>
