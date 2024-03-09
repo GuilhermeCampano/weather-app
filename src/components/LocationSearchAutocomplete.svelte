@@ -56,6 +56,11 @@
 		}
 	}
 
+	function clearSearch() {
+		searchInput.set('');
+		results.set([]);
+	}
+
 	onMount(() => {
 		initializeGoogleServices();
 		if (typeof window !== 'undefined') {
@@ -80,6 +85,12 @@
 		class:autocomplete__input--open={isInputFocused && $results.length > 0}
 		placeholder="Search for a location"
 	/>
+
+	{#if $searchInput.length > 1}
+		<button class="autocomplete__clear" on:click={clearSearch}>
+			<i class="material-symbols-outlined">close</i>
+		</button>
+	{/if}
 
 	{#if isInputFocused}
 		<div class="autocomplete__results" transition:slide={{ delay: 100, duration: 300 }}>
@@ -150,5 +161,19 @@
 	.autocomplete__input--open {
 		border-bottom-left-radius: 0px;
 		border-bottom-right-radius: 0px;
+	}
+
+	.autocomplete__clear {
+		border: none;
+		box-shadow: none;
+		background-color: transparent;
+		padding: 0px;
+		margin: 0px;
+		position: absolute;
+		right: 5px;
+		top: 50%;
+		transform: translateY(-50%);
+		cursor: pointer;
+		font-size: var(--font-lg);
 	}
 </style>
