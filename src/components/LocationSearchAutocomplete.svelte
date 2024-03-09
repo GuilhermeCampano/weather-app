@@ -3,44 +3,30 @@
 	import { fetchForecast } from '$lib/stores/forecast.store';
 	import { slide } from 'svelte/transition';
 	import { latitude, longitude, searchInput, autoCompleteResults, resetSearchInput } from '$lib/stores/location.store';
-
-	type AutocompletePrediction = google.maps.places.AutocompletePrediction;
-	type PlacesServiceStatus = google.maps.places.PlacesServiceStatus;
-	type PlaceResult = google.maps.places.PlaceResult;
-
+	import {AutocompleteGeolocationService} from '$lib/services/autocomplete-geolocation.service';
+	
 	let isInputFocused = false;
-	let autocompleteService: google.maps.places.AutocompleteService;
-	let placesService: google.maps.places.PlacesService;
+	let autoCompleteService:AutocompleteGeolocationService;
 
-	function initializeGoogleServices() {
-		autocompleteService = new google.maps.places.AutocompleteService();
-		placesService = new google.maps.places.PlacesService(document.createElement('div'));
-	}
-
-	function search() {
+	async function search()  {
 		if ($searchInput.length < 1) {
 			autoCompleteResults.set([]);
 			return;
 		}
-		autocompleteService.getPlacePredictions({ input: $searchInput }, (predictions) => {
-			autoCompleteResults.set(predictions || []);
-		});
+
+		const results = await autoCompleteService.search($searchInput);
+		autoCompleteResults.set(results);
 	}
 
-	function handleKeydown(event: KeyboardEvent, result: AutocompletePrediction) {
-		if (event.key === 'Enter' || event.key === ' ') {
-			selectLocation(result);
-			event.preventDefault();
-		}
-	}
 
-	function selectLocation(location: AutocompletePrediction) {
-		placesService.getDetails({ placeId: location.place_id }, handlePlaceDetails);
+	async function selectLocation(location: google.maps.places.AutocompletePrediction) {
+		const placeResult: google.maps.places.PlaceResult = await autoCompleteService.selectLocation(location.place_id);
+		handlePlaceDetails(placeResult);
 		isInputFocused = false;
 	}
 
-	function handlePlaceDetails(place: PlaceResult, status: PlacesServiceStatus) {
-		if (status === google.maps.places.PlacesServiceStatus.OK && place.geometry) {
+	function handlePlaceDetails(place: google.maps.places.PlaceResult | undefined) {
+		if (place?.geometry) {
 			latitude.set(place.geometry.location.lat());
 			longitude.set(place.geometry.location.lng());
 			fetchForecast();
@@ -54,9 +40,15 @@
 		}
 	}
 
+	function handleKeydown(event: KeyboardEvent, location: google.maps.places.AutocompletePrediction) {
+		if (event.key === 'Enter') {
+			selectLocation(location);
+		}
+	}
+
 
 	onMount(() => {
-		initializeGoogleServices();
+		autoCompleteService = new AutocompleteGeolocationService();
 		if (typeof window !== 'undefined') {
 			window.addEventListener('click', handleClickOutside);
 		}
@@ -145,6 +137,8 @@
 		font-size: var(--font-lg);
 		border: none;
 		margin: 0px;
+		padding-right: 4rem;
+		text-overflow: ellipsis;
 		transition: border-radius ease 0.8s;
 	}
 
@@ -165,8 +159,7 @@
 		margin: 0px;
 		position: absolute;
 		right: 5px;
-		top: 50%;
-		transform: translateY(-50%);
+		top: 30%;
 		cursor: pointer;
 		font-size: var(--font-lg);
 	}
