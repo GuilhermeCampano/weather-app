@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 	import { fetchForecast } from '$lib/stores/forecast.store';
-	import { slide } from 'svelte/transition';
 	import { latitude, longitude, searchInput, autoCompleteResults, resetSearchInput } from '$lib/stores/location.store';
 	import {AutocompleteGeolocationService} from '$lib/services/autocomplete-geolocation.service';
+	import AutocompleteResults from './AutocompleteResults.svelte';
 	
 	let isInputFocused = false;
-	let autoCompleteService:AutocompleteGeolocationService;
+	let autoCompleteService: AutocompleteGeolocationService;
 
 	async function search()  {
 		if ($searchInput.length < 1) {
@@ -18,14 +18,13 @@
 		autoCompleteResults.set(results);
 	}
 
-
-	async function selectLocation(location: google.maps.places.AutocompletePrediction) {
+	async function onSelectLocation(location: google.maps.places.AutocompletePrediction) {
 		const placeResult: google.maps.places.PlaceResult = await autoCompleteService.selectLocation(location.place_id);
-		handlePlaceDetails(placeResult);
+		processLocation(placeResult);
 		isInputFocused = false;
 	}
 
-	function handlePlaceDetails(place: google.maps.places.PlaceResult | undefined) {
+	function processLocation(place: google.maps.places.PlaceResult | undefined) {
 		if (place?.geometry) {
 			latitude.set(place.geometry.location.lat());
 			longitude.set(place.geometry.location.lng());
@@ -37,12 +36,6 @@
 	function handleClickOutside(event: MouseEvent) {
 		if (!(event.target as Element).closest('.autocomplete')) {
 			isInputFocused = false;
-		}
-	}
-
-	function handleKeydown(event: KeyboardEvent, location: google.maps.places.AutocompletePrediction) {
-		if (event.key === 'Enter') {
-			selectLocation(location);
 		}
 	}
 
@@ -79,19 +72,7 @@
 	{/if}
 
 	{#if isInputFocused}
-		<div class="autocomplete__results" transition:slide={{ delay: 100, duration: 300 }}>
-			{#each $autoCompleteResults as result, index (result.place_id)}
-				<div
-					tabindex={index}
-					class="autocomplete__result"
-					on:click={() => selectLocation(result)}
-					on:keydown={(event) => handleKeydown(event, result)}
-					role="button"
-				>
-					{result.description}
-				</div>
-			{/each}
-		</div>
+		<AutocompleteResults results={$autoCompleteResults} on:selectLocation={(location) => onSelectLocation(location.detail)}/>
 	{/if}
 </div>
 
@@ -103,30 +84,7 @@
 		display: inline-block;
 	}
 
-	.autocomplete__results {
-		background-color: var(--color-off-white);
-		border-radius: 20px;
-		box-shadow: var(--box-shadow);
-		margin-top: 0px;
-		max-height: 200px;
-		overflow-y: auto;
-		position: absolute;
-		z-index: 10;
-		top: 55px;
-		border-top-right-radius: 0px;
-		border-top-left-radius: 0px;
-		width: 100%;
-	}
-
-	.autocomplete__result {
-		padding: 10px;
-		cursor: pointer;
-	}
-
-	.autocomplete__result:hover {
-		background: var(--color-light-gray);
-	}
-
+	
 	.autocomplete__input {
 		background-color: var(--color-off-white-transparent);
 		box-shadow: var(--box-shadow);
