@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 	import { writable } from 'svelte/store';
-	import { fetchForecast, latitude, longitude } from '$lib/stores/forecast.store';
+	import { fetchForecast } from '$lib/stores/forecast.store';
 	import { slide } from 'svelte/transition';
+	import { latitude, longitude, searchInput } from '$lib/stores/location.store';
 
 	type AutocompletePrediction = google.maps.places.AutocompletePrediction;
 	type PlacesServiceStatus = google.maps.places.PlacesServiceStatus;
 	type PlaceResult = google.maps.places.PlaceResult;
 
-	let searchInput = '';
 	let results = writable([] as AutocompletePrediction[]);
 	let isInputFocused = false;
 	let autocompleteService: google.maps.places.AutocompleteService;
@@ -20,11 +20,11 @@
 	}
 
 	function search() {
-		if (searchInput.length < 1) {
+		if ($searchInput.length < 1) {
 			results.set([]);
 			return;
 		}
-		autocompleteService.getPlacePredictions({ input: searchInput }, (predictions) => {
+		autocompleteService.getPlacePredictions({ input: $searchInput }, (predictions) => {
 			results.set(predictions || []);
 		});
 	}
@@ -46,7 +46,7 @@
 			latitude.set(place.geometry.location.lat());
 			longitude.set(place.geometry.location.lng());
 			fetchForecast();
-			searchInput = place.formatted_address || '';
+			searchInput.set(place.formatted_address || '');
 		}
 	}
 
@@ -73,7 +73,7 @@
 <div class="autocomplete">
 	<input
 		type="text"
-		bind:value={searchInput}
+		bind:value={$searchInput}
 		on:input={search}
 		on:focus={() => (isInputFocused = true)}
 		class="autocomplete__input"

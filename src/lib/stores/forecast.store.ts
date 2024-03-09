@@ -3,10 +3,9 @@ import { cities } from '../models/cities.model';
 import { WeatherApiService } from '../services/weather-api.service';
 import type { ForecastApiResponse, ForecastCurrentCard, ForecastDayCard, ForecastHourCard } from '$lib/models';
 import { LocalizationService } from '$lib/services/localization-service';
+import { latitude, longitude } from './location.store';
 
 export const selectedCity = writable(cities[0]);
-export const latitude = writable(0);
-export const longitude = writable(0);
 export const forecast = writable<ForecastApiResponse | null>(null);
 export const isLoading = writable(false);
 
