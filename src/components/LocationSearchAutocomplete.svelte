@@ -1,15 +1,13 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
-	import { writable } from 'svelte/store';
 	import { fetchForecast } from '$lib/stores/forecast.store';
 	import { slide } from 'svelte/transition';
-	import { latitude, longitude, searchInput } from '$lib/stores/location.store';
+	import { latitude, longitude, searchInput, autoCompleteResults, resetSearchInput } from '$lib/stores/location.store';
 
 	type AutocompletePrediction = google.maps.places.AutocompletePrediction;
 	type PlacesServiceStatus = google.maps.places.PlacesServiceStatus;
 	type PlaceResult = google.maps.places.PlaceResult;
 
-	let results = writable([] as AutocompletePrediction[]);
 	let isInputFocused = false;
 	let autocompleteService: google.maps.places.AutocompleteService;
 	let placesService: google.maps.places.PlacesService;
@@ -21,11 +19,11 @@
 
 	function search() {
 		if ($searchInput.length < 1) {
-			results.set([]);
+			autoCompleteResults.set([]);
 			return;
 		}
 		autocompleteService.getPlacePredictions({ input: $searchInput }, (predictions) => {
-			results.set(predictions || []);
+			autoCompleteResults.set(predictions || []);
 		});
 	}
 
@@ -56,10 +54,6 @@
 		}
 	}
 
-	function clearSearch() {
-		searchInput.set('');
-		results.set([]);
-	}
 
 	onMount(() => {
 		initializeGoogleServices();
@@ -82,19 +76,19 @@
 		on:input={search}
 		on:focus={() => (isInputFocused = true)}
 		class="autocomplete__input"
-		class:autocomplete__input--open={isInputFocused && $results.length > 0}
+		class:autocomplete__input--open={isInputFocused && $autoCompleteResults.length > 0}
 		placeholder="Search for a location"
 	/>
 
 	{#if $searchInput.length > 1}
-		<button class="autocomplete__clear" on:click={clearSearch}>
+		<button class="autocomplete__clear" on:click={resetSearchInput}>
 			<i class="material-symbols-outlined">close</i>
 		</button>
 	{/if}
 
 	{#if isInputFocused}
 		<div class="autocomplete__results" transition:slide={{ delay: 100, duration: 300 }}>
-			{#each $results as result, index (result.place_id)}
+			{#each $autoCompleteResults as result, index (result.place_id)}
 				<div
 					tabindex={index}
 					class="autocomplete__result"
