@@ -58,7 +58,7 @@
 	<AutocompleteInput 
 		bind:searchInput={$searchInput}
 		bind:isInputFocused={isInputFocused}
-		bind:hasResults={$hasResults}
+		hasResults={$hasResults}
 		on:inputChange={searchLocations}
 		on:reset={resetSearchInput}
 		on:focus={() => isInputFocused = true} 
