@@ -28,7 +28,7 @@
 		</div>
 		<div class="text-right">
 			<strong class="weather__code-text"
-				>{$currentWeather.weatherCode.description.replace(/-/g, ' ')}</strong
+				>{$currentWeather.weatherCode.label}</strong
 			>
 			<div class="weather__feel-like mb-5">
 				Feels Like <strong>{$currentWeather.apparentTemperature}°</strong>

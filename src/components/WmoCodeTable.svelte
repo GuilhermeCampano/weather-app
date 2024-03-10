@@ -1,11 +1,12 @@
 <script lang="ts">
-	import { WMOCodesMeaning, type WeatherCodeDetails } from '$lib/models';
-	import { WeatherApiService } from '$lib/services/weather-api.service';
+	import type { WeatherCodeDetails } from '$lib/models';
+	import { WeatherCodeDetailsFactory } from '$lib/utils/weather-code-details-factory';
 	import WeatherIcon from './WeatherIcon.svelte';
 
+	const weatherCodeDetailsFactory = new WeatherCodeDetailsFactory();
 	const allIcons: WeatherCodeDetails[] = new Array(100)
 		.fill(0)
-		.map((_, i) => WeatherApiService.geWeatherCodeDetails(i));
+		.map((_, i) => weatherCodeDetailsFactory.create(i));
 </script>
 
 <a
@@ -14,14 +15,14 @@
 	target="_blank">WMO Codes Source</a
 >
 <div class="wmo__grid">
-	{#each allIcons as iconDetails, index}
+	{#each allIcons as iconDetails}
 		<div class="wmo__card">
 			<div class="wmo__card-header">
-				<div class="wmo__code">{index}</div>
+				<div class="wmo__code">{iconDetails.wmoCode}</div>
 				<div class="wmo__icon"><WeatherIcon {iconDetails} size="medium" /></div>
 			</div>
-			<h5 class="wmo__label">{iconDetails.description}</h5>
-			<div class="wmo__meaning">{WMOCodesMeaning[index]}</div>
+			<h5 class="wmo__label">{iconDetails.label}</h5>
+			<div class="wmo__meaning">{iconDetails.wmoCodeDescription}</div>
 		</div>
 	{/each}
 </div>

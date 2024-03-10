@@ -8,7 +8,7 @@
 
 </script>
 
-<i class={`material-symbols-outlined icon--${size} icon--${iconDetails.color}`} aria-label={iconDetails.description}>
+<i class={`material-symbols-outlined icon--${size} icon--${iconDetails.color}`} aria-label={iconDetails.label}>
 	{iconDetails.icon}
 </i>
 

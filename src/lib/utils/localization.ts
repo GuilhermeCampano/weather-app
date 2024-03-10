@@ -1,4 +1,4 @@
-export class LocalizationService {
+export class Localization {
 
   /**
    * Formats a date to display the time in 'HH:MM' format

@@ -1,11 +1,13 @@
 import { derived, get, writable, type Readable } from 'svelte/store';
 import { WeatherApiService } from '../services/weather-api.service';
 import type { ForecastApiResponse, ForecastCurrentCard, ForecastDayCard, ForecastHourCard } from '$lib/models';
-import { LocalizationService } from '$lib/services/localization-service';
+import { Localization } from '$lib/utils/localization';
 import { latitude, longitude } from './location.store';
+import { WeatherCodeDetailsFactory } from '$lib/utils/weather-code-details-factory';
 
 export const forecast = writable<ForecastApiResponse | null>(null);
 export const isLoading = writable(false);
+export const weatherCodeDetailsFactory = new WeatherCodeDetailsFactory();
 
 export async function fetchForecast() {
   const weatherApiService = new WeatherApiService();
@@ -22,7 +24,7 @@ export const currentWeather: Readable<ForecastCurrentCard | null> = derived(fore
     apparentTemperature: Math.round($forecast.current.apparent_temperature),
     precipitationChance: $forecast.current.precipitation_probability,
     windSpeed: Math.round($forecast.current.wind_speed_10m),
-    weatherCode: WeatherApiService.geWeatherCodeDetails($forecast.current.weather_code),
+    weatherCode: weatherCodeDetailsFactory.create($forecast.current.weather_code),
     temperatureMax: Math.round($forecast.daily.temperature_2m_max[0]),
     temperatureMin: Math.round($forecast.daily.temperature_2m_min[0])
   };
@@ -33,9 +35,9 @@ export const weekForecastCards: Readable<ForecastDayCard[]> = derived(forecast, 
   
   return $forecast.daily.time.map((day, index) => {
     return <ForecastDayCard>{
-      dayOfWeek: index === 0 ? 'Today' : LocalizationService.formatDayOfWeek(day),
+      dayOfWeek: index === 0 ? 'Today' : Localization.formatDayOfWeek(day),
       temperature: Math.round($forecast.daily.temperature_2m_max[index]),
-      weatherCode: WeatherApiService.geWeatherCodeDetails($forecast.daily.weather_code[index])
+      weatherCode: weatherCodeDetailsFactory.create($forecast.daily.weather_code[index])
     };
   });
 });
@@ -49,9 +51,9 @@ export const hourlyForecastCards: Readable<ForecastHourCard[]> = derived(forecas
   const endIndex = startIndex + 25;
   return $forecast.hourly.time.slice(startIndex, endIndex).map((hour, index) => {
     return <ForecastHourCard>{
-      time: index === 0 ? 'Now' : LocalizationService.formatHourMinute(hour),
+      time: index === 0 ? 'Now' : Localization.formatHourMinute(hour),
       temperature: Math.round($forecast.hourly.temperature_2m[startIndex + index]),
-      weatherCode: WeatherApiService.geWeatherCodeDetails($forecast.hourly.weather_code[startIndex + index]),
+      weatherCode: weatherCodeDetailsFactory.create($forecast.hourly.weather_code[startIndex + index]),
     };
   });
 });
