@@ -1,4 +1,4 @@
-export enum WeatherCode {
+export enum WeatherCodeKey {
   ClearSky = 'clear-sky',
   PartlyCloudy = 'partly-cloudy',
   Cloudy = 'cloudy',
@@ -21,64 +21,55 @@ export enum WeatherMaterialIcons {
 }
 
 export interface WeatherCodeDetails {
-  code: WeatherCode;
   icon: WeatherMaterialIcons;
   color: IconColor;
-  description: string;
+  label: string;
   wmoCode?: number;
   wmoCodeDescription?: string;
 }
 
 export type IconColor = 'yellow' | 'orange' | 'blue';
 
-export const WeatherCodeDetailsMap = new Map<WeatherCode, WeatherCodeDetails>([
-  [WeatherCode.ClearSky, {
-    code: WeatherCode.ClearSky,
+export const WeatherCodeDetailsMap = new Map<WeatherCodeKey, WeatherCodeDetails>([
+  [WeatherCodeKey.ClearSky, {
     icon: WeatherMaterialIcons.ClearSky,
     color: 'yellow',
-    description: 'Clear sky'
+    label: 'Clear sky'
   }],
-  [WeatherCode.PartlyCloudy, {
-    code: WeatherCode.PartlyCloudy,
+  [WeatherCodeKey.PartlyCloudy, {
     icon: WeatherMaterialIcons.PartlyCloudy,
     color: 'yellow',
-    description: 'Partly cloudy'
+    label: 'Partly cloudy'
   }],
-  [WeatherCode.Cloudy, {
-    code: WeatherCode.Cloudy,
+  [WeatherCodeKey.Cloudy, {
     icon: WeatherMaterialIcons.Cloudy,
     color: 'blue',
-    description: 'Cloudy'
+    label: 'Cloudy'
   }],
-  [WeatherCode.Fog, {
-    code: WeatherCode.Fog,
+  [WeatherCodeKey.Fog, {
     icon: WeatherMaterialIcons.Fog,
     color: 'blue',
-    description: 'Fog'
+    label: 'Fog'
   }],
-  [WeatherCode.Drizzle, {
-    code: WeatherCode.Drizzle,
+  [WeatherCodeKey.Drizzle, {
     icon: WeatherMaterialIcons.Drizzle,
     color: 'blue',
-    description: 'Drizzle'
+    label: 'Drizzle'
   }],
-  [WeatherCode.Rain, {
-    code: WeatherCode.Rain,
+  [WeatherCodeKey.Rain, {
     icon: WeatherMaterialIcons.Rain,
     color: 'blue',
-    description: 'Rain'
+    label: 'Rain'
   }],
-  [WeatherCode.Snow, {
-    code: WeatherCode.Snow,
+  [WeatherCodeKey.Snow, {
     icon: WeatherMaterialIcons.Snow,
     color: 'blue',
-    description: 'Snow'
+    label: 'Snow'
   }],
-  [WeatherCode.Thunderstorm, {
-    code: WeatherCode.Thunderstorm,
+  [WeatherCodeKey.Thunderstorm, {
     icon: WeatherMaterialIcons.Thunderstorm,
     color: 'blue',
-    description: 'Thunderstorm'
+    label: 'Thunderstorm'
   }],
 ]);
 

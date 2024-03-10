@@ -1,22 +1,20 @@
-import { WeatherCodeDetailsMap, type WeatherCodeDetails, WeatherCode, WeatherMaterialIcons, type IconColor, WMOCodesMeaning } from "$lib/models";
+import { WMOCodesMeaning, type IconColor, type WeatherMaterialIcons, type WeatherCodeDetails, WeatherCodeDetailsMap, WeatherCodeKey } from "$lib/models";
 
-
-export class WeatherCodeDetailsBuilder implements WeatherCodeDetails {
+export class WeatherCodeDetailsFactory implements WeatherCodeDetails {
   wmoCode: number;
-  code: WeatherCode;
   icon: WeatherMaterialIcons;
   color: IconColor;
-  description: string;
+  label: string;
   wmoCodeDescription: string;
 
   constructor(wmoCode: number) {
     this.wmoCode = wmoCode;
-    const details = this.geWeatherCodeDetails(wmoCode);
-    this.code = details.code;
-    this.icon = details.icon;
-    this.color = details.color;
-    this.description = details.description;
     this.wmoCodeDescription = WMOCodesMeaning[wmoCode];
+    
+    const {icon, color, label} = this.geWeatherCodeDetails(wmoCode);
+    this.icon = icon;
+    this.color = color;
+    this.label = label;
   }
 
   private geWeatherCodeDetails(wmoCodeNumber: number): WeatherCodeDetails {
@@ -56,15 +54,15 @@ export class WeatherCodeDetailsBuilder implements WeatherCodeDetails {
     return code === 13 || code === 17 || code === 29 || code >= 95 && code <= 99;
   }
 
-  private weatherCodeLookup: { condition: (code: number) => boolean, code: WeatherCode }[] = [
-    { condition: this.isClearSky, code: WeatherCode.ClearSky },
-    { condition: this.isPartlyCloudy, code: WeatherCode.PartlyCloudy },
-    { condition: this.isCloudy, code: WeatherCode.Cloudy },
-    { condition: this.isThunderstorm, code: WeatherCode.Thunderstorm },
-    { condition: this.isRaining, code: WeatherCode.Rain },
-    { condition: this.isFoggy, code: WeatherCode.Fog },
-    { condition: this.isSnow, code: WeatherCode.Snow },
-    { condition: this.isDrizzle, code: WeatherCode.Drizzle },
-    { condition: () => true, code: WeatherCode.Cloudy }
+  private weatherCodeLookup: { condition: (code: number) => boolean, code: WeatherCodeKey }[] = [
+    { condition: this.isClearSky, code: WeatherCodeKey.ClearSky },
+    { condition: this.isPartlyCloudy, code: WeatherCodeKey.PartlyCloudy },
+    { condition: this.isCloudy, code: WeatherCodeKey.Cloudy },
+    { condition: this.isThunderstorm, code: WeatherCodeKey.Thunderstorm },
+    { condition: this.isRaining, code: WeatherCodeKey.Rain },
+    { condition: this.isFoggy, code: WeatherCodeKey.Fog },
+    { condition: this.isSnow, code: WeatherCodeKey.Snow },
+    { condition: this.isDrizzle, code: WeatherCodeKey.Drizzle },
+    { condition: () => true, code: WeatherCodeKey.Cloudy }
   ];
 }
