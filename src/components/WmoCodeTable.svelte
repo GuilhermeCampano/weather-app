@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { WMOCodesMeaning, type WeatherCodeDetails } from '$lib/models';
-	import { WeatherApiService } from '$lib/services/weather-api.service';
+	import { WeatherCodeDetailsBuilder } from '$lib/utils/weather-code-details';
 	import WeatherIcon from './WeatherIcon.svelte';
 
 	const allIcons: WeatherCodeDetails[] = new Array(100)
 		.fill(0)
-		.map((_, i) => WeatherApiService.geWeatherCodeDetails(i));
+		.map((_, i) => new WeatherCodeDetailsBuilder(i));
 </script>
 
 <a
@@ -17,11 +17,11 @@
 	{#each allIcons as iconDetails, index}
 		<div class="wmo__card">
 			<div class="wmo__card-header">
-				<div class="wmo__code">{index}</div>
+				<div class="wmo__code">{iconDetails.wmoCode}</div>
 				<div class="wmo__icon"><WeatherIcon {iconDetails} size="medium" /></div>
 			</div>
 			<h5 class="wmo__label">{iconDetails.description}</h5>
-			<div class="wmo__meaning">{WMOCodesMeaning[index]}</div>
+			<div class="wmo__meaning">{iconDetails.wmoCodeDescription}</div>
 		</div>
 	{/each}
 </div>

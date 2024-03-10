@@ -1,5 +1,4 @@
-import { WeatherCodeDetailsMap, WeatherCodeLookup } from "$lib/models/weather-code.model";
-import type { ForecastApiResponse, WeatherCodeDetails } from "../models";
+import type { ForecastApiResponse } from "../models";
 export class WeatherApiService {
   constructor() { }
   private readonly FORECAST_ENDPOINT = 'https://api.open-meteo.com/v1/forecast';
@@ -46,14 +45,5 @@ export class WeatherApiService {
       console.error(error);
       throw new Error('Error fetching forecast data');
     }
-  }
-
-  static geWeatherCodeDetails(code: number): WeatherCodeDetails {
-    for (const lookup of WeatherCodeLookup) {
-      if (lookup.condition(code)) {
-        return WeatherCodeDetailsMap.get(lookup.code) as WeatherCodeDetails;
-      }
-    }
-    throw new Error('Weather code not found');
   }
 }
