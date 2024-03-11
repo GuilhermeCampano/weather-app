@@ -5,6 +5,7 @@
 	import {AutocompleteGeolocationService} from '$lib/services/autocomplete-geolocation.service';
 	import AutocompleteResults from './AutocompleteResults.svelte';
 	import AutocompleteInput from './AutocompleteInput.svelte';
+	import { debounce } from '$lib/utils/debounce';
 	
 	let isInputFocused = false;
 	let autoCompleteService: AutocompleteGeolocationService;
@@ -59,7 +60,7 @@
 		bind:searchInput={$searchInput}
 		bind:isInputFocused={isInputFocused}
 		hasResults={$hasResults}
-		on:inputChange={searchLocations}
+		on:inputChange={debounce(searchLocations)}
 		on:reset={resetSearchInput}
 		on:focus={() => isInputFocused = true} 
 	/>

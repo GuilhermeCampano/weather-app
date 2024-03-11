@@ -6,7 +6,7 @@ export class AutocompleteGeolocationService {
     this.autocompleteService = new google.maps.places.AutocompleteService();
     this.placesService = new google.maps.places.PlacesService(document.createElement('div'));
   }
-
+  
   searchLocations(input: string): Promise<google.maps.places.AutocompletePrediction[]> {
     return new Promise((resolve) => {
       this.autocompleteService.getPlacePredictions({ input }, (predictions) => {
