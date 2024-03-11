@@ -9,7 +9,9 @@
 </script>
 
 <div class={cardClasses}>
-	<slot />
+	{#if !isLoading}
+		<slot />
+	{/if}
 </div>
 
 <style>

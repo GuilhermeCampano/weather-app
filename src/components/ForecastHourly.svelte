@@ -7,7 +7,7 @@
 
 {#if $isLoading}
 	<h6><SkeletonAnimation width="200px" height="2rem" /></h6>
-	<SkeletonAnimation width="100%" height="150px" />
+	<SkeletonAnimation width="100%" height="150px" withElevation/>
 {/if}
 
 {#if !$isLoading && $hourlyForecastCards.length}
