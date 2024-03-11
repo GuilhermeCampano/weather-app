@@ -7,5 +7,6 @@ export enum WeatherMaterialIcons {
   Rain = 'rainy',
   Snow = 'weather_snowy',
   Drizzle = 'weather_mix',
-  Windy = 'air'
+  Windy = 'air',
+  Mist = 'mist'
 }

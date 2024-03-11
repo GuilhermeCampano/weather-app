@@ -54,18 +54,30 @@ const Windy: WeatherCodeDetails = {
   label: 'Windy'
 };
 
-export const WeatherCodeDetailsList: Record<number, WeatherCodeDetails> = {
+const Haze: WeatherCodeDetails = {
+  icon: WeatherMaterialIcons.Mist,
+  color: 'blue',
+  label: 'Haze'
+};
+
+const Mist: WeatherCodeDetails = {
+  icon: WeatherMaterialIcons.Mist,
+  color: 'blue',
+  label: 'Mist'
+};
+
+export const WeatherCodeDetailsMap: Record<number, WeatherCodeDetails> = {
   0: ClearSky,
   1: Cloudy,
   2: PartlyCloudy,
   3: PartlyCloudy,
   4: Cloudy,
-  5: Rain,
+  5: Haze,
   6: Windy,
   7: Windy,
   8: Windy,
   9: Windy,
-  10: Fog,
+  10: Mist,
   11: Fog,
   12: Fog,
   13: Thunderstorm,

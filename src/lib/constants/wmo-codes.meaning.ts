@@ -1,4 +1,4 @@
-export const WMOCodesMeaningList: Record<number, string> = {
+export const WMOCodesMeaningDictionary: Record<number, string> = {
   0: 'Cloud development not observed or not observable',
   1: 'Clouds generally dissolving or becoming less developed',
   2: 'State of sky on the whole unchanged',

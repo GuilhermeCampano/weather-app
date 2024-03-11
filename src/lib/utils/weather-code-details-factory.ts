@@ -1,4 +1,4 @@
-import { WMOCodesMeaningList, WeatherCodeDetailsList } from "$lib/constants";
+import { WMOCodesMeaningDictionary, WeatherCodeDetailsMap } from "$lib/constants";
 import type { IconColor, WeatherCodeDetails, WeatherMaterialIcons } from "$lib/models";
 
 export class WeatherCodeDetailsFactory implements WeatherCodeDetails {
@@ -9,8 +9,8 @@ export class WeatherCodeDetailsFactory implements WeatherCodeDetails {
   wmoCodeDescription: string;
 
   constructor(wmoCode: number) {
-    const {icon, color, label } = WeatherCodeDetailsList[wmoCode];
-    const wmoCodeDescription = WMOCodesMeaningList[wmoCode];
+    const {icon, color, label } = WeatherCodeDetailsMap[wmoCode];
+    const wmoCodeDescription = WMOCodesMeaningDictionary[wmoCode];
     this.icon = icon;
     this.color = color;
     this.label = label;
