@@ -39,7 +39,7 @@
 		gap: 0 0.5rem;
 		padding: 1rem 0px;
     min-height: 135px;
-		margin: 0;
+		margin-top: 0;
 	}
 
 	.card--large {
