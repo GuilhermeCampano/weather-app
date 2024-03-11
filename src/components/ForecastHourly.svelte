@@ -7,12 +7,11 @@
 
 {#if $isLoading}
 	<h6><SkeletonAnimation width="200px" height="2rem" /></h6>
-	<SkeletonAnimation width="100%" height="150px" withElevation/>
+	<SkeletonAnimation width="100%" height="116px" withElevation/>
 {/if}
 
 {#if !$isLoading && $hourlyForecastCards.length}
 	<h6>Hourly Forecast</h6>
-
 	<Card size="large" isCompact>
 		<div class="hourly-card__content">
 			{#each $hourlyForecastCards as hourForecastCard}

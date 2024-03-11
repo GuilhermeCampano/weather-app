@@ -6,7 +6,6 @@ import { WeatherCodeDetailsFactory } from '$lib/utils/weather-code-details-facto
 
 export const forecast = writable<ForecastApiResponse | null>(null);
 export const isLoading = writable(false);
-export const weatherCodeDetailsFactory = new WeatherCodeDetailsFactory();
 
 export async function fetchForecast(latitude: string, longitude: string) {
   const weatherApiService = new WeatherApiService();
@@ -24,7 +23,7 @@ export const currentWeather: Readable<ForecastCurrentCard | null> = derived(fore
     apparentTemperature: Math.round($forecast.current.apparent_temperature),
     precipitationChance: $forecast.current.precipitation_probability,
     windSpeed: Math.round($forecast.current.wind_speed_10m),
-    weatherCode: weatherCodeDetailsFactory.create($forecast.current.weather_code),
+    weatherCode: new WeatherCodeDetailsFactory($forecast.current.weather_code),
     temperatureMax: Math.round($forecast.daily.temperature_2m_max[0]),
     temperatureMin: Math.round($forecast.daily.temperature_2m_min[0])
   };
@@ -37,7 +36,7 @@ export const weekForecastCards: Readable<ForecastDayCard[]> = derived(forecast, 
     return <ForecastDayCard>{
       dayOfWeek: index === 0 ? 'Today' : Localization.formatDayOfWeek(day),
       temperature: Math.round($forecast.daily.temperature_2m_max[index]),
-      weatherCode: weatherCodeDetailsFactory.create($forecast.daily.weather_code[index])
+      weatherCode: new WeatherCodeDetailsFactory($forecast.daily.weather_code[index])
     };
   });
 });
@@ -53,7 +52,7 @@ export const hourlyForecastCards: Readable<ForecastHourCard[]> = derived(forecas
     return <ForecastHourCard>{
       time: index === 0 ? 'Now' : Localization.formatHourMinute(hour),
       temperature: Math.round($forecast.hourly.temperature_2m[startIndex + index]),
-      weatherCode: weatherCodeDetailsFactory.create($forecast.hourly.weather_code[startIndex + index]),
+      weatherCode: new WeatherCodeDetailsFactory($forecast.hourly.weather_code[startIndex + index]),
     };
   });
 });
