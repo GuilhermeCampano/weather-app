@@ -3,10 +3,9 @@
 	import { WeatherCodeDetailsFactory } from '$lib/utils/weather-code-details-factory';
 	import WeatherIcon from './WeatherIcon.svelte';
 
-	const weatherCodeDetailsFactory = new WeatherCodeDetailsFactory();
 	const allIcons: WeatherCodeDetails[] = new Array(100)
 		.fill(0)
-		.map((_, i) => weatherCodeDetailsFactory.create(i));
+		.map((_, i) => new WeatherCodeDetailsFactory(i));
 </script>
 
 <a
