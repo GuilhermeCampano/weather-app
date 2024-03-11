@@ -5,9 +5,9 @@
 </script>
 
 <h6>Today</h6>
-<Card size="large">
-	{#if $isLoading}
-		<p>Loading...</p>
+<Card size="large" isLoading={$isLoading}>
+	{#if !$isLoading && !$currentWeather}
+		<h2>Please select a location</h2>
 	{/if}
 
 	{#if !$isLoading && $currentWeather}
@@ -36,10 +36,6 @@
 			<div>Rain: <strong>{$currentWeather.precipitationChance}%</strong></div>
 			<div>Wind: <strong>{$currentWeather.windSpeed}km/h</strong></div>
 		</div>
-	{/if}
-
-	{#if !$isLoading && !$currentWeather}
-		<h2>Please select a location</h2>
 	{/if}
 </Card>
 
