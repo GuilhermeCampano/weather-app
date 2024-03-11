@@ -1,14 +1,15 @@
 <script lang="ts">
 	import { fetchForecast } from "$lib/stores/forecast.store";
 	import { latitude, longitude, resetSearchInput } from "$lib/stores/location.store";
+	import { debounce } from "$lib/utils/debounce";
   
   function getLocation() {
     try {
       navigator.geolocation.getCurrentPosition((position) => {
-        latitude.set(position.coords.latitude);
-        longitude.set(position.coords.longitude);
+        latitude.set(position.coords.latitude.toString());
+        longitude.set(position.coords.longitude.toString());
         resetSearchInput();
-        fetchForecast();
+        fetchForecast($latitude, $longitude);
       });
     } catch (error) {
       console.error(error);
@@ -16,7 +17,7 @@
   }
 </script>
 
-<button on:click={getLocation} class="precise-location">
+<button on:click={debounce(getLocation)} class="precise-location">
   <i class="material-symbols-outlined precise-location__icon">my_location</i>
   <span class="precise-location__text">Use precise location</span>
 </button>

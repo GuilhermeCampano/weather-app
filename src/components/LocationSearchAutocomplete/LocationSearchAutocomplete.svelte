@@ -29,9 +29,9 @@
 	function processLocation(place: google.maps.places.PlaceResult | undefined) {
 		if (place?.geometry) {
 			searchInput.set(place.formatted_address || '');
-			latitude.set(place.geometry.location.lat());
-			longitude.set(place.geometry.location.lng());
-			fetchForecast();
+			latitude.set(place.geometry.location.lat().toString());
+			longitude.set(place.geometry.location.lng().toString());
+			fetchForecast($latitude, $longitude);
 		}
 	}
 
