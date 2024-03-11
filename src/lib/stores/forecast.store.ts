@@ -1,21 +1,21 @@
-import { derived, get, writable, type Readable } from 'svelte/store';
+import { derived, writable, type Readable } from 'svelte/store';
 import { WeatherApiService } from '../services/weather-api.service';
 import type { ForecastApiResponse, ForecastCurrentCard, ForecastDayCard, ForecastHourCard } from '$lib/models';
 import { Localization } from '$lib/utils/localization';
-import { latitude, longitude } from './location.store';
 import { WeatherCodeDetailsFactory } from '$lib/utils/weather-code-details-factory';
 
 export const forecast = writable<ForecastApiResponse | null>(null);
 export const isLoading = writable(false);
 export const weatherCodeDetailsFactory = new WeatherCodeDetailsFactory();
 
-export async function fetchForecast() {
+export async function fetchForecast(latitude: string, longitude: string) {
   const weatherApiService = new WeatherApiService();
   isLoading.set(true);
-  const response = await weatherApiService.getForecast(get(latitude).toFixed(4), get(longitude).toFixed(4));
+  const response = await weatherApiService.getForecast(latitude,longitude);
   forecast.set(response);
   isLoading.set(false);
 }
+
 
 export const currentWeather: Readable<ForecastCurrentCard | null> = derived(forecast, ($forecast) => {
   if (!$forecast) return null;

@@ -1,11 +1,18 @@
 <script lang="ts">
 	import { isLoading, hourlyForecastCards } from '$lib/stores/forecast.store';
 	import Card from './Card.svelte';
+	import SkeletonAnimation from './SkeletonAnimation.svelte';
 	import WeatherIcon from './WeatherIcon.svelte';
 </script>
 
+{#if $isLoading}
+	<h6><SkeletonAnimation width="200px" height="2rem" /></h6>
+	<SkeletonAnimation width="100%" height="150px" withElevation/>
+{/if}
+
 {#if !$isLoading && $hourlyForecastCards.length}
 	<h6>Hourly Forecast</h6>
+
 	<Card size="large" isCompact>
 		<div class="hourly-card__content">
 			{#each $hourlyForecastCards as hourForecastCard}

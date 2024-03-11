@@ -1,13 +1,20 @@
 <script lang="ts">
 	import { isLoading, currentWeather } from '$lib/stores/forecast.store';
 	import Card from './Card.svelte';
+	import SkeletonAnimation from './SkeletonAnimation.svelte';
 	import WeatherIcon from './WeatherIcon.svelte';
 </script>
 
-<h6>Today</h6>
-<Card size="large">
-	{#if $isLoading}
-		<p>Loading...</p>
+
+{#if $isLoading}
+	<h6><SkeletonAnimation width="200px" height="2rem" /></h6>
+	{:else}
+	<h6>Today</h6>
+{/if}
+
+<Card size="large" isLoading={$isLoading}>
+	{#if !$isLoading && !$currentWeather}
+		<h2>Please select a location</h2>
 	{/if}
 
 	{#if !$isLoading && $currentWeather}
@@ -36,10 +43,6 @@
 			<div>Rain: <strong>{$currentWeather.precipitationChance}%</strong></div>
 			<div>Wind: <strong>{$currentWeather.windSpeed}km/h</strong></div>
 		</div>
-	{/if}
-
-	{#if !$isLoading && !$currentWeather}
-		<h2>Please select a location</h2>
 	{/if}
 </Card>
 
