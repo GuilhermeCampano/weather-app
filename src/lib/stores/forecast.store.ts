@@ -23,9 +23,9 @@ export const currentWeather: Readable<ForecastCurrentCard | null> = derived(fore
     apparentTemperature: Math.round($forecast.current.apparent_temperature),
     precipitationChance: $forecast.current.precipitation_probability,
     windSpeed: Math.round($forecast.current.wind_speed_10m),
-    weatherCode: new WeatherCodeDetailsFactory($forecast.current.weather_code),
+    weatherCode: new WeatherCodeDetailsFactory($forecast.current.weather_code, $forecast.current.is_day > 0),
     temperatureMax: Math.round($forecast.daily.temperature_2m_max[0]),
-    temperatureMin: Math.round($forecast.daily.temperature_2m_min[0])
+    temperatureMin: Math.round($forecast.daily.temperature_2m_min[0]),
   };
 });
 
@@ -36,7 +36,7 @@ export const weekForecastCards: Readable<ForecastDayCard[]> = derived(forecast, 
     return <ForecastDayCard>{
       dayOfWeek: index === 0 ? 'Today' : Localization.formatDayOfWeek(day),
       temperature: Math.round($forecast.daily.temperature_2m_max[index]),
-      weatherCode: new WeatherCodeDetailsFactory($forecast.daily.weather_code[index])
+      weatherCode: new WeatherCodeDetailsFactory($forecast.daily.weather_code[index]),
     };
   });
 });
@@ -52,7 +52,7 @@ export const hourlyForecastCards: Readable<ForecastHourCard[]> = derived(forecas
     return <ForecastHourCard>{
       time: index === 0 ? 'Now' : Localization.formatHourMinute(hour),
       temperature: Math.round($forecast.hourly.temperature_2m[startIndex + index]),
-      weatherCode: new WeatherCodeDetailsFactory($forecast.hourly.weather_code[startIndex + index]),
+      weatherCode: new WeatherCodeDetailsFactory($forecast.hourly.weather_code[startIndex + index], $forecast.hourly.is_day[startIndex + index] > 0),
     };
   });
 });

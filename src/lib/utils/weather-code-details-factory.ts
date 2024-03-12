@@ -1,5 +1,5 @@
 import { WMOCodesMeaningDictionary, WeatherCodeDetailsMap } from "$lib/constants";
-import type { IconColor, WeatherCodeDetails, WeatherMaterialIcons } from "$lib/models";
+import { WeatherMaterialIcons, type IconColor, type WeatherCodeDetails } from "$lib/models";
 
 export class WeatherCodeDetailsFactory implements WeatherCodeDetails {
   icon: WeatherMaterialIcons;
@@ -8,13 +8,23 @@ export class WeatherCodeDetailsFactory implements WeatherCodeDetails {
   wmoCode: number;
   wmoCodeDescription: string;
 
-  constructor(wmoCode: number) {
+  constructor(wmoCode: number, isDay = true) {
     const {icon, color, label } = WeatherCodeDetailsMap[wmoCode];
     const wmoCodeDescription = WMOCodesMeaningDictionary[wmoCode];
-    this.icon = icon;
+
+    this.icon = isDay ? icon : this.applyNightTheme(icon);
     this.color = color;
     this.label = label;
     this.wmoCode = wmoCode;
     this.wmoCodeDescription = wmoCodeDescription;
+  }
+
+  private applyNightTheme(icon: WeatherMaterialIcons): WeatherMaterialIcons {
+    const nightIcons = new Map([
+      [WeatherMaterialIcons.ClearSky, WeatherMaterialIcons.NightSKy],
+      [WeatherMaterialIcons.PartlyCloudy, WeatherMaterialIcons.NightPartlyCloudy]
+    ]);
+    
+    return nightIcons.get(icon) || icon;
   }
 }
