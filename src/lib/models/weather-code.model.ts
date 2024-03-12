@@ -7,4 +7,5 @@ export interface WeatherCodeDetails {
   label: string;
   wmoCode?: number;
   wmoCodeDescription?: string;
+  isDay?: boolean;
 }

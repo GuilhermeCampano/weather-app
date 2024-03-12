@@ -13,7 +13,8 @@ export class WeatherApiService {
   private readonly HOURLY_PARAMS = [
     'temperature_2m',
     'precipitation_probability',
-    'weather_code'
+    'weather_code',
+    'is_day',
   ];
   private readonly DAILY_PARAMS = [
     'temperature_2m_max',

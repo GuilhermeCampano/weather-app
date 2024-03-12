@@ -1,6 +1,8 @@
 export enum WeatherMaterialIcons {
   ClearSky = 'clear_day',
+  NightSKy = 'clear_night',
   PartlyCloudy = 'partly_cloudy_day',
+  NightPartlyCloudy = 'partly_cloudy_night',
   Thunderstorm = 'thunderstorm',
   Cloudy = 'cloud',
   Fog = 'foggy',

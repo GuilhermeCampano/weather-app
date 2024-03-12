@@ -9,12 +9,12 @@
 </script>
 
 <i class={`material-symbols-outlined icon--${size} icon--${iconDetails.color}`} aria-label={iconDetails.label}>
-	{iconDetails.icon}
+	{ iconDetails.icon }
 </i>
 
 
 <style>
-	.icon--small {
+		.icon--small {
 		font-size: 1rem;
 	}
 
