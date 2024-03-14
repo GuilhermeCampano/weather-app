@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-static';
+import adapter from '@sveltejs/adapter-cloudflare';
 import preprocess from 'svelte-preprocess';
 
 const config = {
@@ -6,11 +6,11 @@ const config = {
 
   kit: {
     adapter: adapter({
-			fallback: '404.html'
+      routes: {
+				include: ['/*'],
+				exclude: ['<all>']
+			},
     }),
-		paths: {
-			base: process.argv.includes('dev') ? '' : process.env.BASE_PATH
-		}
   },
 };
 
