@@ -1,13 +1,11 @@
-import adapter from '@sveltejs/adapter-static';
+import adapter from '@sveltejs/adapter-cloudflare';
 import preprocess from 'svelte-preprocess';
 
 const config = {
   preprocess: preprocess(),
 
   kit: {
-    adapter: adapter({
-			fallback: '404.html'
-    }),
+    adapter: adapter(),
 		paths: {
 			base: process.argv.includes('dev') ? '' : process.env.BASE_PATH
 		}
