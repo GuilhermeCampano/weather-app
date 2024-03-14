@@ -1,16 +1,19 @@
 # Weather App
 
-You can view the deployed app [here](https://guilhermecampano.github.io/weather-app/).
+You can view the deployed web application at [IsSunny.co](https://issunny.co/).
 
 
 ## About
 
-This is an experimental project to get used to working with Svelte. It uses the [Open-Meteo](https://open-meteo.com/) API to create a simple weather application with the following features:
+A simple weather application built with SvelteKit, [Open-Meteo](https://open-meteo.com/) and Google Maps API.
+The key features of this application include:
 
 - Display the current weather
-- Show the weather forecast for the next 7 days
+- Forecast the weather for the next 24 hours
+- Forecast for the next 7 days
 - Get the user's location to show local weather
-- Autocomplete location search
+- Location search to get the weather for any location
+
 
 ## Local Development
 
