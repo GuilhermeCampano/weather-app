@@ -36,6 +36,7 @@ export class WeatherApiService {
     ].join('');
   }
 
+
   public async getForecast(latitude: string, longitude: string): Promise<ForecastApiResponse> {
     try {
       const request = this.getForecastUrl(latitude, longitude);
