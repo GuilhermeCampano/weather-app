@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-  <title>Is Sunny?</title>
+  <title>Is It Sunny?</title>
 </svelte:head>
 
 <main>

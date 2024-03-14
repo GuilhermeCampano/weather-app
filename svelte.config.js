@@ -5,10 +5,12 @@ const config = {
   preprocess: preprocess(),
 
   kit: {
-    adapter: adapter(),
-		paths: {
-			base: process.argv.includes('dev') ? '' : process.env.BASE_PATH
-		}
+    adapter: adapter({
+      routes: {
+				include: ['/*'],
+				exclude: ['<all>']
+			},
+    }),
   },
 };
 
