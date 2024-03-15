@@ -12,16 +12,8 @@ export async function fetchForecast(latitude: string, longitude: string) {
   isLoading.set(false);
 }
 
+export const currentWeather: Readable<ForecastCurrentCard | null> = derived(forecast, $forecast => $forecast?.current ?? null);
 
-export const currentWeather: Readable<ForecastCurrentCard | null> = derived(forecast, ($forecast) => {
-  return $forecast?.current ?? null
-});
+export const weekForecastCards: Readable<ForecastDayCard[]> = derived(forecast, $forecast => $forecast?.daily ?? []);
 
-export const weekForecastCards: Readable<ForecastDayCard[]> = derived(forecast, ($forecast) => {
-  return $forecast?.daily ?? [];
-});
-
-
-export const hourlyForecastCards: Readable<ForecastHourCard[]> = derived(forecast, ($forecast) => { 
-  return $forecast?.hourly ?? [];
-});
+export const hourlyForecastCards: Readable<ForecastHourCard[]> = derived(forecast, $forecast => $forecast?.hourly ?? []);
