@@ -10,3 +10,9 @@ export function resetSearchInput() {
   searchInput.set("");
   autoCompleteResults.set([]);
 }
+
+export async function fetchAutoCompleteResults(input: string) {
+  const response = await fetch(`/api/autocomplete?input=${input}`);
+  const results = await response.json();
+  autoCompleteResults.set(results || []);
+}

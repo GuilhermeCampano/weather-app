@@ -36,15 +36,13 @@ export class WeatherApiService {
     ].join('');
   }
 
+
   public async getForecast(latitude: string, longitude: string): Promise<ForecastApiResponse> {
-    try {
-      const request = this.getForecastUrl(latitude, longitude);
-      const response = await fetch(request);
-      const data: ForecastApiResponse = await response.json();
-      return data;
-    } catch (error) {
-      console.error(error);
-      throw new Error('Error fetching forecast data');
-    }
+    return fetch(this.getForecastUrl(latitude, longitude))
+      .then(response => response.json())
+      .catch(error => {
+        console.error(error);
+        throw new Error('Error fetching forecast data');
+      })
   }
 }
