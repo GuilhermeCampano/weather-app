@@ -1,3 +1,4 @@
+import ApiService from "$lib/utils/api-service";
 import { derived, writable } from "svelte/store";
 
 export const latitude = writable('0');
@@ -12,7 +13,6 @@ export function resetSearchInput() {
 }
 
 export async function fetchAutoCompleteResults(input: string) {
-  const response = await fetch(`/api/autocomplete?input=${input}`);
-  const results = await response.json();
+  const results = await ApiService.getAutocomplete(input);
   autoCompleteResults.set(results || []);
 }

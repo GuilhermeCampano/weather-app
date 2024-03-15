@@ -1,14 +1,14 @@
 import { derived, writable, type Readable } from 'svelte/store';
 import type { ForecastApiResponse, ForecastCurrentCard, ForecastDayCard, ForecastHourCard } from '$lib/models';
+import ApiService from '$lib/utils/api-service';
 
 export const forecast = writable<ForecastApiResponse | null>(null);
 export const isLoading = writable(false);
 
 export async function fetchForecast(latitude: string, longitude: string) {
   isLoading.set(true);
-  const response = await fetch('/api/forecast?latitude=' + latitude + '&longitude=' + longitude);
-  const data = await response.json();
-  forecast.set(data);
+  const forecastApiResponse = await ApiService.getForecast(latitude, longitude);
+  forecast.set(forecastApiResponse);
   isLoading.set(false);
 }
 

@@ -5,6 +5,7 @@
 	import AutocompleteResults from './AutocompleteResults.svelte';
 	import AutocompleteInput from './AutocompleteInput.svelte';
 	import { debounce } from '$lib/utils/debounce';
+	import ApiService from '$lib/utils/api-service';
 	
 	let isInputFocused = false;
 
@@ -18,8 +19,7 @@
 	}
 
 	async function onSelectLocation(location: google.maps.places.AutocompletePrediction) {
-		const response = await fetch(`/api/geolocation?placeId=${location.place_id}`);
-  	const placeResult = await response.json();
+		const placeResult = await ApiService.getGeolocation(location.place_id);
 		processLocation(placeResult);
 		isInputFocused = false;
 	}
