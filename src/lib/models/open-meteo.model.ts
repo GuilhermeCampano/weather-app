@@ -3,7 +3,7 @@ export interface ForecastAPIRequest {
   longitude: number;
 }
 
-export interface ForecastApiResponse {
+export interface OpenMeteoApiResponse {
   latitude: number;
   longitude: number;
   generationtime_ms: number;
