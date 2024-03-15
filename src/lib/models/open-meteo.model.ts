@@ -1,9 +1,4 @@
-export interface ForecastAPIRequest {
-  latitude: number;
-  longitude: number;
-}
-
-export interface ForecastApiResponse {
+export interface OpenMeteoApiResponse {
   latitude: number;
   longitude: number;
   generationtime_ms: number;
@@ -20,7 +15,7 @@ export interface ForecastApiResponse {
 }
 
 
-export interface Current {
+interface Current {
   apparent_temperature: number;
   interval: number;
   is_day: number;
@@ -31,7 +26,7 @@ export interface Current {
   wind_speed_10m: number;
 }
 
-export interface Hourly {
+interface Hourly {
   time: string[];
   temperature_2m: number[];
   weather_code: number[];
@@ -39,7 +34,7 @@ export interface Hourly {
   is_day: number[];
 }
 
-export interface Daily {
+interface Daily {
   time: string[];
   weather_code: number[];
   temperature_2m_max: number[];
@@ -48,7 +43,7 @@ export interface Daily {
   apparent_temperature_min: number[];
 }
 
-export interface Units {
+interface Units {
   time: string;
   interval?: string;
   temperature_2m: string;

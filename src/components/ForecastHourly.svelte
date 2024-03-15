@@ -3,6 +3,11 @@
 	import Card from './Card.svelte';
 	import SkeletonAnimation from './SkeletonAnimation.svelte';
 	import WeatherIcon from './WeatherIcon.svelte';
+	import {Localization} from '$lib/utils/localization';
+
+	function formatTime(time: string, index: number) {
+		return index ===0 ? 'Now' : Localization.formatHourMinute(time);
+	}
 </script>
 
 {#if $isLoading}
@@ -14,9 +19,9 @@
 	<h6>Hourly Forecast</h6>
 	<Card size="large" isCompact>
 		<div class="hourly-card__content">
-			{#each $hourlyForecastCards as hourForecastCard}
+			{#each $hourlyForecastCards as hourForecastCard, index}
 				<div class="hourly-card__item">
-					<div>{hourForecastCard.time}</div>
+					<div>{formatTime(hourForecastCard.time, index)}</div>
 					<WeatherIcon iconDetails={hourForecastCard.weatherCode} size="medium" />
 					<div>{hourForecastCard.temperature}°</div>
 				</div>

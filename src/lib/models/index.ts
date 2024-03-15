@@ -1,4 +1,4 @@
-export * from './forecast.model';
+export * from './open-meteo.model';
 export * from './weather-code.model';
 export * from './forecast-current-card.model';
 export * from './forecast-day-card.model';
@@ -6,3 +6,7 @@ export * from './forecast-hour-card.model';
 export * from './weather-code.model';
 export * from './weather-material-icons';
 export * from './icon-color';
+export * from './forecast-api-response.model';
+export * from './autocomplete-item.model';
+export * from './forecast-api-metadata';
+export * from './place-geolocation-details.model';

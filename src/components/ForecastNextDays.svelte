@@ -3,6 +3,12 @@
 	import Card from './Card.svelte';
 	import WeatherIcon from './WeatherIcon.svelte';
 	import SkeletonAnimation from './SkeletonAnimation.svelte';
+
+	import {Localization} from '$lib/utils/localization';
+
+	function formatDayOfWeek(dayNumber: number) {
+		return dayNumber === 0 ? 'Today' : Localization.formatDayOfWeek(dayNumber.toString());
+	}
 </script>
 
 {#if $isLoading}
@@ -20,7 +26,7 @@
 		{#each $weekForecastCards as dayForecastCard, i}
 			<Card size="small" isLoading={$isLoading}>
 				<div class="forecast__text"></div>
-				{dayForecastCard.dayOfWeek}
+				{formatDayOfWeek(dayForecastCard.dayOfWeek)}
 				<WeatherIcon iconDetails={dayForecastCard.weatherCode} size="large" />
 				<div class="forecast__text">{dayForecastCard.temperature}°</div>
 			</Card>
