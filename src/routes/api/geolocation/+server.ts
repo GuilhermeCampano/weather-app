@@ -1,4 +1,4 @@
-import { GeolocationService } from "$lib/server/geolocation.service";
+import { GeolocationService } from "$lib/server/geolocation-api.service";
 
 export async function GET({ url }: { url: URL }) {
   console.log('GET /api/geolocation');

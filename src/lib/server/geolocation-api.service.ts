@@ -1,8 +1,8 @@
 import { env } from '$env/dynamic/private';
 export class GeolocationService {
-  readonly #API_KEY = 'AIzaSyC2YwoIGga-xHDKayrLaUSofcly_4bgRpk';
-  readonly #AUTOCOMPLETE_ENDPOINT = 'https://maps.googleapis.com/maps/api/place/autocomplete/json';
-  readonly #PLACES_ENDPOINT = 'https://maps.googleapis.com/maps/api/place/details/json';
+  readonly #GOOGLE_API = 'https://maps.googleapis.com/maps/api/';
+  readonly #AUTOCOMPLETE_ENDPOINT = `${this.#GOOGLE_API}place/autocomplete/json`;
+  readonly #PLACES_ENDPOINT = `${this.#GOOGLE_API}place/details/json`;
 
   public getPlaceAutocomplete(input: string): Promise<google.maps.places.AutocompletePrediction[]> {
     return fetch(`${this.#AUTOCOMPLETE_ENDPOINT}?input=${encodeURIComponent(input)}&key=${env.GOOGLE_API_KEY}`)
