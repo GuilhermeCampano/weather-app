@@ -1,16 +1,18 @@
 <script lang="ts">
+	import type { AutocompleteItem } from "$lib";
 	import { createEventDispatcher } from "svelte";
 	import { slide } from "svelte/transition";
+	import type { A } from "vitest/dist/reporters-MmQN-57K.js";
 
-  export let results: google.maps.places.AutocompletePrediction[] = [];
+  export let results: AutocompleteItem[] = [];
 
   const dispatch = createEventDispatcher();
 
-  function selectLocation(result: google.maps.places.AutocompletePrediction) {
+  function selectLocation(result: AutocompleteItem) {
     dispatch('selectLocation', result);
   }
   
-	function handleKeydown(event: KeyboardEvent, location: google.maps.places.AutocompletePrediction) {
+	function handleKeydown(event: KeyboardEvent, location: AutocompleteItem) {
 		if (event.key === 'Enter') {
 			selectLocation(location);
 		}
@@ -18,7 +20,7 @@
 </script>
 
 <div class="autocomplete__results" transition:slide={{ delay: 100, duration: 300 }}>
-  {#each results as result, index (result.place_id)}
+  {#each results as result, index (result.placeId)}
     <div
       tabindex={index}
       class="autocomplete__result"

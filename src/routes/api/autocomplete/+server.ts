@@ -1,6 +1,6 @@
 import { GeolocationService } from "$lib/server/geolocation-api.service";
 
-export async function GET({ url }: { url: URL }) {
+export async function GET({ url }: { url: URL }): Promise<Response> {
   const input = <string>url.searchParams.get('input');
   if (!input) {
     console.error('Error: input is required');
