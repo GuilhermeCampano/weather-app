@@ -13,10 +13,10 @@ export function resetSearchInput() {
   autoCompleteResults.set([]);
 }
 
-export function selectPlaceResult(place: PlaceGeolocationDetails) {
-  searchInput.set(place.formattedAddress);
-  latitude.set(place.latitude.toString());
-  longitude.set(place.longitude.toString());
+export function selectPlaceResult(placeDetails: PlaceGeolocationDetails, autocompleteItem: AutocompleteItem) {
+  searchInput.set(autocompleteItem.description);
+  latitude.set(placeDetails.latitude.toString());
+  longitude.set(placeDetails.longitude.toString());
 }
 
 export async function fetchAutoCompleteResults(input: string) {

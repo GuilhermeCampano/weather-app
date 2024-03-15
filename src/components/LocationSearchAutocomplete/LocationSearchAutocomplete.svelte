@@ -28,10 +28,10 @@
 		fetchAutoCompleteResults($searchInput);
 	}
 
-	async function onSelectLocation(location: AutocompleteItem) {
-		const placeResult = await ApiService.getGeolocation(location.placeId);
-		if (placeResult) {
-			selectPlaceResult(placeResult);
+	async function onSelectLocation(autocompleteItem: AutocompleteItem) {
+		const placeDetails = await ApiService.getGeolocation(autocompleteItem.placeId);
+		if (placeDetails) {
+			selectPlaceResult(placeDetails, autocompleteItem);
 			fetchForecast($latitude, $longitude);
 		}
 		isInputFocused = false;
