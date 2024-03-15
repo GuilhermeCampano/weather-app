@@ -32,7 +32,13 @@ cd weather-app
 npm install
 ```
 
-3. Serve the app:
+3. Create a `.env` file in the root of the project with the following content:
+
+```bash
+GOOGLE_API_KEY='YOUR_API_KEY'
+```
+
+4. Serve the app:
 
 ```bash
 npm run dev
