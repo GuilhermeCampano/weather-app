@@ -8,7 +8,8 @@
 		autoCompleteResults,
 		resetSearchInput,
 		hasResults,
-		fetchAutoCompleteResults
+		fetchAutoCompleteResults,
+		selectPlaceResult
 	} from '$lib/stores/location.store';
 	import AutocompleteResults from './AutocompleteResults.svelte';
 	import AutocompleteInput from './AutocompleteInput.svelte';
@@ -29,17 +30,11 @@
 
 	async function onSelectLocation(location: AutocompleteItem) {
 		const placeResult = await ApiService.getGeolocation(location.placeId);
-		processLocation(placeResult);
-		isInputFocused = false;
-	}
-
-	function processLocation(place: PlaceGeolocationDetails | null) {
-		if (place) {
-			searchInput.set(place.formattedAddress || '');
-			latitude.set(place.latitude.toString());
-			longitude.set(place.longitude.toString());
+		if (placeResult) {
+			selectPlaceResult(placeResult);
 			fetchForecast($latitude, $longitude);
 		}
+		isInputFocused = false;
 	}
 
 	function handleClickOutside(event: MouseEvent) {
