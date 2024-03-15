@@ -1,4 +1,4 @@
-import type { AutocompleteItem, ForecastApiResponse } from "$lib/models";
+import type { AutocompleteItem, ForecastApiResponse, PlaceGeolocationDetails } from "$lib/models";
 
 export default class ApiService {
   static readonly AUTOCOMPLETE = '/api/autocomplete';
@@ -17,7 +17,7 @@ export default class ApiService {
     return await this.fetch(`${this.FORECAST}?latitude=${latitude}&longitude=${longitude}`);
   }
 
-  static async getGeolocation(placeId: string): Promise<google.maps.places.PlaceResult> {
+  static async getGeolocation(placeId: string): Promise<PlaceGeolocationDetails> {
     return await this.fetch(`${this.GEOLOCATION}?placeId=${placeId}`);
   }
 
