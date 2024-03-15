@@ -22,11 +22,6 @@ export const weekForecastCards: Readable<ForecastDayCard[]> = derived(forecast, 
 });
 
 
-export const hourlyForecastCards: Readable<ForecastHourCard[]> = derived(forecast, ($forecast) => {
-  if (!$forecast) return [];
-
-  const currentHour = new Date($forecast.metadata.localTime).getHours();
-  const startIndex = currentHour;
-  const endIndex = startIndex + 25;
-  return $forecast.hourly.slice(startIndex, endIndex);
+export const hourlyForecastCards: Readable<ForecastHourCard[]> = derived(forecast, ($forecast) => { 
+  return $forecast?.hourly ?? [];
 });

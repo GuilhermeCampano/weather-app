@@ -80,7 +80,12 @@ export class WeatherApiService {
   }
   
   private normalizeHourly(data: OpenMeteoApiResponse): ForecastHourCard[] {
-    return data.hourly.time.map((hour, index) => {
+    const currentHour = new Date(data.current.time).getHours();
+    const startIndex = currentHour;
+    const endIndex = startIndex + 25;
+    const hourlyData = data.hourly.time.slice(startIndex, endIndex);
+
+    return hourlyData.map((hour, index) => {
       return {
         time: hour,
         temperature: Math.round(data.hourly.temperature_2m[index]),
