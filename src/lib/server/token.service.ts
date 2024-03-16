@@ -1,16 +1,23 @@
+import jwt from 'jsonwebtoken';
 import { PRIVATE_SECRET_KEY } from '$env/static/private';
-import HmacSHA256 from 'crypto-js/hmac-sha256';
 
 export class TokenService {
-  static readonly timestamp: string = Date.now().toString();
+  createToken() {
+    const expiration15minutes = Math.floor(Date.now() / 1000) + 60 * 15;
 
-  static createSignature() {
-    const hash = HmacSHA256(this.timestamp, PRIVATE_SECRET_KEY);
-    return hash.toString();
+    const token = jwt.sign({
+      expiration: expiration15minutes,
+    }, PRIVATE_SECRET_KEY);
+    return token;
   }
 
-  static verifySignature(signature: string) {
-    const calculatedSignature = this.createSignature();
-    return signature === calculatedSignature;
+  verifyToken(token: string): boolean {
+    try {
+      const { expiration } = jwt.verify(token, PRIVATE_SECRET_KEY) as { expiration: number };
+      return expiration >= Math.floor(Date.now() / 1000);
+    } catch (error) {
+      console.log('Error verifying token', error);
+      return true;
+    }
   }
 }

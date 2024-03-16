@@ -1,17 +1,16 @@
 import { TokenService } from '$lib/server/token.service';
 
 export async function handle({ event, resolve }) {
+  const tokenService = new TokenService();
   const { request } = event;
 
   if (!isApiRequest(request)) { return resolve(event); }
+  if (!validReferer(request)) { return new Response('Unauthorized: Invalid origin', { status: 403 }); }
 
   const token = extractToken(request);
 
   if (!token) { return new Response('Unauthorized: Missing token', { status: 401 }); }
-
-  if (!TokenService.verifySignature(token)) { return new Response('Unauthorized: Invalid token', { status: 403 }); }
-
-  if (!validReferer(request)) { return new Response('Unauthorized: Invalid origin', { status: 403 }); }
+  if (!tokenService.verifyToken(token)) { return new Response('Unauthorized: Invalid token', { status: 403 }); }
 
   return resolve(event);
 }

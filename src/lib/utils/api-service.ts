@@ -16,6 +16,11 @@ export default class ApiService {
 
   static async fetch<T>(endpoint: string, options?: RequestInit): Promise<T> {
     const response = await fetch(endpoint, { ...options, headers: { 'Authorization': `Bearer ${this.token}` } });
+    if (response.status === 403) {
+      location.reload();
+      throw new Error('Token is expired. Refreshing the page...');
+    }
+
     if (!response.ok) {
       throw new Error(`API request failed: ${response.status}`);
     }
