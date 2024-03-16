@@ -1,18 +1,24 @@
-import { verifySignature} from '$lib/server/token.service';
+import { TokenService } from '$lib/server/token.service';
 
 export async function handle({ event, resolve }) {
-  const request = event.request;
-  
-  if(!request.url.includes('/api/')) {
-    return resolve(event);
-  }
+  const { request } = event;
 
-  const authHeader = request.headers.get('Authorization');
-  const signature = authHeader?.split('Bearer ')[1] as string;
+  if (!isApiRequest(request)) return resolve(event);
 
-  if (!verifySignature(signature)){
-    return new Response('Invalid token', { status: 401 });
-  }
+  const token = extractToken(request);
+
+  if (!token) return new Response('Unauthorized: Missing token', { status: 401 });
+
+  if (!TokenService.verifySignature(token)) return new Response('Unauthorized: Invalid token', { status: 403 });
 
   return resolve(event);
+}
+
+function isApiRequest(request: Request): boolean {
+  return request.url.includes('/api/');
+}
+
+function extractToken(request: Request): string {
+  const authHeader = request.headers.get('Authorization');
+  return authHeader?.split('Bearer ')[1] || '';
 }
