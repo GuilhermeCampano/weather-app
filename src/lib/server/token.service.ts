@@ -2,12 +2,16 @@ import jwt from 'jsonwebtoken';
 import { PRIVATE_SECRET_KEY } from '$env/static/private';
 
 export function createToken(): string {
-  const expiration15minutes = Math.floor(Date.now() / 1000) + 60 * 15;
+  console.log('createToken', PRIVATE_SECRET_KEY);
 
-  const token = jwt.sign({
-    expiration: expiration15minutes,
-  }, PRIVATE_SECRET_KEY);
-  return token;
+  try {
+    const expiration15minutes = Math.floor(Date.now() / 1000) + 60 * 15;
+    const token = jwt.sign({expiration: expiration15minutes}, PRIVATE_SECRET_KEY);
+    return token;
+  } catch (error) {
+    console.log('Error creating token', error);
+    return '';
+  }
 }
 
 export function verifyToken(token: string): boolean {
@@ -19,4 +23,3 @@ export function verifyToken(token: string): boolean {
     return true;
   }
 }
-
