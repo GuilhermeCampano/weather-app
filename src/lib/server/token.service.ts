@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import { PRIVATE_SECRET_KEY } from '$env/static/private';
 
 export class TokenService {
-  createToken() {
+  createToken(): string {
     const expiration15minutes = Math.floor(Date.now() / 1000) + 60 * 15;
 
     const token = jwt.sign({
