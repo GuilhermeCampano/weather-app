@@ -20,6 +20,7 @@
 		"@sveltejs/adapter-static": "^3.0.1",
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
+		"@types/crypto-js": "^4.2.2",
 		"@types/eslint": "^8.56.0",
 		"@types/googlemaps": "^3.43.3",
 		"@types/node": "^20.11.24",
@@ -28,6 +29,7 @@
 		"eslint": "^8.56.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-svelte": "^2.35.1",
+		"jsonwebtoken": "^9.0.2",
 		"prettier": "^3.1.1",
 		"prettier-plugin-svelte": "^3.1.2",
 		"svelte": "^4.2.7",
@@ -38,5 +40,8 @@
 		"vite": "^5.0.3",
 		"vitest": "^1.2.0"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"crypto-js": "^4.2.0"
+	}
 }

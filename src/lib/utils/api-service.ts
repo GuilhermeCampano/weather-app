@@ -1,12 +1,21 @@
 import type { AutocompleteItem, ForecastApiResponse, PlaceGeolocationDetails } from "$lib/models";
 
 export default class ApiService {
+  static #token: string = '';
+
+  static set token(value: string) {
+    this.#token = value;
+  }
+
+  static get token(): string {
+    return this.#token;
+  }
   static readonly AUTOCOMPLETE = '/api/autocomplete';
   static readonly FORECAST = '/api/forecast';
   static readonly GEOLOCATION = '/api/geolocation';
 
   static async fetch<T>(endpoint: string, options?: RequestInit): Promise<T> {
-    const response = await fetch(endpoint, options);
+    const response = await fetch(endpoint, { ...options, headers: { 'Authorization': `Bearer ${this.token}` } });
     if (!response.ok) {
       throw new Error(`API request failed: ${response.status}`);
     }
