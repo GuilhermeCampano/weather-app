@@ -1,12 +1,11 @@
-import crypto from 'crypto';
-import { PRIVATE_HMAC_SECRET_KEY } from '$env/static/private';
+import { PRIVATE_SECRET_KEY } from '$env/static/private';
+import HmacSHA256 from 'crypto-js/hmac-sha256';
 
 const timestamp = Date.now().toString();
 
 export function createSignature() {
-  const hmac = crypto.createHmac('sha256', PRIVATE_HMAC_SECRET_KEY);
-  hmac.update(timestamp.toString());
-  return hmac.digest('hex');
+  const hash = HmacSHA256(timestamp, PRIVATE_SECRET_KEY);
+  return hash.toString();
 }
 
 export function verifySignature(signature: string) {
