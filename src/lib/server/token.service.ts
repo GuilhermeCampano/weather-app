@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import { PRIVATE_SECRET_KEY } from '$env/static/private';
 
 export class TokenService {
-  createToken(): string {
+  static createToken(): string {
     const expiration15minutes = Math.floor(Date.now() / 1000) + 60 * 15;
 
     const token = jwt.sign({
@@ -11,7 +11,7 @@ export class TokenService {
     return token;
   }
 
-  verifyToken(token: string): boolean {
+  static verifyToken(token: string): boolean {
     try {
       const { expiration } = jwt.verify(token, PRIVATE_SECRET_KEY) as { expiration: number };
       return expiration >= Math.floor(Date.now() / 1000);
