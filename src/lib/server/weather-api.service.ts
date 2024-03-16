@@ -88,8 +88,8 @@ export class WeatherApiService {
     return hourlyData.map((hour, index) => {
       return {
         time: hour,
-        temperature: Math.round(data.hourly.temperature_2m[index]),
-        weatherCode: new WeatherCodeDetailsFactory(data.hourly.weather_code[index], data.hourly.is_day[index] > 0),
+        temperature: Math.round(data.hourly.temperature_2m[startIndex + index]),
+        weatherCode: new WeatherCodeDetailsFactory(data.hourly.weather_code[startIndex + index], data.hourly.is_day[startIndex + index] > 0),
       };
     });
   }
