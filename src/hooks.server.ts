@@ -1,4 +1,4 @@
-import { TokenService } from '$lib/server/token.service';
+import { verifyToken } from "$lib/server/token.service";
 
 export async function handle({ event, resolve }) {
   const { request } = event;
@@ -9,7 +9,7 @@ export async function handle({ event, resolve }) {
   const token = extractToken(request);
 
   if (!token) { return new Response('Unauthorized: Missing token', { status: 401 }); }
-  if (!TokenService.verifyToken(token)) { return new Response('Unauthorized: Invalid token', { status: 403 }); }
+  if (!verifyToken(token)) { return new Response('Unauthorized: Invalid token', { status: 403 }); }
 
   return resolve(event);
 }

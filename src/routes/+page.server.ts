@@ -1,7 +1,7 @@
-import { TokenService } from "$lib/server/token.service";
+import { createToken } from "$lib/server/token.service";
 
 export async function load() {
-  const token = TokenService.createToken();
+  const token = createToken();
   return {
     props: { token }
   }
