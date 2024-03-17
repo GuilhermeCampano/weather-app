@@ -1,10 +1,25 @@
 import type { AutocompleteItem } from "$lib/models";
 
 export const autocompleteMockResponse = <AutocompleteItem[]>[
-  { placeId: '1', description: 'Test 1' },
-  { placeId: '2', description: 'Test 2' },
-  { placeId: '3', description: 'Test 3' },
-  { placeId: '4', description: 'Test 4' },
-  { placeId: '5', description: 'Test 5' },
-  { placeId: '6', description: 'Test 6' },
+  {
+    "placeId": "abc123",
+    "description": "Dubai - United Arab Emirates"
+  },
+  {
+    "placeId": "abc124",
+    "description": "Dubai Mall - Dubai - United Arab Emirates"
+  },
+  {
+    "placeId": "abc125",
+    "description": "Dubai Hills Mall - Al Khail Road - Dubai - United Arab Emirates"
+  },
+  {
+    "placeId": "abc126",
+    "description": "Dubai Marina - Dubai - United Arab Emirates"
+  },
+  {
+    "placeId": "abc127",
+    "description": "Dubai Airport Terminal 2 Departures - Dubai - United Arab Emirates"
+  }
+
 ]
