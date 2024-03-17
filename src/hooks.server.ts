@@ -1,3 +1,6 @@
+import { PRIVATE_TEST_API } from "$env/static/private";
+import { autocompleteMockResponse } from "$lib/mocks/autocomplete.mock";
+import { forecastMockResponse } from "$lib/mocks/forecast.mock";
 import { verifyToken } from "$lib/server/token.service";
 
 export async function handle({ event, resolve }) {
@@ -11,6 +14,13 @@ export async function handle({ event, resolve }) {
   if (!token) { return new Response('Unauthorized: Missing token', { status: 401 }); }
   const isTokenValid = await verifyToken(token);
   if (!isTokenValid) { return new Response('Unauthorized: Invalid token', { status: 403 }); }
+
+  
+  if (PRIVATE_TEST_API === 'TRUE') {
+    console.log('Mocking API response');
+    return mockAPIResponse(request);
+  }
+
 
   return resolve(event);
 }
@@ -31,4 +41,18 @@ function validReferer(request: Request): boolean {
     referer = referer.slice(0, -1);
   }
   return referer === serverOrigin;
+}
+
+function mockAPIResponse(request: Request): Response{
+  const status200 = { status: 200 };
+  if (request.url.includes('/api/forecast')) {
+    return new Response(JSON.stringify(forecastMockResponse), status200);
+  }  
+  if (request.url.includes('/api/autocomplete')) {
+    return new Response(JSON.stringify(autocompleteMockResponse), status200);
+  }
+  if(request.url.includes('/api/geolocation')) {
+    return new Response(JSON.stringify({}), status200);
+  }
+  return new Response('Not found', { status: 404 });
 }
