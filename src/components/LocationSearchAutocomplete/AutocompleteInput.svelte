@@ -29,7 +29,7 @@
 	placeholder="Search for a location"
 />
 
-{#if searchInput.length > 1}
+{#if searchInput.length > 1 && isInputFocused}
 	<button class="autocomplete__clear" on:click={handleClearButtonClick}>
 		<i class="material-symbols-outlined">close</i>
 	</button>

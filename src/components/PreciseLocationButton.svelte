@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { fetchForecast } from "$lib/stores/forecast.store";
-	import { latitude, longitude, resetSearchInput } from "$lib/stores/location.store";
+	import { latitude, longitude, resetSearchInput } from "$lib/stores/search-location.store";
 	import { debounce } from "$lib/utils/debounce";
   
   function getLocation() {

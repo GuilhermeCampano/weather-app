@@ -6,7 +6,7 @@
 	import LocationSearchAutocomplete from '../components/LocationSearchAutocomplete/LocationSearchAutocomplete.svelte';
 	import { onMount } from 'svelte';
 	import ApiService from '$lib/utils/api-service';
-	import { selectPlaceResult } from '$lib/stores/location.store';
+	import { selectPlaceResult } from '$lib/stores/search-location.store';
 	import { LocalStorage } from '$lib/utils/localstorage';
 	import { fetchForecast } from '$lib/stores/forecast.store';
 	import { DEFAULT_SEARCH } from '$lib/constants';

@@ -9,8 +9,9 @@
 		resetSearchInput,
 		hasResults,
 		fetchAutoCompleteResults,
-		selectPlaceResult
-	} from '$lib/stores/location.store';
+		selectPlaceResult,
+		lastSelectedSearchInput
+	} from '$lib/stores/search-location.store';
 	import AutocompleteResults from './AutocompleteResults.svelte';
 	import AutocompleteInput from './AutocompleteInput.svelte';
 	import { debounce } from '$lib/utils/debounce';
@@ -41,6 +42,9 @@
 
 	function handleClickOutside(event: MouseEvent) {
 		if (!(event.target as Element).closest('.autocomplete')) {
+			if($searchInput !== $lastSelectedSearchInput) {
+				searchInput.set($lastSelectedSearchInput);
+			}
 			isInputFocused = false;
 		}
 	}

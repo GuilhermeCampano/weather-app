@@ -18,7 +18,7 @@ export class InMemoryCache<T> {
     if (this.cache.size >= this.maxEntries) {
       this.purgeOldEntry();
     }
-    this.cache.set(key, value);
+    this.cache.set(this.normalizeKey(key), value);
   }
 
   getFromCache(key: string): T | undefined {
@@ -26,7 +26,7 @@ export class InMemoryCache<T> {
       this.clearCache();
       return undefined;
     }
-    return this.cache.get(key);
+    return this.cache.get(this.normalizeKey(key));
   }
 
   clearCache() {
@@ -41,5 +41,9 @@ export class InMemoryCache<T> {
 
   private isCacheStale() {
     return Date.now() - this.creationTime > this.maxCacheTime;
+  }
+
+  private normalizeKey(key: string): string {
+    return key.toLocaleLowerCase().trim()
   }
 }
