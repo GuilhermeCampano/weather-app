@@ -14,7 +14,6 @@ export async function GET({ url }: { url: URL }) {
     console.log(`GET /api/forecast for latitude: ${latitude}, longitude: ${longitude}`);
     const weatherApiService = new WeatherApiService();
     const response = await weatherApiService.getForecast(latitude, longitude);
-    console.log('Response from Weather API:', JSON.stringify(response, null, 2));
     return new Response(JSON.stringify(response), {
       headers: { 'content-type': 'application/json' },
       status: 200
