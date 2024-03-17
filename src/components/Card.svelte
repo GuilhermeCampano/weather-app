@@ -60,7 +60,7 @@
 		.card--large {
 			width: auto;
 			margin-right: auto;
-			padding-right: 1rem;
+			padding-inline: 2rem;
 			border-radius: 20px;
 			right: 0;
 		}

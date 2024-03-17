@@ -25,14 +25,14 @@ export class LocalStorage {
       delete autocompleteHashTable[oldestEntry[0]];
     }
   
-    autocompleteHashTable[inputSearch] = autocompleteItem;
+    autocompleteHashTable[inputSearch.toLocaleLowerCase()] = autocompleteItem;
     localStorage.setItem(AUTOCOMPLETE_HASH_TABLE_KEY, JSON.stringify(autocompleteHashTable));
   }
   
   static getAutoCompleteHashTable(inputSearch: string): AutocompleteItem[] | null {
     const autocompleteHashTable = JSON.parse(localStorage.getItem(AUTOCOMPLETE_HASH_TABLE_KEY) || '{}');
   
-    const autocompleteItem = autocompleteHashTable[inputSearch];
+    const autocompleteItem = autocompleteHashTable[inputSearch.toLocaleLowerCase()];
   
     return autocompleteItem || null;
   }
