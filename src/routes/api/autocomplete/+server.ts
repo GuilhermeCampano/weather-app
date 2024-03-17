@@ -13,7 +13,6 @@ export async function GET({ url }: { url: URL }): Promise<Response> {
   try {
     const geolocationService = new GeolocationService();
     const response = await geolocationService.getPlaceAutocomplete(input);
-    console.log('Response from Geolocation API:', JSON.stringify(response, null, 2));
     return new Response(JSON.stringify(response), {
       headers: { 'content-type': 'application/json' },
       status: 200

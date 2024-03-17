@@ -1,14 +1,27 @@
 import { PRIVATE_GOOGLE_API_KEY } from '$env/static/private';
 import type { AutocompleteItem, PlaceGeolocationDetails } from '$lib/models';
+import { InMemoryCache } from './in-memory-cache';
+
+const AutocompleteCache = new InMemoryCache<AutocompleteItem[]>();
+const PlaceDetailsCache = new InMemoryCache<PlaceGeolocationDetails>();
 export class GeolocationService {
   readonly #GOOGLE_API = 'https://maps.googleapis.com/maps/api/';
   readonly #AUTOCOMPLETE_ENDPOINT = `${this.#GOOGLE_API}place/autocomplete/json`;
   readonly #PLACES_ENDPOINT = `${this.#GOOGLE_API}place/details/json`;
 
   public getPlaceAutocomplete(input: string): Promise<AutocompleteItem[]> {
+    const cachedResults = AutocompleteCache.getFromCache(input);
+    if (cachedResults) {
+      console.log('Returning cached results for:', input);
+      return Promise.resolve(cachedResults);
+    }
     return fetch(`${this.#AUTOCOMPLETE_ENDPOINT}?input=${encodeURIComponent(input)}&key=${PRIVATE_GOOGLE_API_KEY}`)
       .then(response => response.json())
       .then(data => data.predictions.length ? this.normalizeAutocompleteResults(data.predictions) : [])
+      .then((results: AutocompleteItem[]) => {
+        AutocompleteCache.addToCache(input, results);
+        return results;
+      })
       .catch(error => {
         console.error(error);
         throw new Error('Error fetching place autocomplete data');
@@ -16,9 +29,20 @@ export class GeolocationService {
   }
 
   public getPlaceDetails(placeId: string): Promise<PlaceGeolocationDetails | null> {
+    const cachedDetails = PlaceDetailsCache.getFromCache(placeId);
+    if (cachedDetails) {
+      console.log('Returning cached details for:', placeId);
+      return Promise.resolve(cachedDetails);
+    }
     return fetch(`${this.#PLACES_ENDPOINT}?place_id=${placeId}&key=${PRIVATE_GOOGLE_API_KEY}`)
       .then(response => response.json())
       .then(data => data.result ? this.normalizePlaceDetails(data.result) : null)
+      .then((details: PlaceGeolocationDetails | null) => {
+        if (details) {
+          PlaceDetailsCache.addToCache(placeId, details);
+        }
+        return details;
+      })
       .catch(error => {
         console.error(error);
         throw new Error('Error fetching place details');

@@ -14,7 +14,6 @@ export async function GET({ url }: { url: URL }) {
   try {
     const geolocationService = new GeolocationService();
     const response = await geolocationService.getPlaceDetails(placeId);
-    console.log('Response from Geolocation API:', JSON.stringify(response, null, 2));
     return new Response(JSON.stringify(response), {
       headers: { 'content-type': 'application/json' },
       status: 200

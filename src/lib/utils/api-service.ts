@@ -1,5 +1,4 @@
 import type { AutocompleteItem, ForecastApiResponse, PlaceGeolocationDetails } from "$lib/models";
-import { LocalStorage } from "./localstorage";
 
 export default class ApiService {
   static #token: string = '';
@@ -37,13 +36,6 @@ export default class ApiService {
   }
 
   static async getAutocomplete(input: string): Promise<AutocompleteItem[]> {
-    const cachedAutocomplete = LocalStorage.getAutoCompleteHashTable(input);
-    if (cachedAutocomplete) {
-      return cachedAutocomplete;
-    }
-    const apiResults: AutocompleteItem[] = await this.fetch(`${this.AUTOCOMPLETE}?input=${input}`);
-    LocalStorage.setAutoCompleteHashTable(input, apiResults);
-    return apiResults;
-
+    return await this.fetch(`${this.AUTOCOMPLETE}?input=${input}`);
   }
 }
