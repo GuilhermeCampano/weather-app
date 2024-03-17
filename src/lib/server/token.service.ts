@@ -1,25 +1,27 @@
-import jwt from 'jsonwebtoken';
+import { SignJWT, jwtVerify } from 'jose';
 import { PRIVATE_SECRET_KEY } from '$env/static/private';
 
-export function createToken(): string {
-  console.log('createToken', PRIVATE_SECRET_KEY);
+const JWT_ALGORITHM = 'HS256';
+const JWT_KEY = new TextEncoder().encode(PRIVATE_SECRET_KEY);
+const JWT_EXPIRATION = 60 * 15; // 15 minutes in seconds;
 
-  try {
-    const expiration15minutes = Math.floor(Date.now() / 1000) + 60 * 15;
-    const token = jwt.sign({expiration: expiration15minutes}, PRIVATE_SECRET_KEY);
-    return token;
-  } catch (error) {
-    console.log('Error creating token', error);
-    return '';
-  }
+export async function createToken() {
+  const token = await new SignJWT({ exp: Math.floor(Date.now() / 1000) + JWT_EXPIRATION })
+    .setProtectedHeader({ alg: JWT_ALGORITHM })
+    .sign(JWT_KEY);
+  return token;
 }
 
-export function verifyToken(token: string): boolean {
+export async function verifyToken(token: string) {
   try {
-    const { expiration } = jwt.verify(token, PRIVATE_SECRET_KEY) as { expiration: number };
-    return expiration >= Math.floor(Date.now() / 1000);
+    const { payload } = await jwtVerify(token, JWT_KEY, {
+      algorithms: [JWT_ALGORITHM],
+    });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const exp = (payload as any)['exp'];
+    return exp >= Math.floor(Date.now() / 1000);
   } catch (error) {
     console.log('Error verifying token', error);
-    return true;
+    return false;
   }
 }
