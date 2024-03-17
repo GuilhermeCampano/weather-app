@@ -15,7 +15,8 @@
 	import AutocompleteInput from './AutocompleteInput.svelte';
 	import { debounce } from '$lib/utils/debounce';
 	import ApiService from '$lib/utils/api-service';
-	import type { AutocompleteItem, PlaceGeolocationDetails } from '$lib';
+	import type { AutocompleteItem } from '$lib';
+	import { LocalStorage } from '$lib/utils/localstorage';
 
 	let isInputFocused = false;
 
@@ -32,6 +33,7 @@
 		const placeDetails = await ApiService.getGeolocation(autocompleteItem.placeId);
 		if (placeDetails) {
 			selectPlaceResult(placeDetails, autocompleteItem);
+			LocalStorage.saveLastSearch(placeDetails, autocompleteItem);
 			fetchForecast($latitude, $longitude);
 		}
 		isInputFocused = false;
@@ -54,6 +56,15 @@
 			window.removeEventListener('click', handleClickOutside);
 		}
 	});
+
+	function handleFocus() {
+		isInputFocused = true;
+		if($searchInput.length > 0) {
+			resetSearchInput();
+		}
+	}
+
+
 </script>
 
 <div class="autocomplete">
@@ -63,7 +74,7 @@
 		hasResults={$hasResults}
 		on:inputChange={debounce(searchLocations)}
 		on:reset={resetSearchInput}
-		on:focus={() => (isInputFocused = true)}
+		on:focus={handleFocus}
 	/>
 
 	{#if isInputFocused}

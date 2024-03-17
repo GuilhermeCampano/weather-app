@@ -14,7 +14,7 @@
 
 <Card size="large" isLoading={$isLoading}>
 	{#if !$isLoading && !$currentWeather}
-		<h2>Please select a location</h2>
+		<h2 class="weather__placeholder">Please select a location</h2>
 	{/if}
 
 	{#if !$isLoading && $currentWeather}
@@ -47,6 +47,11 @@
 </Card>
 
 <style>
+
+	.weather__placeholder {
+		width: 100%;
+		text-align: center;
+	}
 	.weather__temperature {
 		font-size: 100px;
 		line-height: 100px;
