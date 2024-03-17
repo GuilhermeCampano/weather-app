@@ -33,7 +33,7 @@
 		const placeDetails = await ApiService.getGeolocation(autocompleteItem.placeId);
 		if (placeDetails) {
 			selectPlaceResult(placeDetails, autocompleteItem);
-			LocalStorage.saveLastSearch(placeDetails, autocompleteItem);
+			LocalStorage.lastSearch.save({placeDetails, autocompleteItem});
 			fetchForecast($latitude, $longitude);
 		}
 		isInputFocused = false;

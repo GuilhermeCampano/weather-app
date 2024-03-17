@@ -10,3 +10,4 @@ export * from './forecast-api-response.model';
 export * from './autocomplete-item.model';
 export * from './forecast-api-metadata';
 export * from './place-geolocation-details.model';
+export * from './user-preferences.model';
