@@ -2,18 +2,18 @@ import type { ForecastApiResponse } from "$lib";
 
 export const forecastMockResponse = <ForecastApiResponse>{
   "metadata": {
-    "latitude": 53.35,
-    "longitude": -6.26,
-    "timezone": "Europe/Dublin",
-    "localTime": "2024-03-17T23:00"
+    "latitude": -23.5,
+    "longitude": -46.625,
+    "timezone": "America/Sao_Paulo",
+    "localTime": "2024-03-18T05:00"
   },
   "current": {
-    "temperature": 11,
-    "temperatureMax": 14,
-    "temperatureMin": 8,
-    "apparentTemperature": 7,
-    "precipitationChance": 0,
-    "windSpeed": 13,
+    "temperature": 23,
+    "temperatureMax": 30,
+    "temperatureMin": 23,
+    "apparentTemperature": 27,
+    "precipitationChance": 23,
+    "windSpeed": 1,
     "weatherCode": {
       "icon": "partly_cloudy_night",
       "color": "yellow",
@@ -24,63 +24,63 @@ export const forecastMockResponse = <ForecastApiResponse>{
   },
   "daily": [
     {
-      "dayOfWeek": 0,
-      "temperature": 14,
+      "dayOfWeek": "2024-03-18",
+      "temperature": 30,
       "weatherCode": {
-        "icon": "weather_mix",
+        "icon": "thunderstorm",
         "color": "blue",
-        "label": "Drizzle",
-        "wmoCode": 51,
-        "wmoCodeDescription": "Drizzle, not freezing, continuous"
+        "label": "Thunderstorm",
+        "wmoCode": 96,
+        "wmoCodeDescription": "Thunderstorm, slight or moderate, with hail** at time of observation"
       }
     },
     {
-      "dayOfWeek": 1,
-      "temperature": 15,
+      "dayOfWeek": "2024-03-19",
+      "temperature": 30,
       "weatherCode": {
-        "icon": "weather_mix",
+        "icon": "thunderstorm",
         "color": "blue",
-        "label": "Drizzle",
-        "wmoCode": 51,
-        "wmoCodeDescription": "Drizzle, not freezing, continuous"
+        "label": "Thunderstorm",
+        "wmoCode": 96,
+        "wmoCodeDescription": "Thunderstorm, slight or moderate, with hail** at time of observation"
       }
     },
     {
-      "dayOfWeek": 2,
-      "temperature": 13,
+      "dayOfWeek": "2024-03-20",
+      "temperature": 31,
       "weatherCode": {
-        "icon": "weather_mix",
+        "icon": "foggy",
         "color": "blue",
-        "label": "Drizzle",
-        "wmoCode": 53,
-        "wmoCodeDescription": "Drizzle, not freezing, continuous"
+        "label": "Fog",
+        "wmoCode": 45,
+        "wmoCodeDescription": "Fog or ice fog, sky invisible"
       }
     },
     {
-      "dayOfWeek": 3,
-      "temperature": 10,
+      "dayOfWeek": "2024-03-21",
+      "temperature": 31,
       "weatherCode": {
-        "icon": "weather_mix",
+        "icon": "thunderstorm",
         "color": "blue",
-        "label": "Drizzle",
-        "wmoCode": 53,
-        "wmoCodeDescription": "Drizzle, not freezing, continuous"
+        "label": "Thunderstorm",
+        "wmoCode": 96,
+        "wmoCodeDescription": "Thunderstorm, slight or moderate, with hail** at time of observation"
       }
     },
     {
-      "dayOfWeek": 4,
-      "temperature": 15,
+      "dayOfWeek": "2024-03-22",
+      "temperature": 24,
       "weatherCode": {
-        "icon": "weather_mix",
+        "icon": "rainy",
         "color": "blue",
-        "label": "Drizzle",
-        "wmoCode": 51,
-        "wmoCodeDescription": "Drizzle, not freezing, continuous"
+        "label": "Rain",
+        "wmoCode": 80,
+        "wmoCodeDescription": "Rain shower(s), slight"
       }
     },
     {
-      "dayOfWeek": 5,
-      "temperature": 10,
+      "dayOfWeek": "2024-03-23",
+      "temperature": 22,
       "weatherCode": {
         "icon": "partly_cloudy_day",
         "color": "yellow",
@@ -90,8 +90,8 @@ export const forecastMockResponse = <ForecastApiResponse>{
       }
     },
     {
-      "dayOfWeek": 6,
-      "temperature": 9,
+      "dayOfWeek": "2024-03-24",
+      "temperature": 25,
       "weatherCode": {
         "icon": "rainy",
         "color": "blue",
@@ -103,76 +103,43 @@ export const forecastMockResponse = <ForecastApiResponse>{
   ],
   "hourly": [
     {
-      "time": "2024-03-17T23:00",
-      "temperature": 11,
-      "weatherCode": {
-        "icon": "partly_cloudy_night",
-        "color": "yellow",
-        "label": "Partly cloudy",
-        "wmoCode": 3,
-        "wmoCodeDescription": "Clouds generally forming or developing"
-      }
-    },
-    {
-      "time": "2024-03-18T00:00",
-      "temperature": 11,
-      "weatherCode": {
-        "icon": "clear_night",
-        "color": "yellow",
-        "label": "Clear sky",
-        "wmoCode": 0,
-        "wmoCodeDescription": "Cloud development not observed or not observable"
-      }
-    },
-    {
-      "time": "2024-03-18T01:00",
-      "temperature": 10,
-      "weatherCode": {
-        "icon": "clear_night",
-        "color": "yellow",
-        "label": "Clear sky",
-        "wmoCode": 0,
-        "wmoCodeDescription": "Cloud development not observed or not observable"
-      }
-    },
-    {
-      "time": "2024-03-18T02:00",
-      "temperature": 10,
-      "weatherCode": {
-        "icon": "partly_cloudy_night",
-        "color": "yellow",
-        "label": "Partly cloudy",
-        "wmoCode": 3,
-        "wmoCodeDescription": "Clouds generally forming or developing"
-      }
-    },
-    {
-      "time": "2024-03-18T03:00",
-      "temperature": 11,
-      "weatherCode": {
-        "icon": "partly_cloudy_night",
-        "color": "yellow",
-        "label": "Partly cloudy",
-        "wmoCode": 3,
-        "wmoCodeDescription": "Clouds generally forming or developing"
-      }
-    },
-    {
-      "time": "2024-03-18T04:00",
-      "temperature": 10,
-      "weatherCode": {
-        "icon": "partly_cloudy_night",
-        "color": "yellow",
-        "label": "Partly cloudy",
-        "wmoCode": 3,
-        "wmoCodeDescription": "Clouds generally forming or developing"
-      }
-    },
-    {
       "time": "2024-03-18T05:00",
-      "temperature": 10,
+      "temperature": 23,
       "weatherCode": {
         "icon": "partly_cloudy_night",
+        "color": "yellow",
+        "label": "Partly cloudy",
+        "wmoCode": 3,
+        "wmoCodeDescription": "Clouds generally forming or developing"
+      }
+    },
+    {
+      "time": "2024-03-18T06:00",
+      "temperature": 23,
+      "weatherCode": {
+        "icon": "partly_cloudy_night",
+        "color": "yellow",
+        "label": "Partly cloudy",
+        "wmoCode": 3,
+        "wmoCodeDescription": "Clouds generally forming or developing"
+      }
+    },
+    {
+      "time": "2024-03-18T07:00",
+      "temperature": 23,
+      "weatherCode": {
+        "icon": "foggy",
+        "color": "blue",
+        "label": "Fog",
+        "wmoCode": 45,
+        "wmoCodeDescription": "Fog or ice fog, sky invisible"
+      }
+    },
+    {
+      "time": "2024-03-18T08:00",
+      "temperature": 24,
+      "weatherCode": {
+        "icon": "partly_cloudy_day",
         "color": "yellow",
         "label": "Partly cloudy",
         "wmoCode": 2,
@@ -180,63 +147,30 @@ export const forecastMockResponse = <ForecastApiResponse>{
       }
     },
     {
-      "time": "2024-03-18T06:00",
-      "temperature": 10,
-      "weatherCode": {
-        "icon": "clear_night",
-        "color": "yellow",
-        "label": "Clear sky",
-        "wmoCode": 0,
-        "wmoCodeDescription": "Cloud development not observed or not observable"
-      }
-    },
-    {
-      "time": "2024-03-18T07:00",
-      "temperature": 10,
-      "weatherCode": {
-        "icon": "partly_cloudy_day",
-        "color": "yellow",
-        "label": "Partly cloudy",
-        "wmoCode": 3,
-        "wmoCodeDescription": "Clouds generally forming or developing"
-      }
-    },
-    {
-      "time": "2024-03-18T08:00",
-      "temperature": 11,
-      "weatherCode": {
-        "icon": "partly_cloudy_day",
-        "color": "yellow",
-        "label": "Partly cloudy",
-        "wmoCode": 3,
-        "wmoCodeDescription": "Clouds generally forming or developing"
-      }
-    },
-    {
       "time": "2024-03-18T09:00",
-      "temperature": 12,
+      "temperature": 26,
       "weatherCode": {
-        "icon": "partly_cloudy_day",
-        "color": "yellow",
-        "label": "Partly cloudy",
-        "wmoCode": 3,
-        "wmoCodeDescription": "Clouds generally forming or developing"
+        "icon": "cloud",
+        "color": "blue",
+        "label": "Cloudy",
+        "wmoCode": 1,
+        "wmoCodeDescription": "Clouds generally dissolving or becoming less developed"
       }
     },
     {
       "time": "2024-03-18T10:00",
-      "temperature": 13,
+      "temperature": 28,
       "weatherCode": {
         "icon": "partly_cloudy_day",
         "color": "yellow",
         "label": "Partly cloudy",
-        "wmoCode": 3,
-        "wmoCodeDescription": "Clouds generally forming or developing"
+        "wmoCode": 2,
+        "wmoCodeDescription": "State of sky on the whole unchanged"
       }
     },
     {
       "time": "2024-03-18T11:00",
-      "temperature": 14,
+      "temperature": 29,
       "weatherCode": {
         "icon": "partly_cloudy_day",
         "color": "yellow",
@@ -247,18 +181,18 @@ export const forecastMockResponse = <ForecastApiResponse>{
     },
     {
       "time": "2024-03-18T12:00",
-      "temperature": 14,
+      "temperature": 30,
       "weatherCode": {
         "icon": "partly_cloudy_day",
         "color": "yellow",
         "label": "Partly cloudy",
-        "wmoCode": 3,
-        "wmoCodeDescription": "Clouds generally forming or developing"
+        "wmoCode": 2,
+        "wmoCodeDescription": "State of sky on the whole unchanged"
       }
     },
     {
       "time": "2024-03-18T13:00",
-      "temperature": 14,
+      "temperature": 30,
       "weatherCode": {
         "icon": "partly_cloudy_day",
         "color": "yellow",
@@ -269,62 +203,73 @@ export const forecastMockResponse = <ForecastApiResponse>{
     },
     {
       "time": "2024-03-18T14:00",
-      "temperature": 15,
+      "temperature": 29,
       "weatherCode": {
-        "icon": "partly_cloudy_day",
-        "color": "yellow",
-        "label": "Partly cloudy",
-        "wmoCode": 3,
-        "wmoCodeDescription": "Clouds generally forming or developing"
+        "icon": "rainy",
+        "color": "blue",
+        "label": "Rain",
+        "wmoCode": 80,
+        "wmoCodeDescription": "Rain shower(s), slight"
       }
     },
     {
       "time": "2024-03-18T15:00",
-      "temperature": 14,
+      "temperature": 29,
       "weatherCode": {
-        "icon": "partly_cloudy_day",
-        "color": "yellow",
-        "label": "Partly cloudy",
-        "wmoCode": 3,
-        "wmoCodeDescription": "Clouds generally forming or developing"
+        "icon": "thunderstorm",
+        "color": "blue",
+        "label": "Thunderstorm",
+        "wmoCode": 95,
+        "wmoCodeDescription": "Thunderstorm, slight or moderate, without hail** but with rain and/or snow at time of observation"
       }
     },
     {
       "time": "2024-03-18T16:00",
-      "temperature": 14,
+      "temperature": 28,
       "weatherCode": {
-        "icon": "partly_cloudy_day",
-        "color": "yellow",
-        "label": "Partly cloudy",
-        "wmoCode": 3,
-        "wmoCodeDescription": "Clouds generally forming or developing"
+        "icon": "thunderstorm",
+        "color": "blue",
+        "label": "Thunderstorm",
+        "wmoCode": 95,
+        "wmoCodeDescription": "Thunderstorm, slight or moderate, without hail** but with rain and/or snow at time of observation"
       }
     },
     {
       "time": "2024-03-18T17:00",
-      "temperature": 13,
+      "temperature": 26,
       "weatherCode": {
-        "icon": "partly_cloudy_day",
-        "color": "yellow",
-        "label": "Partly cloudy",
-        "wmoCode": 3,
-        "wmoCodeDescription": "Clouds generally forming or developing"
+        "icon": "thunderstorm",
+        "color": "blue",
+        "label": "Thunderstorm",
+        "wmoCode": 96,
+        "wmoCodeDescription": "Thunderstorm, slight or moderate, with hail** at time of observation"
       }
     },
     {
       "time": "2024-03-18T18:00",
-      "temperature": 12,
+      "temperature": 25,
       "weatherCode": {
-        "icon": "partly_cloudy_day",
-        "color": "yellow",
-        "label": "Partly cloudy",
-        "wmoCode": 3,
-        "wmoCodeDescription": "Clouds generally forming or developing"
+        "icon": "thunderstorm",
+        "color": "blue",
+        "label": "Thunderstorm",
+        "wmoCode": 95,
+        "wmoCodeDescription": "Thunderstorm, slight or moderate, without hail** but with rain and/or snow at time of observation"
       }
     },
     {
       "time": "2024-03-18T19:00",
-      "temperature": 12,
+      "temperature": 25,
+      "weatherCode": {
+        "icon": "rainy",
+        "color": "blue",
+        "label": "Rain",
+        "wmoCode": 80,
+        "wmoCodeDescription": "Rain shower(s), slight"
+      }
+    },
+    {
+      "time": "2024-03-18T20:00",
+      "temperature": 24,
       "weatherCode": {
         "icon": "partly_cloudy_night",
         "color": "yellow",
@@ -334,30 +279,19 @@ export const forecastMockResponse = <ForecastApiResponse>{
       }
     },
     {
-      "time": "2024-03-18T20:00",
-      "temperature": 13,
-      "weatherCode": {
-        "icon": "weather_mix",
-        "color": "blue",
-        "label": "Drizzle",
-        "wmoCode": 51,
-        "wmoCodeDescription": "Drizzle, not freezing, continuous"
-      }
-    },
-    {
       "time": "2024-03-18T21:00",
-      "temperature": 14,
+      "temperature": 24,
       "weatherCode": {
-        "icon": "weather_mix",
-        "color": "blue",
-        "label": "Drizzle",
-        "wmoCode": 51,
-        "wmoCodeDescription": "Drizzle, not freezing, continuous"
+        "icon": "partly_cloudy_night",
+        "color": "yellow",
+        "label": "Partly cloudy",
+        "wmoCode": 3,
+        "wmoCodeDescription": "Clouds generally forming or developing"
       }
     },
     {
       "time": "2024-03-18T22:00",
-      "temperature": 12,
+      "temperature": 24,
       "weatherCode": {
         "icon": "partly_cloudy_night",
         "color": "yellow",
@@ -368,14 +302,80 @@ export const forecastMockResponse = <ForecastApiResponse>{
     },
     {
       "time": "2024-03-18T23:00",
-      "temperature": 13,
+      "temperature": 24,
       "weatherCode": {
-        "icon": "clear_night",
+        "icon": "partly_cloudy_night",
         "color": "yellow",
-        "label": "Clear sky",
-        "wmoCode": 0,
-        "wmoCodeDescription": "Cloud development not observed or not observable"
+        "label": "Partly cloudy",
+        "wmoCode": 3,
+        "wmoCodeDescription": "Clouds generally forming or developing"
+      }
+    },
+    {
+      "time": "2024-03-19T00:00",
+      "temperature": 23,
+      "weatherCode": {
+        "icon": "partly_cloudy_night",
+        "color": "yellow",
+        "label": "Partly cloudy",
+        "wmoCode": 2,
+        "wmoCodeDescription": "State of sky on the whole unchanged"
+      }
+    },
+    {
+      "time": "2024-03-19T01:00",
+      "temperature": 23,
+      "weatherCode": {
+        "icon": "partly_cloudy_night",
+        "color": "yellow",
+        "label": "Partly cloudy",
+        "wmoCode": 2,
+        "wmoCodeDescription": "State of sky on the whole unchanged"
+      }
+    },
+    {
+      "time": "2024-03-19T02:00",
+      "temperature": 23,
+      "weatherCode": {
+        "icon": "partly_cloudy_night",
+        "color": "yellow",
+        "label": "Partly cloudy",
+        "wmoCode": 3,
+        "wmoCodeDescription": "Clouds generally forming or developing"
+      }
+    },
+    {
+      "time": "2024-03-19T03:00",
+      "temperature": 23,
+      "weatherCode": {
+        "icon": "partly_cloudy_night",
+        "color": "yellow",
+        "label": "Partly cloudy",
+        "wmoCode": 2,
+        "wmoCodeDescription": "State of sky on the whole unchanged"
+      }
+    },
+    {
+      "time": "2024-03-19T04:00",
+      "temperature": 23,
+      "weatherCode": {
+        "icon": "partly_cloudy_night",
+        "color": "yellow",
+        "label": "Partly cloudy",
+        "wmoCode": 2,
+        "wmoCodeDescription": "State of sky on the whole unchanged"
+      }
+    },
+    {
+      "time": "2024-03-19T05:00",
+      "temperature": 23,
+      "weatherCode": {
+        "icon": "partly_cloudy_night",
+        "color": "yellow",
+        "label": "Partly cloudy",
+        "wmoCode": 2,
+        "wmoCodeDescription": "State of sky on the whole unchanged"
       }
     }
   ]
-}
+};

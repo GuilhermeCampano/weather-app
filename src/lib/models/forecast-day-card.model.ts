@@ -1,7 +1,7 @@
 import type { WeatherCodeDetails } from "./weather-code.model";
 
 export interface ForecastDayCard {
-  dayOfWeek: number;
+  dayOfWeek: string;
   temperature: number;
   weatherCode: WeatherCodeDetails;
 }
