@@ -44,6 +44,8 @@
 
 	.card--large {
 		display: flex;
+		flex-flow: wrap;
+		row-gap: 1.5rem;
 		flex-direction: row;
 		align-items: start;
 		justify-content: space-between;

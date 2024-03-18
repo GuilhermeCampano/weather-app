@@ -1,6 +1,11 @@
 <script lang="ts">
-	import { currentWeather, hourlyForecastCards, isLoading, weekForecastCards } from '$lib/stores/forecast.store';
-	import { isMobile } from '$lib/stores/screen-detection.store';
+	import {
+		currentWeather,
+		hourlyForecastCards,
+		isLoading,
+		weekForecastCards
+	} from '$lib/stores/forecast.store';
+	import { isDesktop } from '$lib/stores/screen-detection.store';
 	import Card from '../UI/Card.svelte';
 	import SkeletonAnimation from '../UI/SkeletonAnimation.svelte';
 	import CurrentWeather from './CurrentWeather.svelte';
@@ -24,30 +29,26 @@
 {:else}
 	<h6>Today</h6>
 
-	<Card size="large">
-		<CurrentWeather forecastCurrentCard={$currentWeather} />
-	</Card>
-
-	<h6>Hourly Forecast</h6>
-
-	<Card size="large" isCompact>
-		<ForecastHourly hourlyForecastCards={$hourlyForecastCards} />
-	</Card>
+	{#if $isDesktop}
+		<Card size="large">
+			<CurrentWeather forecastCurrentCard={$currentWeather} />
+			<ForecastHourly hourlyForecastCards={$hourlyForecastCards} />
+		</Card>
+	{:else}
+		<Card size="large">
+			<CurrentWeather forecastCurrentCard={$currentWeather} />
+		</Card>
+		<h6>Hourly Forecast</h6>
+		<Card size="large" isCompact>
+			<ForecastHourly hourlyForecastCards={$hourlyForecastCards} />
+		</Card>
+	{/if}
 
 	<h6>Next 7 Days</h6>
 
 	<ForecastNextDays weekForecastCards={$weekForecastCards} />
 {/if}
 
-<!-- {#if $isMobile}
-	<CurrentWeather />
-	<ForecastHourly />
-{:else}
-	<CurrentWeather>
-		<ForecastHourly />
-	</CurrentWeather>
-{/if}
-<ForecastNextDays /> -->
 
 <style>
 	.forecast__loading-week {
