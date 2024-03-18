@@ -10,6 +10,7 @@
 	import { LocalStorage } from '$lib/utils/localstorage';
 	import { fetchForecast } from '$lib/stores/forecast.store';
 	import { DEFAULT_SEARCH } from '$lib/constants';
+	import { isMobile } from '$lib/stores/screen-detection.store';
 
 	export let data;
 
@@ -44,6 +45,13 @@
 
 <LocationSearchAutocomplete />
 <PreciseLocationButton />
-<CurrentWeather />
-<ForecastHourly />
+
+{#if $isMobile}
+	<CurrentWeather />
+	<ForecastHourly />
+{:else}
+	<CurrentWeather>
+		<ForecastHourly />
+	</CurrentWeather>
+{/if}
 <ForecastNextDays />
