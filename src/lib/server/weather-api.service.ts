@@ -72,7 +72,7 @@ export class WeatherApiService {
   private normalizeDaily(data: OpenMeteoApiResponse): ForecastDayCard[] {
     return data.daily.time.map((day, index) => {
       return {
-        dayOfWeek: index,
+        dayOfWeek: day,
         temperature: Math.round(data.daily.temperature_2m_max[index]),
         weatherCode: new WeatherCodeDetailsFactory(data.daily.weather_code[index]),
       };

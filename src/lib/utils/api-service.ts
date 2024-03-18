@@ -1,4 +1,4 @@
-import type { AutocompleteItem, ForecastApiResponse, PlaceGeolocationDetails } from "$lib/models";
+import { type ForecastApiResponse, Endpoints, type PlaceGeolocationDetails, type AutocompleteItem } from "$lib";
 
 export default class ApiService {
   static #token: string = '';
@@ -10,9 +10,6 @@ export default class ApiService {
   static get token(): string {
     return this.#token;
   }
-  static readonly AUTOCOMPLETE = '/api/autocomplete';
-  static readonly FORECAST = '/api/forecast';
-  static readonly GEOLOCATION = '/api/geolocation';
 
   static async fetch<T>(endpoint: string, options?: RequestInit): Promise<T> {
     const response = await fetch(endpoint, { ...options, headers: { 'Authorization': `Bearer ${this.token}` } });
@@ -28,14 +25,14 @@ export default class ApiService {
   }
 
   static async getForecast(latitude: string, longitude: string): Promise<ForecastApiResponse> {
-    return await this.fetch(`${this.FORECAST}?latitude=${latitude}&longitude=${longitude}`);
+    return await this.fetch(`${Endpoints.FORECAST}?latitude=${latitude}&longitude=${longitude}`);
   }
 
   static async getGeolocation(placeId: string): Promise<PlaceGeolocationDetails> {
-    return await this.fetch(`${this.GEOLOCATION}?placeId=${placeId}`);
+    return await this.fetch(`${Endpoints.GEOLOCATION}?placeId=${placeId}`);
   }
 
   static async getAutocomplete(input: string): Promise<AutocompleteItem[]> {
-    return await this.fetch(`${this.AUTOCOMPLETE}?input=${input}`);
+    return await this.fetch(`${Endpoints.AUTOCOMPLETE}?input=${input}`);
   }
 }
