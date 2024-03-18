@@ -18,6 +18,7 @@
 	import ApiService from '$lib/utils/api-service';
 	import type { AutocompleteItem } from '$lib';
 	import { LocalStorage } from '$lib/utils/localstorage';
+	import PreciseLocationButton from './PreciseLocationButton.svelte';
 
 	let isInputFocused = false;
 
@@ -34,7 +35,7 @@
 		const placeDetails = await ApiService.getGeolocation(autocompleteItem.placeId);
 		if (placeDetails) {
 			selectPlaceResult(placeDetails, autocompleteItem);
-			LocalStorage.lastSearch.save({placeDetails, autocompleteItem});
+			LocalStorage.lastSearch.save({ placeDetails, autocompleteItem });
 			fetchForecast($latitude, $longitude);
 		}
 		isInputFocused = false;
@@ -42,7 +43,7 @@
 
 	function handleClickOutside(event: MouseEvent) {
 		if (!(event.target as Element).closest('.autocomplete')) {
-			if($searchInput !== $lastSelectedSearchInput) {
+			if ($searchInput !== $lastSelectedSearchInput) {
 				searchInput.set($lastSelectedSearchInput);
 			}
 			isInputFocused = false;
@@ -63,38 +64,52 @@
 
 	function handleFocus() {
 		isInputFocused = true;
-		if($searchInput.length > 0) {
+		if ($searchInput.length > 0) {
 			resetSearchInput();
 		}
 	}
-
-
 </script>
 
-<div class="autocomplete">
-
-	<AutocompleteInput
-		bind:searchInput={$searchInput}
-		bind:isInputFocused
-		hasResults={$hasResults}
-		on:inputChange={debounce(searchLocations)}
-		on:reset={resetSearchInput}
-		on:focus={handleFocus}
-	/>
-
-	{#if isInputFocused}
-		<AutocompleteResults
-			results={$autoCompleteResults}
-			on:selectLocation={(location) => onSelectLocation(location.detail)}
+<div class="location-search">
+	<div class="location-search__item">
+		<AutocompleteInput
+			bind:searchInput={$searchInput}
+			bind:isInputFocused
+			hasResults={$hasResults}
+			on:inputChange={debounce(searchLocations)}
+			on:reset={resetSearchInput}
+			on:focus={handleFocus}
 		/>
-	{/if}
+
+		{#if isInputFocused}
+			<AutocompleteResults
+				results={$autoCompleteResults}
+				on:selectLocation={(location) => onSelectLocation(location.detail)}
+			/>
+		{/if}
+	</div>
+	<div class="location-search__item">
+		<PreciseLocationButton />
+	</div>
 </div>
 
 <style>
-	.autocomplete {
+	.location-search {
 		position: relative;
 		width: 100%;
-		max-width: 394px;
-		display: inline-block;
+		display: flex;
+		flex-direction: column;
+		flex-flow: wrap;
+		gap: 1rem;
+	}
+	
+	.location-search__item {
+		flex: 1 0 300px;
+	}
+
+	@media (max-width: 768px) {
+		.location-search {
+			text-align: right;
+		}
 	}
 </style>

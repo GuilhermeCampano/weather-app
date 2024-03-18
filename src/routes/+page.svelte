@@ -6,7 +6,6 @@
 	import { fetchForecast } from '$lib/stores/forecast.store';
 	import { DEFAULT_SEARCH } from '$lib/constants';
 	import LocationSearch from '$lib/components/LocationSearch/LocationSearch.svelte';
-	import PreciseLocationButton from '$lib/components/PreciseLocationButton.svelte';
 	import Forecast from '$lib/components/Forecast/Forecast.svelte';
 
 	export let data;
@@ -41,5 +40,4 @@
 </svelte:head>
 
 <LocationSearch />
-<PreciseLocationButton />
 <Forecast/>
