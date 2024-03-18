@@ -100,7 +100,7 @@
 		display: flex;
 		flex-direction: column;
 		flex-flow: wrap;
-		gap: 1rem;
+		column-gap: 1rem;
 	}
 	.search__autocomplete {
 		flex: 1 0 300px;
@@ -108,11 +108,12 @@
 
 	.search__precise-button {
 		flex: 1 1 100px;
+		text-align: right;
 	}
 
-	@media (max-width: 768px) {
-		.search {
-			text-align: right;
+	@media (min-width: 768px) {
+		.search__precise-button  {
+			text-align: left;
 		}
 	}
 </style>
