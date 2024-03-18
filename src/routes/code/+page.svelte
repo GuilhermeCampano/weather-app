@@ -1,5 +1,6 @@
 <script lang="ts">
-	import WmoCodeTable from "../../components/WmoCodeTable.svelte";
+	import WmoCodeTable from "$lib/components/WmoCodeTable.svelte";
+
 </script>
 
 <WmoCodeTable />

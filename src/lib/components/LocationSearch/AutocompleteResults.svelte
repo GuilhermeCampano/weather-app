@@ -2,7 +2,6 @@
 	import type { AutocompleteItem } from "$lib";
 	import { createEventDispatcher } from "svelte";
 	import { slide } from "svelte/transition";
-	import type { A } from "vitest/dist/reporters-MmQN-57K.js";
 
   export let results: AutocompleteItem[] = [];
 

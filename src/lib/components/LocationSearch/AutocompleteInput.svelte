@@ -19,24 +19,30 @@
 	}
 </script>
 
-<input
-	type="text"
-	bind:value={searchInput}
-	on:input={handleInputChange}
-	on:focus={handleFocus}
-	class="autocomplete__input"
-	class:autocomplete__input--open={isInputFocused && hasResults}
-	placeholder="Search for a location"
-/>
+<div class="autocomplete">
+	<input
+		type="text"
+		bind:value={searchInput}
+		on:input={handleInputChange}
+		on:focus={handleFocus}
+		class="autocomplete__input"
+		class:autocomplete__input--open={isInputFocused && hasResults}
+		placeholder="Search for a location"
+	/>
 
-{#if searchInput.length > 1 && isInputFocused}
-	<button class="autocomplete__clear" on:click={handleClearButtonClick}>
-		<i class="material-symbols-outlined">close</i>
-	</button>
-{/if}
+	{#if searchInput.length > 1 && isInputFocused}
+		<button class="autocomplete__clear" on:click={handleClearButtonClick}>
+			<i class="material-symbols-outlined">close</i>
+		</button>
+	{/if}
+
+	<slot/>
+</div>
 
 <style>
-  
+	.autocomplete {
+		position: relative;
+	}
 	.autocomplete__input {
 		background-color: var(--color-off-white-transparent);
 		box-shadow: var(--box-shadow);

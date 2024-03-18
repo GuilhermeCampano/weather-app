@@ -42,7 +42,7 @@
 	}
 
 	function handleClickOutside(event: MouseEvent) {
-		if (!(event.target as Element).closest('.autocomplete')) {
+		if (!(event.target as Element).closest('.search__autocomplete')) {
 			if ($searchInput !== $lastSelectedSearchInput) {
 				searchInput.set($lastSelectedSearchInput);
 			}
@@ -70,8 +70,8 @@
 	}
 </script>
 
-<div class="location-search">
-	<div class="location-search__item">
+<div class="search">
+	<div class="search__autocomplete">
 		<AutocompleteInput
 			bind:searchInput={$searchInput}
 			bind:isInputFocused
@@ -79,22 +79,22 @@
 			on:inputChange={debounce(searchLocations)}
 			on:reset={resetSearchInput}
 			on:focus={handleFocus}
-		/>
-
-		{#if isInputFocused}
-			<AutocompleteResults
-				results={$autoCompleteResults}
-				on:selectLocation={(location) => onSelectLocation(location.detail)}
-			/>
-		{/if}
+		>
+			{#if isInputFocused}
+				<AutocompleteResults
+					results={$autoCompleteResults}
+					on:selectLocation={(location) => onSelectLocation(location.detail)}
+				/>
+			{/if}
+		</AutocompleteInput>
 	</div>
-	<div class="location-search__item">
+	<div class="search__precise-button">
 		<PreciseLocationButton />
 	</div>
 </div>
 
 <style>
-	.location-search {
+	.search {
 		position: relative;
 		width: 100%;
 		display: flex;
@@ -102,13 +102,16 @@
 		flex-flow: wrap;
 		gap: 1rem;
 	}
-	
-	.location-search__item {
+	.search__autocomplete {
 		flex: 1 0 300px;
 	}
 
+	.search__precise-button {
+		flex: 1 1 100px;
+	}
+
 	@media (max-width: 768px) {
-		.location-search {
+		.search {
 			text-align: right;
 		}
 	}
