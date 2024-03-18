@@ -1,35 +1,22 @@
 <script lang="ts">
-	import { isLoading, weekForecastCards } from '$lib/stores/forecast.store';
 	import Card from '../UI/Card.svelte';
 	import WeatherIcon from '../UI/WeatherIcon.svelte';
-	import SkeletonAnimation from '../UI/SkeletonAnimation.svelte';
+	import { Localization } from '$lib/utils/localization';
+	import type { ForecastDayCard } from '$lib/models';
 
-	import {Localization} from '$lib/utils/localization';
-
+	export let weekForecastCards: ForecastDayCard[] = [];
 </script>
 
-{#if $isLoading}
-	<h6><SkeletonAnimation width="200px" height="2rem" /></h6>
-	<div class="forecast">
-		{#each new Array(7).fill(null) as item}
-			<Card size="small" isLoading={true}/>
-		{/each}
-	</div>
-{/if}
-
-{#if !$isLoading && $weekForecastCards.length}
-	<h6>7 Day Forecast</h6>
-	<div class="forecast">
-		{#each $weekForecastCards as dayForecastCard, i}
-			<Card size="small" isLoading={$isLoading}>
-				<div class="forecast__text"></div>
-				{i === 0 ? 'Today' : Localization.formatDayOfWeek(dayForecastCard.dayOfWeek)}
-				<WeatherIcon iconDetails={dayForecastCard.weatherCode} size="large" />
-				<div class="forecast__text">{dayForecastCard.temperature}°</div>
-			</Card>
-		{/each}
-	</div>
-{/if}
+<div class="forecast">
+	{#each weekForecastCards as dayForecastCard, i}
+		<Card size="small">
+			<div class="forecast__text"></div>
+			{i === 0 ? 'Today' : Localization.formatDayOfWeek(dayForecastCard.dayOfWeek)}
+			<WeatherIcon iconDetails={dayForecastCard.weatherCode} size="large" />
+			<div class="forecast__text">{dayForecastCard.temperature}°</div>
+		</Card>
+	{/each}
+</div>
 
 <style>
 	.forecast {

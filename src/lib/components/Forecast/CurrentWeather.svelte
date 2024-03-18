@@ -1,57 +1,41 @@
 <script lang="ts">
-	import { isLoading, currentWeather } from '$lib/stores/forecast.store';
-	import Card from '../UI/Card.svelte';
-	import SkeletonAnimation from '../UI/SkeletonAnimation.svelte';
+	import type { ForecastCurrentCard } from '$lib/models';
+
 	import WeatherIcon from '../UI/WeatherIcon.svelte';
+
+	export let forecastCurrentCard: ForecastCurrentCard;
 </script>
 
-
-{#if $isLoading}
-	<h6><SkeletonAnimation width="200px" height="2rem" /></h6>
-	{:else}
-	<h6>Today</h6>
-{/if}
-
-<Card size="large" isLoading={$isLoading}>
-	{#if !$isLoading && !$currentWeather}
-		<h2 class="weather__placeholder">Please select a location</h2>
-	{/if}
-
-	{#if !$isLoading && $currentWeather}
-		<div>
-			<h5 class="my-1">Now</h5>
-			<div class="weather__temperature">
-				{$currentWeather.temperature}°
-				<span
-					class="weather__icon"
-					class:weather__icon--two-digits={$currentWeather.temperature > 9}
-					><WeatherIcon iconDetails={$currentWeather.weatherCode} size="large" /></span
-				>
-			</div>
-			<div class="weather__high-low">
-				<div>High: {$currentWeather.temperatureMax}°</div>
-				<div>Low: {$currentWeather.temperatureMin}°</div>
-			</div>
-		</div>
-		<div class="text-right">
-			<strong class="weather__code-text"
-				>{$currentWeather.weatherCode.label}</strong
-			>
-			<div class="weather__feel-like mb-5">
-				Feels Like <strong>{$currentWeather.apparentTemperature}°</strong>
-			</div>
-			<div>Rain: <strong>{$currentWeather.precipitationChance}%</strong></div>
-			<div>Wind: <strong>{$currentWeather.windSpeed}km/h</strong></div>
-		</div>
-	{/if}
-</Card>
+<div>
+	<h5 class="my-1">Now</h5>
+	<div class="weather__temperature">
+		{forecastCurrentCard.temperature}°
+		<span
+			class="weather__icon"
+			class:weather__icon--two-digits={forecastCurrentCard.temperature > 9}
+			><WeatherIcon iconDetails={forecastCurrentCard.weatherCode} size="large" /></span
+		>
+	</div>
+	<div class="weather__high-low">
+		<div>High: {forecastCurrentCard.temperatureMax}°</div>
+		<div>Low: {forecastCurrentCard.temperatureMin}°</div>
+	</div>
+</div>
+<div class="text-right">
+	<strong class="weather__code-text">{forecastCurrentCard.weatherCode.label}</strong>
+	<div class="weather__feel-like mb-5">
+		Feels Like <strong>{forecastCurrentCard.apparentTemperature}°</strong>
+	</div>
+	<div>Rain: <strong>{forecastCurrentCard.precipitationChance}%</strong></div>
+	<div>Wind: <strong>{forecastCurrentCard.windSpeed}km/h</strong></div>
+</div>
+<slot />
 
 <style>
-
-	.weather__placeholder {
+	/* .weather__placeholder {
 		width: 100%;
 		text-align: center;
-	}
+	} */
 	.weather__temperature {
 		font-size: 100px;
 		line-height: 100px;
