@@ -25,3 +25,10 @@ export async function fetchAutoCompleteResults(input: string) {
   const results = await ApiService.getAutocomplete(input);
   autoCompleteResults.set(results || []);
 }
+
+export const pageTitleLastSearch = derived(lastSelectedSearchInput, $lastSelectedSearchInput => {
+  if (!$lastSelectedSearchInput) return "Is It Sunny?";
+  const [firstPart] = $lastSelectedSearchInput.split(/,|-|\./);
+  const title = `Is It Sunny in ${firstPart} ?`;
+  return title.slice(0, 60);
+});

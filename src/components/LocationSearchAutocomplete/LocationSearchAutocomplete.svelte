@@ -72,6 +72,7 @@
 </script>
 
 <div class="autocomplete">
+
 	<AutocompleteInput
 		bind:searchInput={$searchInput}
 		bind:isInputFocused
