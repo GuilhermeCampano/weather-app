@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { isLoading, currentWeather } from '$lib/stores/forecast.store';
-	import Card from './Card.svelte';
-	import SkeletonAnimation from './SkeletonAnimation.svelte';
-	import WeatherIcon from './WeatherIcon.svelte';
+	import Card from '../UI/Card.svelte';
+	import SkeletonAnimation from '../UI/SkeletonAnimation.svelte';
+	import WeatherIcon from '../UI/WeatherIcon.svelte';
 </script>
 
 

@@ -5,11 +5,14 @@ enum Breakpoints {
   TABLET = 992,
 }
 
-const windowWidth = writable(window.innerWidth);
+const windowWidth = writable(typeof window !== 'undefined' ? window.innerWidth : 0);
 
-window.addEventListener('resize', () => {
-  windowWidth.set(window.innerWidth);
-});
+if (typeof window !== 'undefined') {
+  // Update the windowWidth store whenever the window is resized
+  window.addEventListener('resize', () => {
+    windowWidth.set(window.innerWidth);
+  });
+}
 
 export const isMobile = derived(windowWidth, $windowWidth => $windowWidth <= Breakpoints.MOBILE);
 export const isTablet = derived(windowWidth, $windowWidth => $windowWidth <= Breakpoints.TABLET && $windowWidth > Breakpoints.MOBILE);

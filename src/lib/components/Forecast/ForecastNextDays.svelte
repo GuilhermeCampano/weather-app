@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { isLoading, weekForecastCards } from '$lib/stores/forecast.store';
-	import Card from './Card.svelte';
-	import WeatherIcon from './WeatherIcon.svelte';
-	import SkeletonAnimation from './SkeletonAnimation.svelte';
+	import Card from '../UI/Card.svelte';
+	import WeatherIcon from '../UI/WeatherIcon.svelte';
+	import SkeletonAnimation from '../UI/SkeletonAnimation.svelte';
 
 	import {Localization} from '$lib/utils/localization';
 

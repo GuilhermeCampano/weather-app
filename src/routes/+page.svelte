@@ -1,16 +1,13 @@
 <script lang="ts">
-	import PreciseLocationButton from '../components/PreciseLocationButton.svelte';
-	import CurrentWeather from '../components/CurrentWeather.svelte';
-	import ForecastNextDays from '../components/ForecastNextDays.svelte';
-	import ForecastHourly from '../components/ForecastHourly.svelte';
-	import LocationSearchAutocomplete from '../components/LocationSearchAutocomplete/LocationSearchAutocomplete.svelte';
 	import { onMount } from 'svelte';
 	import ApiService from '$lib/utils/api-service';
 	import { pageTitleLastSearch, selectPlaceResult } from '$lib/stores/search-location.store';
 	import { LocalStorage } from '$lib/utils/localstorage';
 	import { fetchForecast } from '$lib/stores/forecast.store';
 	import { DEFAULT_SEARCH } from '$lib/constants';
-	import { isMobile } from '$lib/stores/screen-detection.store';
+	import LocationSearch from '$lib/components/LocationSearch/LocationSearch.svelte';
+	import PreciseLocationButton from '$lib/components/PreciseLocationButton.svelte';
+	import Forecast from '$lib/components/Forecast/Forecast.svelte';
 
 	export let data;
 
@@ -43,15 +40,6 @@
   <title>{$pageTitleLastSearch}</title>
 </svelte:head>
 
-<LocationSearchAutocomplete />
+<LocationSearch />
 <PreciseLocationButton />
-
-{#if $isMobile}
-	<CurrentWeather />
-	<ForecastHourly />
-{:else}
-	<CurrentWeather>
-		<ForecastHourly />
-	</CurrentWeather>
-{/if}
-<ForecastNextDays />
+<Forecast/>

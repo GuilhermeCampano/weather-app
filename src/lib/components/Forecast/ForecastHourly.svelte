@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { isLoading, hourlyForecastCards } from '$lib/stores/forecast.store';
-	import Card from './Card.svelte';
-	import SkeletonAnimation from './SkeletonAnimation.svelte';
-	import WeatherIcon from './WeatherIcon.svelte';
 	import {Localization} from '$lib/utils/localization';
+	import Card from '../UI/Card.svelte';
+	import SkeletonAnimation from '../UI/SkeletonAnimation.svelte';
+	import WeatherIcon from '../UI/WeatherIcon.svelte';
 
 	function formatTime(time: string, index: number) {
 		return index ===0 ? 'Now' : Localization.formatHourMinute(time);

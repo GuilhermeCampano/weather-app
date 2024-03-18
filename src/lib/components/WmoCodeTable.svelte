@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { WeatherCodeDetails } from '$lib/models';
 	import { WeatherCodeDetailsFactory } from '$lib/utils/weather-code-details-factory';
-	import WeatherIcon from './WeatherIcon.svelte';
+	import WeatherIcon from './UI/WeatherIcon.svelte';
 
 	const allIcons: WeatherCodeDetails[] = new Array(100)
 		.fill(0)

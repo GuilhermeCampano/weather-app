@@ -1,5 +1,5 @@
-<script>
-	import FloatingCircle from '../components/FloatingCircle.svelte';
+<script lang="ts">
+	import FloatingCircle from "$lib/components/UI/FloatingCircle.svelte";
 </script>
 
 <main>
