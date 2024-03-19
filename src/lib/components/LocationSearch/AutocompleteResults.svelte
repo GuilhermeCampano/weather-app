@@ -34,7 +34,7 @@
 
 <style>
   .autocomplete__results {
-		background-color: var(--color-off-white);
+		background-color: var(--color-background-off-white);
 		border-radius: 20px;
 		box-shadow: var(--box-shadow);
 		margin-top: 0px;
@@ -54,6 +54,6 @@
 	}
 
 	.autocomplete__result:hover {
-		background: var(--color-light-gray);
+		background: var(--color-background-light);
 	}
 </style>
