@@ -23,6 +23,7 @@
 	let isInputFocused = false;
 
 	async function searchLocations() {
+		isInputFocused = true;
 		if ($searchInput.length < 1) {
 			autoCompleteResults.set([]);
 			return;
@@ -53,6 +54,11 @@
 	onMount(() => {
 		if (typeof window !== 'undefined') {
 			window.addEventListener('click', handleClickOutside);
+			window.addEventListener('keydown', (event) => {
+				if (event.key === 'Enter' && isInputFocused && $autoCompleteResults.length > 0) {
+					onSelectLocation($autoCompleteResults[0]);
+				}
+			});
 		}
 	});
 
