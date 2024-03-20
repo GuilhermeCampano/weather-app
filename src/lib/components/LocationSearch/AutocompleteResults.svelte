@@ -1,44 +1,44 @@
 <script lang="ts">
-	import type { AutocompleteItem } from "$lib";
-	import { createEventDispatcher } from "svelte";
-	import { slide } from "svelte/transition";
+	import type { AutocompleteItem } from '$lib';
+	import { createEventDispatcher } from 'svelte';
+	import { fly, slide } from 'svelte/transition';
 
-  export let results: AutocompleteItem[] = [];
+	export let results: AutocompleteItem[] = [];
 
-  const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher();
 
-  function selectLocation(result: AutocompleteItem) {
-    dispatch('selectLocation', result);
-  }
-  
+	function selectLocation(result: AutocompleteItem) {
+		dispatch('selectLocation', result);
+	}
+
 	function handleKeydown(event: KeyboardEvent, location: AutocompleteItem) {
 		if (event.key === 'Enter') {
 			selectLocation(location);
 		}
-	}  
+	}
 </script>
 
-<div class="autocomplete__results" transition:slide={{ delay: 100, duration: 300 }}>
-  {#each results as result, index (result.placeId)}
-    <div
-      tabindex={index}
-      class="autocomplete__result"
-      on:click={() => selectLocation(result)}
-      on:keydown={(event) => handleKeydown(event, result)}
-      role="button"
-    >
-      {result.description}
-    </div>
-  {/each}
-</div>
+	<div class="autocomplete__results" 	in:slide={{ duration: 400, axis: 'y' }} out:slide={{duration:300}}>
+		{#each results as result, index (result.placeId)}
+			<div
+				tabindex={index}
+				class="autocomplete__result"
+				on:click={() => selectLocation(result)}
+				on:keydown={(event) => handleKeydown(event, result)}
+				role="button"
+			>
+				{result.description}
+			</div>
+		{/each}
+	</div>
 
 <style>
-  .autocomplete__results {
+	.autocomplete__results {
 		background-color: var(--color-background-off-white);
 		border-radius: 20px;
 		box-shadow: var(--box-shadow);
 		margin-top: 0px;
-		max-height: 200px;
+		max-height: 250px;
 		overflow-y: auto;
 		position: absolute;
 		z-index: 10;

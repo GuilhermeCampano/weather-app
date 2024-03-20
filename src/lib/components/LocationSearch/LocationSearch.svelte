@@ -80,7 +80,7 @@
 			on:reset={resetSearchInput}
 			on:focus={handleFocus}
 		>
-			{#if isInputFocused}
+			{#if isInputFocused && $autoCompleteResults.length > 0}
 				<AutocompleteResults
 					results={$autoCompleteResults}
 					on:selectLocation={(location) => onSelectLocation(location.detail)}
