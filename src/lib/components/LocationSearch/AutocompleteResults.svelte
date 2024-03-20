@@ -1,9 +1,12 @@
 <script lang="ts">
 	import type { AutocompleteItem } from '$lib';
 	import { createEventDispatcher } from 'svelte';
-	import { fly, slide } from 'svelte/transition';
+	import { slide } from 'svelte/transition';
 
 	export let results: AutocompleteItem[] = [];
+
+	let selectedOptionIndex = -1;
+	let optionElements: HTMLElement[] = [];
 
 	const dispatch = createEventDispatcher();
 
@@ -11,26 +14,47 @@
 		dispatch('selectLocation', result);
 	}
 
+	function browseOptions(direction: 'ArrowUp' | 'ArrowDown') {
+		if (direction === 'ArrowUp') {
+			selectedOptionIndex = Math.max(0, selectedOptionIndex - 1);
+		} else if (direction === 'ArrowDown') {
+			selectedOptionIndex = Math.min(results.length - 1, selectedOptionIndex + 1);
+		}
+		optionElements[selectedOptionIndex].focus();
+	}
+
 	function handleKeydown(event: KeyboardEvent, location: AutocompleteItem) {
+		event.preventDefault();
+		event.stopPropagation();
 		if (event.key === 'Enter') {
-			selectLocation(location);
+			return selectLocation(location);
+		}
+		if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+			return browseOptions(event.key);
 		}
 	}
 </script>
 
-	<div class="autocomplete__results" 	in:slide={{ duration: 400, axis: 'y' }} out:slide={{duration:300}}>
-		{#each results as result, index (result.placeId)}
-			<div
-				tabindex={index}
-				class="autocomplete__result"
-				on:click={() => selectLocation(result)}
-				on:keydown={(event) => handleKeydown(event, result)}
-				role="button"
-			>
-				{result.description}
-			</div>
-		{/each}
-	</div>
+<div
+	class="autocomplete__results"
+	role="listbox"
+	in:slide={{ duration: 400, axis: 'y' }}
+	out:slide={{ duration: 300 }}
+>
+	{#each results as result, index (result.placeId)}
+		<div
+			bind:this={optionElements[index]}
+			tabindex={index}
+			class="autocomplete__result"
+			on:click={() => selectLocation(result)}
+			on:keydown={(event) => handleKeydown(event, result)}
+			aria-selected={selectedOptionIndex === index ? 'true' : 'false'}
+			role="option"
+		>
+			{result.description}
+		</div>
+	{/each}
+</div>
 
 <style>
 	.autocomplete__results {
