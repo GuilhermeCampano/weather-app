@@ -36,6 +36,8 @@ npm install
 
 ```bash
 GOOGLE_API_KEY='YOUR_API_KEY'
+PRIVATE_SECRET_KEY='JWT_SECRET_KEY'
+PRIVATE_MOCK_API='FALSE'
 ```
 
 4. Serve the app:

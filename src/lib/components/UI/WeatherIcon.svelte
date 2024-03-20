@@ -27,11 +27,11 @@
 	}
 
 	.icon--yellow {
-		color: var(--color-yellow);
+		color: var(--color-icon-tertiary);
 	}
 
 	.icon--blue {
-		color: var(--color-blue);
+		color: var(--color-icon-secondary);
 	}
 
 	.icon--orange {

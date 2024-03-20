@@ -23,6 +23,7 @@
 	let isInputFocused = false;
 
 	async function searchLocations() {
+		isInputFocused = true;
 		if ($searchInput.length < 1) {
 			autoCompleteResults.set([]);
 			return;
@@ -53,15 +54,22 @@
 	onMount(() => {
 		if (typeof window !== 'undefined') {
 			window.addEventListener('click', handleClickOutside);
+			window.addEventListener('keydown', selectDefaultLocation);
 		}
 	});
 
 	onDestroy(() => {
 		if (typeof window !== 'undefined') {
 			window.removeEventListener('click', handleClickOutside);
+			window.removeEventListener('keydown', selectDefaultLocation);
 		}
 	});
 
+	function selectDefaultLocation(event: KeyboardEvent) {
+		if (event.key === 'Enter' && isInputFocused && $autoCompleteResults.length > 0) {
+			onSelectLocation($autoCompleteResults[0]);
+		}
+	}
 	function handleFocus() {
 		isInputFocused = true;
 		if ($searchInput.length > 0) {
@@ -80,7 +88,7 @@
 			on:reset={resetSearchInput}
 			on:focus={handleFocus}
 		>
-			{#if isInputFocused}
+			{#if isInputFocused && $autoCompleteResults.length > 0}
 				<AutocompleteResults
 					results={$autoCompleteResults}
 					on:selectLocation={(location) => onSelectLocation(location.detail)}
@@ -112,7 +120,7 @@
 	}
 
 	@media (min-width: 768px) {
-		.search__precise-button  {
+		.search__precise-button {
 			text-align: left;
 		}
 	}

@@ -1,44 +1,68 @@
 <script lang="ts">
-	import type { AutocompleteItem } from "$lib";
-	import { createEventDispatcher } from "svelte";
-	import { slide } from "svelte/transition";
+	import type { AutocompleteItem } from '$lib';
+	import { createEventDispatcher } from 'svelte';
+	import { slide } from 'svelte/transition';
 
-  export let results: AutocompleteItem[] = [];
+	export let results: AutocompleteItem[] = [];
 
-  const dispatch = createEventDispatcher();
+	let selectedOptionIndex = -1;
+	let optionElements: HTMLElement[] = [];
 
-  function selectLocation(result: AutocompleteItem) {
-    dispatch('selectLocation', result);
-  }
-  
-	function handleKeydown(event: KeyboardEvent, location: AutocompleteItem) {
-		if (event.key === 'Enter') {
-			selectLocation(location);
+	const dispatch = createEventDispatcher();
+
+	function selectLocation(result: AutocompleteItem) {
+		dispatch('selectLocation', result);
+	}
+
+	function browseOptions(direction: 'ArrowUp' | 'ArrowDown') {
+		if (direction === 'ArrowUp') {
+			selectedOptionIndex = Math.max(0, selectedOptionIndex - 1);
+		} else if (direction === 'ArrowDown') {
+			selectedOptionIndex = Math.min(results.length - 1, selectedOptionIndex + 1);
 		}
-	}  
+		optionElements[selectedOptionIndex].focus();
+	}
+
+	function handleKeydown(event: KeyboardEvent, location: AutocompleteItem) {
+		event.preventDefault();
+		event.stopPropagation();
+		if (event.key === 'Enter') {
+			return selectLocation(location);
+		}
+		if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+			return browseOptions(event.key);
+		}
+	}
 </script>
 
-<div class="autocomplete__results" transition:slide={{ delay: 100, duration: 300 }}>
-  {#each results as result, index (result.placeId)}
-    <div
-      tabindex={index}
-      class="autocomplete__result"
-      on:click={() => selectLocation(result)}
-      on:keydown={(event) => handleKeydown(event, result)}
-      role="button"
-    >
-      {result.description}
-    </div>
-  {/each}
+<div
+	class="autocomplete__results"
+	role="listbox"
+	in:slide={{ duration: 400, axis: 'y' }}
+	out:slide={{ duration: 300 }}
+>
+	{#each results as result, index (result.placeId)}
+		<div
+			bind:this={optionElements[index]}
+			tabindex={index}
+			class="autocomplete__result"
+			on:click={() => selectLocation(result)}
+			on:keydown={(event) => handleKeydown(event, result)}
+			aria-selected={selectedOptionIndex === index ? 'true' : 'false'}
+			role="option"
+		>
+			{result.description}
+		</div>
+	{/each}
 </div>
 
 <style>
-  .autocomplete__results {
-		background-color: var(--color-off-white);
+	.autocomplete__results {
+		background-color: var(--color-background-off-white);
 		border-radius: 20px;
 		box-shadow: var(--box-shadow);
 		margin-top: 0px;
-		max-height: 200px;
+		max-height: 250px;
 		overflow-y: auto;
 		position: absolute;
 		z-index: 10;
@@ -54,6 +78,6 @@
 	}
 
 	.autocomplete__result:hover {
-		background: var(--color-light-gray);
+		background: var(--color-background-light);
 	}
 </style>

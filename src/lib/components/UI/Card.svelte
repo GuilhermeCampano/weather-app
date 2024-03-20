@@ -20,9 +20,9 @@
 		padding: 1rem;
 		margin: 1rem 0;
 		border-radius: 20px;
-		border: 1px solid var(--color-light-grey);
+		border: 1px solid var(--color-border-light);
 		box-shadow: var(--box-shadow);
-		background-color: var(--color-off-white-transparent);
+		background-color: var(--color-background-transparent);
 		filter: grayscale(0%);
 		transition: all 0.5s ease;
 	}

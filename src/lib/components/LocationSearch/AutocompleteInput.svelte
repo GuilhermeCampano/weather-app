@@ -44,7 +44,7 @@
 		position: relative;
 	}
 	.autocomplete__input {
-		background-color: var(--color-off-white-transparent);
+		background-color: var(--color-background-off-white);
 		box-shadow: var(--box-shadow);
 		width: 100%;
 		padding: 20px;

@@ -47,7 +47,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		border: 1px dashed var(--color-gray);
+		border: 1px dashed var(--color-text);
 		padding: 0.5rem;
 		box-shadow: var(--box-shadow);
 	}
@@ -61,11 +61,11 @@
 	}
 
 	.wmo__card:nth-child(odd) {
-		background-color: var(--color-white);
+		background-color: var(--color-background);
 	}
 
 	.wmo__card:nth-child(even) {
-		background-color: var(--color-light-gray);
+		background-color: var(--color-background-light);
 	}
 
 	.wmo__code {

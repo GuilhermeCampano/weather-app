@@ -1,26 +1,28 @@
 @import './styles/variables.css';
 @import './styles/helpers.css';
-@import './styles/skeleton.css';  
+@import './styles/skeleton.css';
 
 body {
-  background-color: var(--color-light-orange);
-  color: var(--color-dark-gray);
+  background-color: var(--color-primary);
+  color: var(--color-text-dark);
   font-size: 16px;
   font-family: 'Open Sans', sans-serif;
   margin: 0.5rem;
   padding: 1rem;
-  min-height: 100vh;
   width: 100%;
   max-width: 920px;
   margin-inline: auto;
+  scrollbar-color: var(--color-primary) var(--color-background-light);
 }
 
 @media (prefers-color-scheme: dark) {
   body {
-    --color-light-orange: #C7D9EE;
-    --color-off-white: #eef4fa;
-    color: var(--color-dark-gray);
-    --color-gradient: linear-gradient(#8AF7F0, #6F9DF8);
+    --color-primary: #C7D9EE;
+    --color-secondary: #8AF7F0;
+    --color-tertiary: #6F9DF8;
+    --color-background-off-white: #eef4fa;
+    scrollbar-color: var(--color-tertiary) var(--color-background-light);
+
   }
 }
 
@@ -80,14 +82,15 @@ input {
   margin: 10px;
 }
 
-button, select {
+button,
+select {
   min-width: 100px;
   padding: 10px;
   border: none;
   border-radius: 5px;
   font-size: 16px;
-  color: var(--color-dark-gray);
-  background-color: var(--color-off-white-transparent);
+  color: var(--color-text-dark);
+  background-color: var(--color-background-off-white);
   border-radius: 100px;
   box-shadow: 0px 4px 4px 0px var(--color-shadow);
   cursor: pointer;
@@ -99,6 +102,7 @@ select {
   border-right: 16px solid transparent
 }
 
-button:hover, select:hover {
-  background-color: var(--color-off-white-transparent)
+button:hover,
+select:hover {
+  background-color: var(--color-background-off-white)
 }
