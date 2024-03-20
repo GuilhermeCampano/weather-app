@@ -54,20 +54,22 @@
 	onMount(() => {
 		if (typeof window !== 'undefined') {
 			window.addEventListener('click', handleClickOutside);
-			window.addEventListener('keydown', (event) => {
-				if (event.key === 'Enter' && isInputFocused && $autoCompleteResults.length > 0) {
-					onSelectLocation($autoCompleteResults[0]);
-				}
-			});
+			window.addEventListener('keydown', selectDefaultLocation);
 		}
 	});
 
 	onDestroy(() => {
 		if (typeof window !== 'undefined') {
 			window.removeEventListener('click', handleClickOutside);
+			window.removeEventListener('keydown', selectDefaultLocation);
 		}
 	});
 
+	function selectDefaultLocation(event: KeyboardEvent) {
+		if (event.key === 'Enter' && isInputFocused && $autoCompleteResults.length > 0) {
+			onSelectLocation($autoCompleteResults[0]);
+		}
+	}
 	function handleFocus() {
 		isInputFocused = true;
 		if ($searchInput.length > 0) {
@@ -118,7 +120,7 @@
 	}
 
 	@media (min-width: 768px) {
-		.search__precise-button  {
+		.search__precise-button {
 			text-align: left;
 		}
 	}
