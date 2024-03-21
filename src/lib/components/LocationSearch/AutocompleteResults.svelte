@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { AutocompleteItem } from '$lib';
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, onDestroy, onMount } from 'svelte';
 	import { slide } from 'svelte/transition';
 
 	export let results: AutocompleteItem[] = [];
@@ -10,51 +10,66 @@
 
 	const dispatch = createEventDispatcher();
 
-	function selectLocation(result: AutocompleteItem) {
-		dispatch('selectLocation', result);
+	onMount(() => {
+		window.addEventListener('keydown', handleKeydown);
+	});
+
+	onDestroy(() => {
+		window.removeEventListener('keydown', handleKeydown);
+	});
+
+	function selectLocation(result?: AutocompleteItem) {
+		result ? dispatch('selectLocation', result) : dispatch('selectLocation', results[0]);
 	}
 
-	function browseOptions(direction: 'ArrowUp' | 'ArrowDown') {
-		if (direction === 'ArrowUp') {
-			selectedOptionIndex = Math.max(0, selectedOptionIndex - 1);
-		} else if (direction === 'ArrowDown') {
-			selectedOptionIndex = Math.min(results.length - 1, selectedOptionIndex + 1);
+	function browseOptions(keyPressed: string) {
+		if (keyPressed === 'ArrowUp') {
+			selectedOptionIndex = Math.max(selectedOptionIndex - 1, 0);
+		} else if (keyPressed === 'ArrowDown') {
+			selectedOptionIndex = Math.min(selectedOptionIndex + 1, results.length - 1);
+		} else if (keyPressed === 'Home') {
+			selectedOptionIndex = 0;
+		} else if (keyPressed === 'End') {
+			selectedOptionIndex = results.length - 1;
 		}
-		optionElements[selectedOptionIndex].focus();
+		optionElements[selectedOptionIndex]?.focus();
 	}
 
-	function handleKeydown(event: KeyboardEvent, location: AutocompleteItem) {
-		event.preventDefault();
-		event.stopPropagation();
+	function handleKeydown(event: KeyboardEvent) {
 		if (event.key === 'Enter') {
-			return selectLocation(location);
+			event.preventDefault();
+			event.stopPropagation();
+
+			return selectLocation(results[selectedOptionIndex]);
 		}
-		if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+		if(event.key === 'ArrowUp' || event.key === 'ArrowDown' || event.key === 'Home' || event.key === 'End') {
+			event.preventDefault();
+			event.stopPropagation();
 			return browseOptions(event.key);
 		}
 	}
 </script>
 
-<div
+<ul
 	class="autocomplete__results"
 	role="listbox"
 	in:slide={{ duration: 400, axis: 'y' }}
 	out:slide={{ duration: 300 }}
 >
 	{#each results as result, index (result.placeId)}
-		<div
+		<li
 			bind:this={optionElements[index]}
 			tabindex={index}
-			class="autocomplete__result"
+			class="autocomplete__item"
 			on:click={() => selectLocation(result)}
-			on:keydown={(event) => handleKeydown(event, result)}
+			on:keydown={() => {}}
 			aria-selected={selectedOptionIndex === index ? 'true' : 'false'}
 			role="option"
 		>
 			{result.description}
-		</div>
+		</li>
 	{/each}
-</div>
+</ul>
 
 <style>
 	.autocomplete__results {
@@ -70,14 +85,16 @@
 		border-top-right-radius: 0px;
 		border-top-left-radius: 0px;
 		width: 100%;
+		padding-inline: 0.5rem;
 	}
 
-	.autocomplete__result {
+	.autocomplete__item {
+		list-style: none;
 		padding: 10px;
 		cursor: pointer;
 	}
 
-	.autocomplete__result:hover {
+	.autocomplete__item:hover {
 		background: var(--color-background-light);
 	}
 </style>
