@@ -20,10 +20,9 @@
 	import { LocalStorage } from '$lib/utils/localstorage';
 	import PreciseLocationButton from './PreciseLocationButton.svelte';
 
-	let isInputFocused = false;
+	let openAutocomplete = false;
 
 	async function searchLocations() {
-		isInputFocused = true;
 		if ($searchInput.length < 1) {
 			autoCompleteResults.set([]);
 			return;
@@ -39,42 +38,33 @@
 			LocalStorage.lastSearch.save({ placeDetails, autocompleteItem });
 			fetchForecast($latitude, $longitude);
 		}
-		isInputFocused = false;
+		openAutocomplete = false;
 	}
 
 	function handleClickOutside(event: MouseEvent) {
 		if (!(event.target as Element).closest('.search__autocomplete')) {
+			openAutocomplete = false;
 			if ($searchInput !== $lastSelectedSearchInput) {
 				searchInput.set($lastSelectedSearchInput);
 			}
-			isInputFocused = false;
 		}
 	}
 
 	onMount(() => {
 		if (typeof window !== 'undefined') {
 			window.addEventListener('click', handleClickOutside);
-			window.addEventListener('keydown', selectDefaultLocation);
 		}
 	});
 
 	onDestroy(() => {
 		if (typeof window !== 'undefined') {
 			window.removeEventListener('click', handleClickOutside);
-			window.removeEventListener('keydown', selectDefaultLocation);
 		}
 	});
 
-	function selectDefaultLocation(event: KeyboardEvent) {
-		if (event.key === 'Enter' && isInputFocused && $autoCompleteResults.length > 0) {
-			onSelectLocation($autoCompleteResults[0]);
-		}
-	}
-	function handleFocus() {
-		isInputFocused = true;
-		if ($searchInput.length > 0) {
-			resetSearchInput();
-		}
+	function onInputFocus() {
+		openAutocomplete = true;
+		resetSearchInput();
 	}
 </script>
 
@@ -82,13 +72,14 @@
 	<div class="search__autocomplete">
 		<AutocompleteInput
 			bind:searchInput={$searchInput}
-			bind:isInputFocused
+			bind:isOpen={openAutocomplete}
 			hasResults={$hasResults}
 			on:inputChange={debounce(searchLocations)}
 			on:reset={resetSearchInput}
-			on:focus={handleFocus}
+			on:focus={onInputFocus}
+			on:blur={() => (openAutocomplete = false)}
 		>
-			{#if isInputFocused && $autoCompleteResults.length > 0}
+			{#if openAutocomplete}
 				<AutocompleteResults
 					results={$autoCompleteResults}
 					on:selectLocation={(location) => onSelectLocation(location.detail)}

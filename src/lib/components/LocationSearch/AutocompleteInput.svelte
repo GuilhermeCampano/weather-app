@@ -1,13 +1,18 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 	export let searchInput = '';
-	export let isInputFocused = false;
+	export let isOpen = false;
 	export let hasResults = false;
 
 	const dispatch = createEventDispatcher();
 
 	function handleFocus() {
 		dispatch('focus');
+	}
+
+	function handleBlur(event: KeyboardEvent | FocusEvent) {
+		(event.target as HTMLInputElement)?.blur();
+		dispatch('blur');
 	}
 
 	function handleInputChange() {
@@ -17,20 +22,32 @@
 	function handleClearButtonClick() {
 		dispatch('reset');
 	}
+
+	function handleKeyPressed(event: KeyboardEvent) {
+		if (event.key === 'Escape') {
+			handleClearButtonClick();
+		}
+		if (event.key === 'Enter') {
+			handleBlur(event);
+		}
+	}
 </script>
 
 <div class="autocomplete">
 	<input
 		type="text"
+		aria-label="Search for a location"
+		aria-haspopup="listbox"
 		bind:value={searchInput}
 		on:input={handleInputChange}
 		on:focus={handleFocus}
+		on:keydown={handleKeyPressed}
 		class="autocomplete__input"
-		class:autocomplete__input--open={isInputFocused && hasResults}
+		class:autocomplete__input--open={isOpen && hasResults}
 		placeholder="Search for a location"
 	/>
 
-	{#if searchInput.length > 1 && isInputFocused}
+	{#if searchInput.length > 1 && isOpen}
 		<button class="autocomplete__clear" on:click={handleClearButtonClick}>
 			<i class="material-symbols-outlined">close</i>
 		</button>
