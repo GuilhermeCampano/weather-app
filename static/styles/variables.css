@@ -23,6 +23,7 @@
   --box-shadow: 0px 4px 4px 0px var(--color-shadow);
 
   /* Spacing */
+  --spacing-xs: 5px;
   --spacing-sm: 10px;
   --spacing-md: 20px;
   --spacing-lg: 35px;
@@ -40,4 +41,5 @@
   --font-weight-bold: 700;
   --line-height: 1.6;
   --letter-spacing: 0.1rem;
+
 }

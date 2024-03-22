@@ -34,6 +34,7 @@
     cursor: pointer;
     font-size: var(--font-md);
     font-weight: var(--font-weight-regular);
+    margin-top: var(--spacing-md);
   }
 
   .precise-location:hover .precise-location__text {

@@ -85,12 +85,12 @@
 		border-top-right-radius: 0px;
 		border-top-left-radius: 0px;
 		width: 100%;
-		padding-inline: 0.5rem;
+		padding-inline: var(--spacing-sm);
 	}
 
 	.autocomplete__item {
 		list-style: none;
-		padding: 10px;
+		padding: var(--spacing-sm);
 		cursor: pointer;
 	}
 

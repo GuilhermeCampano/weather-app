@@ -27,7 +27,7 @@
 		{/each}
 	</div>
 {:else}
-	<h6>Today</h6>
+	<h6 class="forecast__title">Today</h6>
 
 	{#if $isDesktop}
 		<Card size="large">
@@ -49,12 +49,20 @@
 	<ForecastNextDays weekForecastCards={$weekForecastCards} />
 {/if}
 
-
 <style>
+	.forecast__title {
+		margin-top: 0px;
+	}
+
+	@media (min-width: 768px) {
+		.forecast__title {
+			margin-top: var(--spacing-lg);
+		}
+	}
 	.forecast__loading-week {
 		display: flex;
 		flex-direction: row;
-		gap: 1rem;
+		gap: var(--spacing-md);
 		overflow-x: auto;
 	}
 </style>

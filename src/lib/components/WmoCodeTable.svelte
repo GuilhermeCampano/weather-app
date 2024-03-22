@@ -36,7 +36,7 @@
 	.wmo__grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-		gap: 16px;
+		gap: var(--spacing-md);
 	}
 
 	.wmo__code{
@@ -48,7 +48,7 @@
 		flex-direction: column;
 		align-items: center;
 		border: 1px dashed var(--color-text);
-		padding: 0.5rem;
+		padding: var(--spacing-sm);
 		box-shadow: var(--box-shadow);
 	}
 

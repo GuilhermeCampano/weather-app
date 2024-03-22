@@ -27,7 +27,7 @@
 		Feels Like <strong>{forecastCurrentCard.apparentTemperature}°</strong>
 	</div>
 	<div>Rain: <strong>{forecastCurrentCard.precipitationChance}%</strong></div>
-	<div>Wind: <strong>{forecastCurrentCard.windSpeed}km/h</strong></div>
+	<div>Wind: <strong>{forecastCurrentCard.windSpeed} km/h</strong></div>
 </div>
 <slot />
 
@@ -44,13 +44,14 @@
 		position: relative;
 		width: auto;
 		padding-right: 48px;
+		letter-spacing: var(--spacing-xs);
 	}
 	.weather__high-low {
 		display: flex;
 		flex-direction: row;
 		align-items: start;
-		gap: 0.5rem;
-		justify-content: space-between;
+		gap: var(--spacing-md);
+		justify-content: start;
 	}
 
 	.weather__feel-like {

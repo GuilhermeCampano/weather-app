@@ -22,7 +22,7 @@
 	.forecast {
 		display: flex;
 		flex-direction: row;
-		gap: 1rem;
+		gap: var(--spacing-md);
 		overflow-x: auto;
 	}
 
