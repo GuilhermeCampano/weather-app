@@ -14,7 +14,7 @@
 
 
 <style>
-		.icon--small {
+	.icon--small {
 		font-size: 1rem;
 	}
 
