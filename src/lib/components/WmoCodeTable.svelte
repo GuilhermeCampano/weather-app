@@ -74,7 +74,7 @@
 
 	.wmo__label {
 		font-weight: bold;
-		margin: 8px 0;
+		margin: var(--spacing-sm) 0;
 	}
 
 	.wmo__meaning{

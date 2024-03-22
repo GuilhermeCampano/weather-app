@@ -23,7 +23,9 @@
   --box-shadow: 0px 4px 4px 0px var(--color-shadow);
 
   /* Spacing */
-  --default-spacing: 1rem;
+  --spacing-sm: 10px;
+  --spacing-md: 20px;
+  --spacing-lg: 35px;
 
   /* Fonts */
   --font-family: 'Open Sans', sans-serif;

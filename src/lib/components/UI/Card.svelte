@@ -17,8 +17,8 @@
 <style>
 	.card {
 		display: flex;
-		padding: 1rem;
-		margin: 1rem 0;
+		padding: var(--spacing-md);
+		margin: var(--spacing-md) 0;
 		border-radius: 20px;
 		border: 1px solid var(--color-border-light);
 		box-shadow: var(--box-shadow);
