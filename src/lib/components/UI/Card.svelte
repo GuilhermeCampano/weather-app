@@ -17,8 +17,8 @@
 <style>
 	.card {
 		display: flex;
-		padding: 1rem;
-		margin: 1rem 0;
+		padding: var(--spacing-md);
+		margin: var(--spacing-md) 0;
 		border-radius: 20px;
 		border: 1px solid var(--color-border-light);
 		box-shadow: var(--box-shadow);
@@ -36,8 +36,8 @@
 		flex-shrink: 0;
 		flex-grow: 1;
 		flex-basis: 100px;
-		gap: 0 0.5rem;
-		padding: 1rem 0px;
+		gap: 0 var(--spacing-sm);
+		padding: var(--spacing-sm) 0px;
     min-height: 135px;
 		margin-top: 0;
 	}
@@ -45,13 +45,13 @@
 	.card--large {
 		display: flex;
 		flex-flow: wrap;
-		row-gap: 1.5rem;
+		row-gap: var(--spacing-md) ;
 		flex-direction: row;
 		align-items: start;
 		justify-content: space-between;
 		position: relative;
 		right: auto;
-		width: calc(100vw - 1rem);
+		width: calc(100vw - var(--spacing-sm));
 		min-height: 200px;
 		margin: 0 auto;
 		border-top-right-radius: 0px;
@@ -62,7 +62,7 @@
 		.card--large {
 			width: auto;
 			margin-right: auto;
-			padding-inline: 2rem;
+			padding-inline: var(--spacing-lg);
 			border-radius: 20px;
 			right: 0;
 		}

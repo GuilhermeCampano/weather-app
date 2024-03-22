@@ -24,9 +24,9 @@
 	.hourly-card__content {
 		display: flex;
 		flex-direction: row;
-		gap: 1rem;
+		gap: var(--spacing-md);
 		overflow-x: auto;
-		padding-bottom: 0.5rem;
+		padding-bottom: var(--spacing-sm);
 	}
 
 	.hourly-card__item {

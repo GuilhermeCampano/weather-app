@@ -64,13 +64,13 @@
 		background-color: var(--color-background-off-white);
 		box-shadow: var(--box-shadow);
 		width: 100%;
-		padding: 20px;
+		padding: var(--spacing-md);
 		border-radius: 20px;
 		font-weight: 400;
 		font-size: var(--font-lg);
 		border: none;
 		margin: 0px;
-		padding-right: 4rem;
+		padding-right: calc(var(--spacing-md) * 2);
 		text-overflow: ellipsis;
 		transition: border-radius ease 0.8s;
 	}

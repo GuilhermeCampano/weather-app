@@ -99,7 +99,7 @@
 		display: flex;
 		flex-direction: column;
 		flex-flow: wrap;
-		column-gap: 1rem;
+		column-gap: var(--spacing-md);
 	}
 	.search__autocomplete {
 		flex: 1 0 300px;

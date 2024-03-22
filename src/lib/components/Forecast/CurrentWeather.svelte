@@ -7,7 +7,7 @@
 </script>
 
 <div>
-	<h5 class="my-1">Now</h5>
+	<h6 class="weather__title">Now</h6>
 	<div class="weather__temperature">
 		{forecastCurrentCard.temperature}°
 		<span
@@ -23,19 +23,18 @@
 </div>
 <div class="text-right">
 	<strong class="weather__code-text">{forecastCurrentCard.weatherCode.label}</strong>
-	<div class="weather__feel-like mb-5">
+	<div class="weather__feel-like">
 		Feels Like <strong>{forecastCurrentCard.apparentTemperature}°</strong>
 	</div>
 	<div>Rain: <strong>{forecastCurrentCard.precipitationChance}%</strong></div>
-	<div>Wind: <strong>{forecastCurrentCard.windSpeed}km/h</strong></div>
+	<div>Wind: <strong>{forecastCurrentCard.windSpeed} km/h</strong></div>
 </div>
 <slot />
 
 <style>
-	/* .weather__placeholder {
-		width: 100%;
-		text-align: center;
-	} */
+	.weather__title {
+		margin: 0px;
+	}
 	.weather__temperature {
 		font-size: 100px;
 		line-height: 100px;
@@ -45,18 +44,20 @@
 		position: relative;
 		width: auto;
 		padding-right: 48px;
+		letter-spacing: var(--spacing-xs);
 	}
 	.weather__high-low {
 		display: flex;
 		flex-direction: row;
 		align-items: start;
-		gap: 0.5rem;
-		justify-content: space-between;
+		gap: var(--spacing-md);
+		justify-content: start;
 	}
 
 	.weather__feel-like {
 		font-size: var(--font-sm);
 		text-align: right;
+		margin-bottom: Var(--spacing-md);
 	}
 
 	.weather__code-text {
