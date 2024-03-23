@@ -51,12 +51,12 @@
 
 <style>
 	.forecast__title {
-		margin-top: 0px;
+		margin-top: var(--spacing-lg);
 	}
 
-	@media (min-width: 768px) {
+	@media (max-width: 768px) {
 		.forecast__title {
-			margin-top: var(--spacing-lg);
+			margin-top: var(--spacing-sm);
 		}
 	}
 	.forecast__loading-week {
