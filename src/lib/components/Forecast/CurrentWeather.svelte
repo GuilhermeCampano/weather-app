@@ -39,12 +39,11 @@
 		font-size: 100px;
 		line-height: 100px;
 		font-weight: var(--font-weight-bold);
-		letter-spacing: -5px;
 		margin-bottom: 1rem;
 		position: relative;
 		width: auto;
-		padding-right: 48px;
-		letter-spacing: var(--spacing-xs);
+		padding-right: var(--spacing-lg);
+		letter-spacing: -5px;
 	}
 	.weather__high-low {
 		display: flex;

@@ -23,8 +23,6 @@
 		border: 1px solid var(--color-border-light);
 		box-shadow: var(--box-shadow);
 		background-color: var(--color-background-transparent);
-		filter: grayscale(0%);
-		transition: all 0.5s ease;
 	}
 
 	.card--small {
