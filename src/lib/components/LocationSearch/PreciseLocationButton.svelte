@@ -5,8 +5,8 @@
   function getLocation() {
     try {
       navigator.geolocation.getCurrentPosition((position) => {
-        latitude.set(position.coords.latitude.toString());
-        longitude.set(position.coords.longitude.toString());
+        latitude.set(position.coords.latitude);
+        longitude.set(position.coords.longitude);
         resetSearchInput();
       });
     } catch (error) {

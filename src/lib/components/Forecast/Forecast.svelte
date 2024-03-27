@@ -8,10 +8,11 @@
 	import ForecastNextDays from './ForecastNextDays.svelte';
 	import ApiService from '$lib/utils/api-service';
 	import { delayPromise } from '$lib/utils/delay-promise';
+	import Error from '../Error.svelte';
 
 </script>
 
-{#await delayPromise(ApiService.getForecast($latitude, $longitude))}
+{#await delayPromise(ApiService.getForecast(0,0))}
 	<h6><SkeletonAnimation width="200px" height="2rem" /></h6>
 	
 	{#if $isDesktop}
@@ -48,7 +49,7 @@
 	<h6>Next 7 Days</h6>
 	<ForecastNextDays weekForecastCards={daily} />
 {:catch error}
-	<p>{error.message}</p>
+	<Error status={error.status} size="small" />
 {/await}
 
 <style>
