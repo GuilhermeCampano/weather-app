@@ -12,10 +12,14 @@
 
 {#await ApiService.getForecast(+$latitude, +$longitude)}
 	<h6><SkeletonAnimation width="200px" height="2rem" /></h6>
-	<Card size="large" isLoading={true} />
-
-	<h6><SkeletonAnimation width="200px" height="2rem" /></h6>
-	<SkeletonAnimation width="100%" height="116px" withElevation />
+	
+	{#if $isDesktop}
+		<Card size="large" isLoading={true} />
+	{:else}
+		<Card size="large" isLoading={true} />
+		<h6><SkeletonAnimation width="200px" height="2rem" /></h6>
+		<SkeletonAnimation width="100%" height="116px" withElevation />
+	{/if}
 
 	<h6><SkeletonAnimation width="200px" height="2rem" /></h6>
 	<div class="forecast__loading-week">
