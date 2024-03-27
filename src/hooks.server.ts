@@ -5,10 +5,8 @@ import { geolocationDetailsMockResponse } from "$lib/mocks/geolocation.mock";
 import { Endpoints } from "$lib/models";
 import { verifyToken } from "$lib/server/token.service";
 
-export async function handle({ event, resolve }) {
-  const { request } = event;
 
-  if (!isApiRequest(request)) { return resolve(event); }
+export async function handleFetch(request: Request): Promise<Response> {
   if (!validReferer(request)) { return new Response('Unauthorized: Invalid origin', { status: 403 }); }
 
   const token = extractToken(request);
@@ -17,17 +15,12 @@ export async function handle({ event, resolve }) {
   const isTokenValid = await verifyToken(token);
   if (!isTokenValid) { return new Response('Unauthorized: Invalid token', { status: 403 }); }
 
-  
   if (PRIVATE_MOCK_API === 'TRUE') {
     console.log('Mocking API response');
     return mockAPIResponse(request);
   }
 
-  return resolve(event);
-}
-
-function isApiRequest(request: Request): boolean {
-  return request.url.includes('/api/');
+  return fetch(request);
 }
 
 function extractToken(request: Request): string {

@@ -1,9 +1,6 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
-	import { fetchForecast } from '$lib/stores/forecast.store';
 	import {
-		latitude,
-		longitude,
 		searchInput,
 		autoCompleteResults,
 		resetSearchInput,
@@ -36,7 +33,6 @@
 		if (placeDetails) {
 			selectPlaceResult(placeDetails, autocompleteItem);
 			LocalStorage.lastSearch.save({ placeDetails, autocompleteItem });
-			fetchForecast($latitude, $longitude);
 		}
 		openAutocomplete = false;
 	}
@@ -74,12 +70,12 @@
 			bind:searchInput={$searchInput}
 			bind:isOpen={openAutocomplete}
 			hasResults={$hasResults}
-			on:inputChange={debounce(searchLocations)}
+			on:inputChange={debounce(searchLocations, 250)}
 			on:reset={resetSearchInput}
 			on:focus={onInputFocus}
 			on:blur={() => (openAutocomplete = false)}
 		>
-			{#if openAutocomplete}
+			{#if openAutocomplete && $hasResults}
 				<AutocompleteResults
 					results={$autoCompleteResults}
 					on:selectLocation={(location) => onSelectLocation(location.detail)}
