@@ -29,36 +29,37 @@ body {
   box-sizing: border-box;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-bottom: var(--spacing-md);
+  line-height: var(--line-height);
+}
+
 h1 {
   font-size: 2.5rem;
-  margin-bottom: var(--spacing-md);
 }
 
 h2 {
   font-size: 2rem;
-  margin-bottom: var(--spacing-md);
 }
 
 h3 {
   font-size: 1.75rem;
-  margin-bottom: var(--spacing-md);
 }
 
 h4 {
   font-size: 1.5rem;
-  margin-bottom: var(--spacing-md);
 }
 
 h5 {
   font-size: 1.25rem;
-  margin-bottom: var(--spacing-md);
 }
 
 h6 {
   font-size: 1rem;
-  margin-bottom: var(--spacing-md);
-}
-
-p {
-  margin-bottom: var(--spacing-md);
 }
