@@ -7,10 +7,11 @@
 	import ForecastHourly from './ForecastHourly.svelte';
 	import ForecastNextDays from './ForecastNextDays.svelte';
 	import ApiService from '$lib/utils/api-service';
+	import { withMinimumDelay } from '$lib/utils/with-minimum-delay';
 
 </script>
 
-{#await ApiService.getForecast(+$latitude, +$longitude)}
+{#await withMinimumDelay(ApiService.getForecast($latitude, $longitude))}
 	<h6><SkeletonAnimation width="200px" height="2rem" /></h6>
 	
 	{#if $isDesktop}
