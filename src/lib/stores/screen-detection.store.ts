@@ -8,7 +8,6 @@ enum Breakpoints {
 const windowWidth = writable(typeof window !== 'undefined' ? window.innerWidth : 0);
 
 if (typeof window !== 'undefined') {
-  // Update the windowWidth store whenever the window is resized
   window.addEventListener('resize', () => {
     windowWidth.set(window.innerWidth);
   });
