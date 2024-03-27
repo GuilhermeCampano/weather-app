@@ -14,8 +14,11 @@ export async function GET({ url }: { url: URL }) {
     console.log(`GET /api/forecast for latitude: ${latitude}, longitude: ${longitude}`);
     const weatherApiService = new WeatherApiService();
     const response = await weatherApiService.getForecast(latitude, longitude);
+    const headers = new Headers();
+    headers.set('Content-Type', 'application/json');
+    headers.set('Cache-Control', 'max-age=300'); // 5 minutes
     return new Response(JSON.stringify(response), {
-      headers: { 'content-type': 'application/json' },
+      headers,
       status: 200
     });
   } catch (error) {
