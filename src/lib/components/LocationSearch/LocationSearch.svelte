@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
-	import { fetchForecast } from '$lib/stores/forecast.store';
 	import {
 		latitude,
 		longitude,
@@ -36,7 +35,6 @@
 		if (placeDetails) {
 			selectPlaceResult(placeDetails, autocompleteItem);
 			LocalStorage.lastSearch.save({ placeDetails, autocompleteItem });
-			fetchForecast($latitude, $longitude);
 		}
 		openAutocomplete = false;
 	}

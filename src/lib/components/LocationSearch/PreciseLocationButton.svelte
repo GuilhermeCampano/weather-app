@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { fetchForecast } from "$lib/stores/forecast.store";
 	import { latitude, longitude, resetSearchInput } from "$lib/stores/search-location.store";
 	import { debounce } from "$lib/utils/debounce";
   
@@ -9,7 +8,6 @@
         latitude.set(position.coords.latitude.toString());
         longitude.set(position.coords.longitude.toString());
         resetSearchInput();
-        fetchForecast($latitude, $longitude);
       });
     } catch (error) {
       console.error(error);
