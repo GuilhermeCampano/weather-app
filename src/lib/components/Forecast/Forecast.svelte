@@ -12,18 +12,18 @@
 
 </script>
 
-{#await delayPromise(ApiService.getForecast($latitude, $longitude))}
-	<h6><SkeletonAnimation width="200px" height="2rem" /></h6>
+{#await delayPromise(ApiService.getForecast($latitude, $longitude), 300)}
+	<h6><SkeletonAnimation width="200px" height="1.5rem" /></h6>
 	
 	{#if $isDesktop}
-		<Card size="large" isLoading={true} />
+		<SkeletonAnimation width="100%" height="325px" withElevation />
 	{:else}
-		<Card size="large" isLoading={true} />
-		<h6><SkeletonAnimation width="200px" height="2rem" /></h6>
-		<SkeletonAnimation width="100%" height="116px" withElevation />
+		<SkeletonAnimation width="100%" height="202px" withElevation />
+		<h6><SkeletonAnimation width="200px" height="1.5rem" /></h6>
+		<SkeletonAnimation width="100%" height="145px" withElevation />
 	{/if}
 
-	<h6><SkeletonAnimation width="200px" height="2rem" /></h6>
+	<h6><SkeletonAnimation width="200px" height="1.5rem" /></h6>
 	<div class="forecast__loading-week">
 		{#each new Array(7).fill(null) as item}
 			<Card size="small" isLoading={true} />
