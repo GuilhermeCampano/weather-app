@@ -19,6 +19,7 @@
       return;
     }
     searchInput.set(placeDetails.formattedAddress);
+    lastSelectedSearchInput.set(placeDetails.formattedAddress);
     latitude.set(placeDetails.latitude);
     longitude.set(placeDetails.longitude);
   }
@@ -27,6 +28,7 @@
 
 <svelte:head>
   <title>{$pageTitleLastSearch}</title>
+  <meta name="description" content="Is it sunny in {data.props.slug}? Get the forecast for {data.props.slug}.">
 </svelte:head>
 <LocationSearch />
 <Forecast/>
