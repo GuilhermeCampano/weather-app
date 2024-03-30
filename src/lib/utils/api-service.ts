@@ -36,4 +36,8 @@ export default class ApiService {
   static async getAutocomplete(input: string): Promise<AutocompleteItem[]> {
     return await this.fetch(`${Endpoints.AUTOCOMPLETE}?input=${input}`);
   }
+
+  static async getGeolocationFromAddress(address: string): Promise<PlaceGeolocationDetails> {
+    return await this.fetch(`${Endpoints.ADDRESS_GEOLOCATION}?address=${address}`);
+  }
 }

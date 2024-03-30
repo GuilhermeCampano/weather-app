@@ -30,9 +30,5 @@
 	}
 </script>
 
-<svelte:head>
-  <title>{$pageTitleLastSearch}</title>
-</svelte:head>
-
 <LocationSearch />
 <Forecast/>
