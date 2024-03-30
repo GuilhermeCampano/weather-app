@@ -19,7 +19,6 @@
       return;
     }
     searchInput.set(placeDetails.formattedAddress);
-    lastSelectedSearchInput.set(placeDetails.formattedAddress);
     latitude.set(placeDetails.latitude);
     longitude.set(placeDetails.longitude);
   }

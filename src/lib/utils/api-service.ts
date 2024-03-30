@@ -25,7 +25,7 @@ export default class ApiService {
   }
 
   static async getForecast(latitude: number, longitude: number): Promise<ForecastApiResponse> {
-    if(!latitude || !longitude) throw new Error('Latitude and longitude are required');
+    if(!latitude || !longitude) Promise.resolve(null);
     return await this.fetch(`${Endpoints.FORECAST}?latitude=${latitude}&longitude=${longitude}`);
   }
 
