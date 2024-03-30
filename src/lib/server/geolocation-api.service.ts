@@ -4,10 +4,12 @@ import { InMemoryCache } from './in-memory-cache';
 
 const AutocompleteCache = new InMemoryCache<AutocompleteItem[]>();
 const PlaceDetailsCache = new InMemoryCache<PlaceGeolocationDetails>();
+const GeolocationCache = new InMemoryCache<PlaceGeolocationDetails>();
 export class GeolocationService {
   readonly #GOOGLE_API = 'https://maps.googleapis.com/maps/api/';
   readonly #AUTOCOMPLETE_ENDPOINT = `${this.#GOOGLE_API}place/autocomplete/json`;
   readonly #PLACES_ENDPOINT = `${this.#GOOGLE_API}place/details/json`;
+  readonly #GEOCODE_ENDPOINT = `${this.#GOOGLE_API}geocode/json`;
 
   public getPlaceAutocomplete(input: string): Promise<AutocompleteItem[]> {
     const cachedResults = AutocompleteCache.getFromCache(input);
@@ -66,5 +68,20 @@ export class GeolocationService {
       latitude: lat,
       longitude: lng
     };
+  }
+
+  public getGeolocationFromAddress(address: string): Promise<PlaceGeolocationDetails | null> {
+    const cachedGeolocation = GeolocationCache.getFromCache(address);
+    if (cachedGeolocation) {
+      console.log('Returning cached geolocation for:', address);
+      return Promise.resolve(cachedGeolocation);
+    }
+    return fetch(`${this.#GEOCODE_ENDPOINT}?address=${encodeURIComponent(address)}&key=${PRIVATE_GOOGLE_API_KEY}`)
+      .then(response => response.json())
+      .then(data => data.results.length ? this.normalizePlaceDetails(data.results[0]) : null)
+      .catch(error => {
+        console.error(error);
+        throw new Error('Error fetching geolocation from address');
+      });
   }
 }

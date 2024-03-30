@@ -16,6 +16,7 @@
 	import type { AutocompleteItem } from '$lib';
 	import { LocalStorage } from '$lib/utils/localstorage';
 	import PreciseLocationButton from './PreciseLocationButton.svelte';
+	import { goto } from '$app/navigation';
 
 	let openAutocomplete = false;
 
@@ -33,6 +34,7 @@
 		if (placeDetails) {
 			selectPlaceResult(placeDetails, autocompleteItem);
 			LocalStorage.lastSearch.save({ placeDetails, autocompleteItem });
+			goto(`/forecast/${placeDetails.formattedAddress}`);
 		}
 		openAutocomplete = false;
 	}

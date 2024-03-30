@@ -25,7 +25,9 @@ export default class ApiService {
   }
 
   static async getForecast(latitude: number, longitude: number): Promise<ForecastApiResponse> {
-    if(!latitude || !longitude) throw new Error('Latitude and longitude are required');
+    if(!latitude || !longitude) {
+      return Promise.resolve({} as ForecastApiResponse);
+    }
     return await this.fetch(`${Endpoints.FORECAST}?latitude=${latitude}&longitude=${longitude}`);
   }
 
@@ -35,5 +37,9 @@ export default class ApiService {
 
   static async getAutocomplete(input: string): Promise<AutocompleteItem[]> {
     return await this.fetch(`${Endpoints.AUTOCOMPLETE}?input=${input}`);
+  }
+
+  static async getGeolocationFromAddress(address: string): Promise<PlaceGeolocationDetails> {
+    return await this.fetch(`${Endpoints.ADDRESS_GEOLOCATION}?address=${address}`);
   }
 }
