@@ -8,11 +8,16 @@
   export let data;
 
   onMount(async () => {
+    searchInput.set(data.props.slug);
     await fetchInitialData(data.props.slug);
   });
 
   async function fetchInitialData(address: string){
     const placeDetails = await ApiService.getGeolocationFromAddress(address);
+    if(!placeDetails){
+      window.location.href = '/';
+      return;
+    }
     searchInput.set(placeDetails.formattedAddress);
     lastSelectedSearchInput.set(placeDetails.formattedAddress);
     latitude.set(placeDetails.latitude);
