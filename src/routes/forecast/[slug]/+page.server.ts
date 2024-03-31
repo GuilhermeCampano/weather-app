@@ -23,6 +23,6 @@ export async function load({ params }) {
     };
   } catch (err) {
     console.error(err);
-    return error(500, 'An error occurred while fetching data');
+    return error(404, 'Not found');
   }
 }
