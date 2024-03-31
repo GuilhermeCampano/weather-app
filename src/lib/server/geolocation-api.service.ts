@@ -79,6 +79,12 @@ export class GeolocationService {
     return fetch(`${this.#GEOCODE_ENDPOINT}?address=${encodeURIComponent(address)}&key=${PRIVATE_GOOGLE_API_KEY}`)
       .then(response => response.json())
       .then(data => data.results.length ? this.normalizePlaceDetails(data.results[0]) : null)
+      .then((details: PlaceGeolocationDetails | null) => {
+        if (details) {
+          GeolocationCache.addToCache(address, details);
+        }
+        return details;
+      })
       .catch(error => {
         console.error(error);
         throw new Error('Error fetching geolocation from address');
