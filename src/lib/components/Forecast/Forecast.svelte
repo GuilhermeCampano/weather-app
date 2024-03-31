@@ -15,7 +15,7 @@
 	import Error from '../Error.svelte';
 	import type { ForecastApiResponse } from '$lib/models';
 
-	export let initialForecast: ForecastApiResponse;
+	export let initialForecast: ForecastApiResponse | null = null;
 
 </script>
 
