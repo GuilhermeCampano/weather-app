@@ -9,10 +9,13 @@
 	import ApiService from '$lib/utils/api-service';
 	import { delayPromise } from '$lib/utils/delay-promise';
 	import Error from '../Error.svelte';
+	import type { ForecastApiResponse } from '$lib/models';
+
+	export let initialForecast:ForecastApiResponse; 
 
 </script>
 
-{#await delayPromise(ApiService.getForecast($latitude, $longitude), 300)}
+{#await initialForecast || delayPromise(ApiService.getForecast($latitude, $longitude), 300)}
 	<h6><SkeletonAnimation width="200px" height="1.5rem" /></h6>
 	
 	{#if $isDesktop}
