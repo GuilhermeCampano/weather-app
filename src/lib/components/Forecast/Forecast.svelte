@@ -1,7 +1,11 @@
 <script lang="ts">
 	import Card from '../UI/Card.svelte';
 	import SkeletonAnimation from '../UI/SkeletonAnimation.svelte';
-	import { latitude, longitude } from '$lib/stores/search-location.store';
+	import {
+		latitude,
+		longitude,
+		searchedOnce,
+	} from '$lib/stores/search-location.store';
 	import { isDesktop } from '$lib/stores/screen-detection.store';
 	import CurrentWeather from './CurrentWeather.svelte';
 	import ForecastHourly from './ForecastHourly.svelte';
@@ -11,13 +15,13 @@
 	import Error from '../Error.svelte';
 	import type { ForecastApiResponse } from '$lib/models';
 
-	export let initialForecast:ForecastApiResponse; 
+	export let initialForecast: ForecastApiResponse;
 
 </script>
 
-{#await initialForecast || delayPromise(ApiService.getForecast($latitude, $longitude), 300)}
+{#await !$searchedOnce && initialForecast ? initialForecast : delayPromise(ApiService.getForecast($latitude, $longitude))}
 	<h6><SkeletonAnimation width="200px" height="1.5rem" /></h6>
-	
+
 	{#if $isDesktop}
 		<SkeletonAnimation width="100%" height="325px" withElevation />
 	{:else}

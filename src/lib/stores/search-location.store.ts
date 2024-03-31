@@ -7,6 +7,7 @@ export const longitude = writable(0);
 export const searchInput = writable("");
 export const lastSelectedSearchInput = writable("");
 export const autoCompleteResults = writable([] as AutocompleteItem[]);
+export const searchedOnce = writable(false);
 export const hasResults = derived(autoCompleteResults, $autoCompleteResults => $autoCompleteResults.length > 0);
 
 export function resetSearchInput() {
@@ -19,6 +20,7 @@ export function selectPlaceResult(placeDetails: PlaceGeolocationDetails, autocom
   lastSelectedSearchInput.set(autocompleteItem.description);
   latitude.set(placeDetails.latitude);
   longitude.set(placeDetails.longitude);
+  searchedOnce.set(true);
 }
 
 export async function fetchAutoCompleteResults(input: string) {
