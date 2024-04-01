@@ -7,13 +7,17 @@ export class IconService {
     if (cachedIcon) {
       return cachedIcon;
     }
-    const icon = await this.fetchIcon(name);
-    localStorage.setItem(`icon_${name}`, icon);
-    return icon;
+    try {
+      const response = await fetch(`${IconService.iconUrl}${name}.svg`);
+      const iconContent = await response.text();
+      if(response.status !== 200) {
+        throw new Error(`Failed to fetch icon: ${name}`);
+      }
+      localStorage.setItem(`icon_${name}`, iconContent);
+      return iconContent;
+    } catch (error) {
+      return '';
+    }
   }
 
-  static fetchIcon(name: string): Promise<string> {
-    return fetch(`${IconService.iconUrl}${name}.svg`)
-      .then((response) => response.text())
-  }
 }

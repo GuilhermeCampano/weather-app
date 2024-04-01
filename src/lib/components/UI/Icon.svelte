@@ -12,7 +12,6 @@
 		orange = 'var(--color-grey)'
 	}
 
-	import { onMount } from 'svelte';
 	import { IconService } from '$lib/utils/icon-service';
 
 	export let name: string;
@@ -25,7 +24,7 @@
 	function parseIconContent(svgContent: string) {
 		return svgContent.replace(
 			'<svg ',
-			`<svg style="width: ${iconSize}; height: ${iconSize}; fill: ${iconColor}"`
+			`<svg style="width: ${iconSize}; height: ${iconSize}; fill: ${iconColor}" `
 		);
 	}
 </script>
