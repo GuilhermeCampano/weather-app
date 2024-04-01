@@ -14,6 +14,17 @@ The key features of this application include:
 - Get the user's location to show local weather
 - Location search to get the weather for any location
 
+## Screenshots
+
+Here is a screenshot of the web application:
+
+![Web Application Screenshot](./docs/screenshot.png)
+
+
+## Performance
+
+![Lighthouse Performance](./docs/lighthouse.png)
+
 
 ## Local Development
 
