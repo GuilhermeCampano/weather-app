@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
+	import Icon from '../UI/Icon.svelte';
+	import type { IconProperties } from '$lib';
 	export let searchInput = '';
 	export let isOpen = false;
 	export let hasResults = false;
@@ -31,6 +33,12 @@
 			handleBlur(event);
 		}
 	}
+	const iconProperties: IconProperties = {
+		name: 'close',
+		label: 'Clear search input',
+		size: 'default',
+		color: 'default'
+	};
 </script>
 
 <div class="autocomplete">
@@ -49,7 +57,7 @@
 
 	{#if searchInput.length > 1 && isOpen}
 		<button class="autocomplete__clear" on:click={handleClearButtonClick}>
-			<i class="material-symbols-outlined">close</i>
+			<Icon {...iconProperties} />
 		</button>
 	{/if}
 

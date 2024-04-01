@@ -3,8 +3,8 @@
 	import { IconService } from '$lib/utils/icon-service';
 
 	export let name: string;
-	export let color: keyof typeof IconColors = 'default';
-	export let size: keyof typeof IconSizes = 'small';
+	export let color: keyof typeof IconColors;
+	export let size: keyof typeof IconSizes;
 	export let label: string
 
 	const iconSize = IconSizes[size] || IconSizes.small;

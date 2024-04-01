@@ -1,5 +1,6 @@
 export enum IconSizes {
   small = '1rem',
+  default = '1.5rem',
   medium = '2rem',
   large = '3rem'
 }
