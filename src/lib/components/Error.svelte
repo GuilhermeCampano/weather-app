@@ -1,21 +1,22 @@
 <script lang="ts">
-	import type { WeatherCodeDetails } from '$lib/models';
-	import WeatherIcon from './UI/WeatherIcon.svelte';
+	import type { IconProperties } from '$lib/models/icon.model';
+	import Icon from './UI/Icon.svelte';
 
 	export let size: 'small' | 'large' = 'large';
 	export let status: number | null = null;
 	export let message = 'Something went wrong';
 
-	const errorIcon = {
-		icon: 'thunderstorm',
+	const errorIcon: IconProperties = {
+		name: 'thunderstorm',
 		color: 'blue',
-		label: 'Error icon'
-	} as WeatherCodeDetails;
+		label: 'Error icon',
+		size: 'large'
+	};
 </script>
 
 <div class="error__container" class:error__container--small={size === 'small'}>
 	<span class="error__icon">
-		<WeatherIcon iconDetails={errorIcon} size="large" />
+		<Icon {...errorIcon}/>
 	</span>
 	<h1 class="error__status">{status ?? 'OPS...'}</h1>
 	<span class="error__message">{message}</span>
@@ -32,6 +33,7 @@
 		max-width: 250px;
 		margin: 0 auto;
 		font-size: 150px;
+		row-gap: var(--spacing-md);
 	}
 
 	.error__container--small {

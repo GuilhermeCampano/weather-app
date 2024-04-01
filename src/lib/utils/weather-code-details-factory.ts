@@ -1,9 +1,10 @@
 import { WMOCodesMeaningDictionary, WeatherCodeDetailsMap } from "$lib/constants";
-import { WeatherMaterialIcons, type IconColor, type WeatherCodeDetails } from "$lib/models";
+import { WeatherMaterialIcons , type WeatherCodeDetails } from "$lib/models";
+import type { IconColors } from "$lib/models/icon.model";
 
 export class WeatherCodeDetailsFactory implements WeatherCodeDetails {
   icon: WeatherMaterialIcons;
-  color: IconColor;
+  color: keyof typeof IconColors;
   label: string;
   wmoCode: number;
   wmoCodeDescription: string;

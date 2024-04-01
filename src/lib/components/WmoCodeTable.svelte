@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { WeatherCodeDetails } from '$lib/models';
 	import { WeatherCodeDetailsFactory } from '$lib/utils/weather-code-details-factory';
-	import WeatherIcon from './UI/WeatherIcon.svelte';
+	import Icon from './UI/Icon.svelte';
 
 	const allIcons: WeatherCodeDetails[] = new Array(100)
 		.fill(0)
@@ -18,7 +18,14 @@
 		<div class="wmo__card">
 			<div class="wmo__card-header">
 				<div class="wmo__code">{iconDetails.wmoCode}</div>
-				<div class="wmo__icon"><WeatherIcon {iconDetails} size="medium" /></div>
+				<div class="wmo__icon">
+					<Icon
+						name={iconDetails.icon}
+						size="medium"
+						color={iconDetails.color}
+						label={iconDetails.label}
+					/>
+				</div>
 			</div>
 			<h5 class="wmo__label">{iconDetails.label}</h5>
 			<div class="wmo__meaning">{iconDetails.wmoCodeDescription}</div>
@@ -27,7 +34,6 @@
 </div>
 
 <style>
-
 	.wmo__source {
 		display: block;
 		font-size: var(--font-md);
@@ -39,7 +45,7 @@
 		gap: var(--spacing-md);
 	}
 
-	.wmo__code{
+	.wmo__code {
 		font-size: var(--font-xl);
 	}
 
@@ -77,7 +83,7 @@
 		margin: var(--spacing-sm) 0;
 	}
 
-	.wmo__meaning{
+	.wmo__meaning {
 		font-size: var(--font-xs);
 		text-align: center;
 	}
