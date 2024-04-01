@@ -1,12 +1,22 @@
 <script lang="ts">
-	import type { ForecastHourCard } from '$lib/models';
+	import type { ForecastHourCard, WeatherCodeDetails } from '$lib/models';
+	import type { IconProperties } from '$lib/models/icon.model';
 	import { Localization } from '$lib/utils/localization';
-	import WeatherIcon from '../UI/WeatherIcon.svelte';
+	import Icon from '../UI/Icon.svelte';
 
 	export let hourlyForecastCards: ForecastHourCard[] = [];
 
 	function formatTime(time: string, index: number) {
 		return index === 0 ? 'Now' : Localization.formatHourMinute(time);
+	}
+
+	function getIconProperties(icoDetails: WeatherCodeDetails): IconProperties {
+		return {
+			name: icoDetails.icon,
+			color: icoDetails.color,
+			label: icoDetails.label,
+			size: 'medium'
+		};
 	}
 </script>
 
@@ -14,7 +24,7 @@
 	{#each hourlyForecastCards as hourForecastCard, index}
 		<div class="hourly-card__item">
 			<div>{formatTime(hourForecastCard.time, index)}</div>
-			<WeatherIcon iconDetails={hourForecastCard.weatherCode} size="medium" />
+			<Icon {...getIconProperties(hourForecastCard.weatherCode)} />
 			<div>{hourForecastCard.temperature}°</div>
 		</div>
 	{/each}

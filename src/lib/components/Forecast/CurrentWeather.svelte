@@ -1,9 +1,8 @@
 <script lang="ts">
 	import type { ForecastCurrentCard } from '$lib/models';
-
-	import WeatherIcon from '../UI/WeatherIcon.svelte';
-
+	import Icon from '../UI/Icon.svelte';
 	export let forecastCurrentCard: ForecastCurrentCard;
+	const iconDetails = forecastCurrentCard.weatherCode;
 </script>
 
 <div>
@@ -13,8 +12,14 @@
 		<span
 			class="weather__icon"
 			class:weather__icon--two-digits={forecastCurrentCard.temperature > 9}
-			><WeatherIcon iconDetails={forecastCurrentCard.weatherCode} size="large" /></span
 		>
+			<Icon
+				name={iconDetails.icon}
+				color={iconDetails.color}
+				size="large"
+				label={iconDetails.label}
+			/>
+		</span>
 	</div>
 	<div class="weather__high-low">
 		<div>High: {forecastCurrentCard.temperatureMax}°</div>

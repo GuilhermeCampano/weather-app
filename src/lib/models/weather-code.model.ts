@@ -1,9 +1,9 @@
-import type { IconColor } from "./icon-color";
+import type { IconColors } from "./icon.model";
 import { WeatherMaterialIcons } from "./weather-material-icons";
 
 export interface WeatherCodeDetails {
   icon: WeatherMaterialIcons;
-  color: IconColor;
+  color: keyof typeof IconColors;
   label: string;
   wmoCode?: number;
   wmoCodeDescription?: string;
