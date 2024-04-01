@@ -1,21 +1,37 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+	enum IconSizes {
+		small = '1rem',
+		medium = '2rem',
+		large = '3rem'
+	}
 
-  export let name: string;
-  export let fill: string = 'currentColor';
-  export let size: string = '20px';
+	enum IconColors {
+		default = 'currentColor',
+		yellow = 'var(--color-icon-tertiary)',
+		blue = 'var(--color-icon-secondary)',
+		orange = 'var(--color-grey)'
+	}
 
-  let svgContent = '';
+	import { onMount } from 'svelte';
+	import { IconService } from '$lib/utils/icon-service';
 
-  const ICON_PATH = '/icons/';
-  const iconUrl = `${ICON_PATH}${name}.svg`;
+	export let name: string;
+	export let color: keyof typeof IconColors = 'default';
+	export let size: keyof typeof IconSizes = 'small';
 
-  onMount(async () => {
-    const response = await fetch(iconUrl);
-    svgContent = await response.text();
-  });
+	const iconSize = IconSizes[size] || IconSizes.small;
+	const iconColor = IconColors[color] || IconColors.default;
+
+	function parseIconContent(svgContent: string) {
+		return svgContent.replace(
+			'<svg ',
+			`<svg style="width: ${iconSize}; height: ${iconSize}; fill: ${iconColor}"`
+		);
+	}
 </script>
 
-<span class="{$$restProps.class || ''}">
-  {@html svgContent.replace('<svg ', `<svg style="width: ${size}; height: ${size}; fill: ${fill}" `)}
-</span>
+{#await IconService.getIcon(name).then(parseIconContent) then iconSvgContent}
+	<span class={$$restProps.class || ''}>
+		{@html iconSvgContent}
+	</span>
+{/await}
