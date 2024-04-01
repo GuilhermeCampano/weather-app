@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { latitude, longitude, resetSearchInput } from "$lib/stores/search-location.store";
 	import { debounce } from "$lib/utils/debounce";
+  import Icon from "$lib/components/UI/Icon.svelte";
   
   function getLocation() {
     try {
@@ -16,7 +17,7 @@
 </script>
 
 <button on:click={debounce(getLocation)} class="precise-location" tabindex="0">
-  <i class="material-symbols-outlined precise-location__icon">my_location</i>
+  <Icon name="my_location" class="precise-location__icon"/>
   <span class="precise-location__text">Use precise location</span>
 </button>
 
@@ -39,10 +40,7 @@
     text-decoration: underline;
   }
 
-  .precise-location__icon {
-    font-size: var(--font-lg);
+  .precise-location :global(.precise-location__icon) {
     margin-right: 0.25rem;
-    padding-bottom: 2px;
   }
-
 </style>
