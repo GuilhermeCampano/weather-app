@@ -5,7 +5,7 @@ export * from './forecast-day-card.model';
 export * from './forecast-hour-card.model';
 export * from './weather-code.model';
 export * from './weather-material-icons';
-export * from './icon-color';
+export * from './icon.model';
 export * from './forecast-api-response.model';
 export * from './autocomplete-item.model';
 export * from './forecast-api-metadata';
