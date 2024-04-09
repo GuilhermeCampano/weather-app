@@ -9,9 +9,10 @@
 
 	export let data;
 
-	onMount(() => {
+	onMount(async () => {
 		saveToken(data.props.token);
 		preFillSearch();
+		await detectSWUpdate();
 	});
 
 	function saveToken(token: string) {
@@ -26,6 +27,15 @@
 		}
 		if (lastSearch) {
 			selectPlaceResult(lastSearch.placeDetails, lastSearch.autocompleteItem);
+		}
+	}
+	
+	async function detectSWUpdate() {
+		if ('serviceWorker' in navigator) {
+			const registration = await navigator.serviceWorker.getRegistration();
+			if (registration && registration.waiting) {
+				registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+			}
 		}
 	}
 </script>
