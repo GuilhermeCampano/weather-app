@@ -1,0 +1,32 @@
+{
+  "name": "Is it sunny?",
+  "short_name": "Is it sunny?",
+  "description": "Get accurate and up-to-date weather forecasts for any location.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFC9AB",
+  "theme_color": "#3768C6",
+  "icons": [
+    {
+      "src": "images/pwa-64x64.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "images/pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "images/maskable-icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
