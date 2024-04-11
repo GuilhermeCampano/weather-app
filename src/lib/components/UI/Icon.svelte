@@ -1,8 +1,12 @@
+<!--
+	Usage:
+	<Icon name="icon-name" color="blue" size="large" label="icon-label" />
+-->
 <script lang="ts">
-	import { IconColors, IconSizes } from '$lib/models/icon.model';
+	import { IconColors, IconSizes, type IconName } from '$lib/models/icon.model';
 	import { IconService } from '$lib/utils/icon-service';
 
-	export let name: string;
+	export let name: IconName;
 	export let color: keyof typeof IconColors;
 	export let size: keyof typeof IconSizes;
 	export let label: string
@@ -19,7 +23,7 @@
 </script>
 
 {#await IconService.getIcon(name).then(parseIconContent) then iconSvgContent}
-	<span class={$$restProps.class || ''} aria-label={label || name}>
+	<span class="{$$restProps.class || ''}"  aria-label={label || name}>
 		{@html iconSvgContent}
 	</span>
 {/await}
