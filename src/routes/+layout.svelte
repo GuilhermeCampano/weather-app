@@ -1,11 +1,11 @@
 <script lang="ts">
-	import FloatingCircle from "$lib/components/UI/FloatingCircle.svelte";
-	import Icon from "$lib/components/UI/Icon.svelte";
+	import SettingsMenu from '$lib/components/SettingsMenu.svelte';
+	import FloatingCircle from '$lib/components/UI/FloatingCircle.svelte';
 </script>
 
 <header class="header">
-	<img src="images/logo.png" alt="logo" class="header__logo"/>
-	<Icon name="gear" color="default" size="default" label="configuration" class="header__icon" />
+	<img src="images/logo.png" alt="logo" class="header__logo" />
+	<SettingsMenu />
 </header>
 
 <main>

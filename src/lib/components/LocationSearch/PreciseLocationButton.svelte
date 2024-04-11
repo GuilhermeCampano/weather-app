@@ -17,7 +17,7 @@
 </script>
 
 <button on:click={debounce(getLocation)} class="precise-location" tabindex="0">
-  <Icon name="my_location" class="precise-location__icon"/>
+  <Icon name="my_location" class="precise-location__icon" color="default" label="my location" size="default"/>
   <span class="precise-location__text">Use precise location</span>
 </button>
 
