@@ -1,5 +1,8 @@
 <script lang="ts">
 	import Icon from './UI/Icon.svelte';
+	import { fly, scale } from 'svelte/transition';
+  import { cubicOut } from 'svelte/easing';
+
 	let menuOpen = false;
 
 	function openMenu() {
@@ -30,7 +33,7 @@
 	</button>
 	
 	{#if menuOpen}
-	<div class="settings__menu">
+	<div class="settings__menu" transition:scale={{start: 0.5,  easing: cubicOut}}>
 		<button on:click={() => closeMenu()} class="settings__button">
 			<Icon name="close" label="close" color="default" size="default"/>
 		</button>
