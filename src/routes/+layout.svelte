@@ -4,7 +4,7 @@
 </script>
 
 <header class="header">
-	<img src="images/logo.png" alt="logo" class="header__logo" />
+	<img src="/images/logo.png" alt="logo" class="header__logo" />
 	<SettingsMenu />
 </header>
 
