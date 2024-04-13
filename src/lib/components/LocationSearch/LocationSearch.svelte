@@ -85,6 +85,7 @@
 		flex-direction: column;
 		flex-flow: wrap;
 		column-gap: var(--spacing-md);
+		color: var(--color-text);
 	}
 	.search__autocomplete {
 		flex: 1 0 300px;

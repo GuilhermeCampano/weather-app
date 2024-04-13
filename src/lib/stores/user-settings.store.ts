@@ -5,7 +5,7 @@ const isBrowser = typeof window !== 'undefined';
 const initialPreferences = {
   units: isBrowser ? localStorage.getItem('units') || 'metric' : 'metric',
   font: isBrowser ? localStorage.getItem('font') || '' : '',
-  theme: isBrowser ? localStorage.getItem('theme') || 'light' : 'light',
+  theme: isBrowser ? localStorage.getItem('theme') || 'warm' : 'warm',
   language: isBrowser ? localStorage.getItem('language') || 'en' : 'en',
 };
 
@@ -21,5 +21,8 @@ language.subscribe(value => localStorage.setItem('language', value));
     localStorage.setItem('font', value);
     document.body.style.fontFamily = `${value}`
   });
-  theme.subscribe(value => localStorage.setItem('theme', value));
+  theme.subscribe(value => {
+    localStorage.setItem('theme', value);
+    document.documentElement.setAttribute('data-theme', value);
+  });
 }
