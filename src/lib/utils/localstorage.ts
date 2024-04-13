@@ -31,5 +31,4 @@ class LocalStorageItem<T> {
 export class LocalStorage {
   static lastSearch = new LocalStorageItem<{ placeDetails: PlaceGeolocationDetails, autocompleteItem: AutocompleteItem }>(LAST_SEARCH_KEY);
   static userPreferences = new LocalStorageItem<UserPreferences>(USER_PREFERENCES_KEY);
-  static icons = new LocalStorageItem<string[]>('icons');
 }

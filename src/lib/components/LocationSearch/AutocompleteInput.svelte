@@ -76,6 +76,7 @@
 		border-radius: 20px;
 		font-weight: 400;
 		font-size: var(--font-lg);
+		font-family: inherit;
 		border: none;
 		margin: 0px;
 		padding-right: calc(var(--spacing-md) * 2);

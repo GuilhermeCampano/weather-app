@@ -1,6 +1,8 @@
 <script lang="ts">
 	import type { ForecastHourCard, WeatherCodeDetails } from '$lib/models';
 	import type { IconProperties } from '$lib/models/icon.model';
+	import { units } from '$lib/stores/user-settings.store';
+	import { getTemperatureFormatted } from '$lib/utils/convert-units';
 	import { Localization } from '$lib/utils/localization';
 	import Icon from '../UI/Icon.svelte';
 
@@ -25,7 +27,7 @@
 		<div class="hourly-card__item">
 			<div>{formatTime(hourForecastCard.time, index)}</div>
 			<Icon {...getIconProperties(hourForecastCard.weatherCode)} />
-			<div>{hourForecastCard.temperature}°</div>
+			<div>{getTemperatureFormatted(hourForecastCard.temperature, $units)}</div>
 		</div>
 	{/each}
 </div>
@@ -43,5 +45,6 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		gap: var(--spacing-xs);
 	}
 </style>

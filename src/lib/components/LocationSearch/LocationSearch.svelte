@@ -17,6 +17,7 @@
 	import { LocalStorage } from '$lib/utils/localstorage';
 	import PreciseLocationButton from './PreciseLocationButton.svelte';
 	import { goto } from '$app/navigation';
+	import clickOutside from '$lib/utils/click-outside';
 
 	let openAutocomplete = false;
 
@@ -39,26 +40,12 @@
 		openAutocomplete = false;
 	}
 
-	function handleClickOutside(event: MouseEvent) {
-		if (!(event.target as Element).closest('.search__autocomplete')) {
-			openAutocomplete = false;
-			if ($searchInput !== $lastSelectedSearchInput) {
-				searchInput.set($lastSelectedSearchInput);
-			}
+	function handleClickOutside() {
+		openAutocomplete = false;
+		if ($searchInput !== $lastSelectedSearchInput) {
+			searchInput.set($lastSelectedSearchInput);
 		}
 	}
-
-	onMount(() => {
-		if (typeof window !== 'undefined') {
-			window.addEventListener('click', handleClickOutside);
-		}
-	});
-
-	onDestroy(() => {
-		if (typeof window !== 'undefined') {
-			window.removeEventListener('click', handleClickOutside);
-		}
-	});
 
 	function onInputFocus() {
 		openAutocomplete = true;
@@ -66,7 +53,7 @@
 	}
 </script>
 
-<div class="search">
+<div class="search" use:clickOutside={handleClickOutside}>
 	<div class="search__autocomplete">
 		<AutocompleteInput
 			bind:searchInput={$searchInput}

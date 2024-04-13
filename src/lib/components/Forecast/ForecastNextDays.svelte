@@ -4,6 +4,8 @@
 	import type { ForecastDayCard, WeatherCodeDetails } from '$lib/models';
 	import Icon from '../UI/Icon.svelte';
 	import type { IconProperties } from '$lib/models/icon.model';
+	import { units } from '$lib/stores/user-settings.store';
+	import { getTemperatureFormatted } from '$lib/utils/convert-units';
 
 	export let weekForecastCards: ForecastDayCard[] = [];
 
@@ -24,7 +26,7 @@
 			<div class="forecast__text"></div>
 			{i === 0 ? 'Today' : Localization.formatDayOfWeek(dayForecastCard.dayOfWeek)}
 			<Icon {...getIconProperties(dayForecastCard.weatherCode)} />
-			<div class="forecast__text">{dayForecastCard.temperature}°</div>
+			<div class="forecast__text">{getTemperatureFormatted(dayForecastCard.temperature, $units)}</div>
 		</Card>
 	{/each}
 </div>
