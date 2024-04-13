@@ -18,9 +18,9 @@
 	}
 </script>
 
-<div class="settings__options">
+<div class="options">
 	<!--Temperature-->
-	<div class="settings__group">
+	<div class="options__group">
 		<label for="temperature">
 			<Icon name="thermostat" color="blue" , size="default" label="temperature" /> Temperature Units
 		</label>
@@ -46,7 +46,7 @@
 		</label>
 	</div>
 	<!--Fonts-->
-	<div class="settings__group">
+	<div class="options__group">
 		<label for="font">
 			<Icon name="font" color="blue" , size="default" label="font" /> Font Style
 		</label>
@@ -72,7 +72,7 @@
 		</label>
 	</div>
 	<!--Theme-->
-	<div class="settings__group">
+	<div class="options__group">
 		<label for="theme">
 			<Icon name="theme" color="blue" , size="default" label="theme" /> Theme
 		</label>
@@ -100,11 +100,11 @@
 </div>
 
 <style>
-	.settings__options {
+	.options {
 		display: flex;
 		flex-direction: column;
 	}
-	.settings__group {
+	.options__group {
 		display: flex;
 		flex-flow: column;
 		gap: var(--spacing-sm);
