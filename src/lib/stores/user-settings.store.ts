@@ -4,7 +4,7 @@ const isBrowser = typeof window !== 'undefined';
 
 const initialPreferences = {
   units: isBrowser ? localStorage.getItem('units') || 'metric' : 'metric',
-  font: isBrowser ? localStorage.getItem('font') || 'Open Sans' : 'Open Sans',
+  font: isBrowser ? localStorage.getItem('font') || '' : '',
   theme: isBrowser ? localStorage.getItem('theme') || 'light' : 'light',
   language: isBrowser ? localStorage.getItem('language') || 'en' : 'en',
 };

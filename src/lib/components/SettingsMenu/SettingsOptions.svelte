@@ -71,14 +71,14 @@
 				on:change={handleFontChange}
 			/> Default
 		</label>
-		<label class="options__font--open-sans">
+		<label class="options__font--sans-serif">
 			<input
 				type="radio"
 				name="font"
-				value="Open Sans"
+				value="sans-serif"
 				bind:group={$font}
 				on:change={handleFontChange}
-			/> Open Sans
+			/> Sans-Serif
 		</label>
 		<label class="options__font--dyslexic">
 			<input
@@ -141,7 +141,7 @@
 		font-family: 'system-ui';
 	}
 
-	.options__font--open-sans {
-		font-family: 'Open Sans';
+	.options__font--sans-serif {
+		font-family: sans-serif;
 	}
 </style>

@@ -1,18 +1,8 @@
 @import './styles/variables.css';
 @import './styles/helpers.css';
 @import './styles/skeleton.css';
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import './styles/fonts.css';
 
-@font-face {
-  font-family: 'Open Sans';
-  src: url('https://fonts.google.com/specimen/Open+Sans?query=Open+Sans') format('woff2');
-}
-
-
-@font-face {
-  font-family: 'Open Dyslexic';
-  src: url('/fonts/OpenDyslexic-Regular.otf') format('opentype');
-}
 
 body {
   background-color: var(--color-primary);

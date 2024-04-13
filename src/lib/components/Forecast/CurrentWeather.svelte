@@ -74,7 +74,8 @@
 
 	.weather__icon {
 		position: absolute;
-		right: 10px;
+		top: var(--spacing-sm);
+		right: var(--spacing-sm);
 	}
 
 	.weather__icon--two-digits {
