@@ -1,8 +1,9 @@
 <script lang="ts">
-	import Icon from './UI/Icon.svelte';
 	import { scale } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
 	import clickOutside from '$lib/utils/click-outside';
+	import Icon from '../UI/Icon.svelte';
+	import SettingsOptions from './SettingsOptions.svelte';
 
 	let menuOpen = false;
 
@@ -40,14 +41,10 @@
 
 	{#if menuOpen}
 		<div class="settings__menu" transition:scale={{ start: 0.5, easing: cubicOut }}>
-			<button on:click={() => closeMenu()} class="settings__button settings__button--right">
+			<button on:click={() => closeMenu()} class="settings__button settings__button--close">
 				<Icon name="close" label="close" color="default" size="default" />
 			</button>
-			<ul>
-				<li>Settings</li>
-				<li>Profile</li>
-				<li>Logout</li>
-			</ul>
+			<SettingsOptions />
 		</div>
 	{/if}
 </div>
@@ -64,8 +61,10 @@
 		border: none;
 		padding: 0;
 	}
-	.settings__button--right {
-		float: right;
+	.settings__button--close {
+		width: 100%;
+		text-align: right;
+		margin-bottom: var(--spacing-sm);
 	}
 
 	.settings__menu {

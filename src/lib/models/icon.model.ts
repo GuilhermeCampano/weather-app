@@ -34,4 +34,5 @@ export type IconName =
   'rainy' |
   'thunderstorm' |
   'weather_mix' |
-  'weather_snowy'
+  'weather_snowy'|
+  'thermostat';

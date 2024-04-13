@@ -1,5 +1,5 @@
 <script lang="ts">
-	import SettingsMenu from '$lib/components/SettingsMenu.svelte';
+	import SettingsMenu from '$lib/components/SettingsMenu/SettingsMenu.svelte';
 	import FloatingCircle from '$lib/components/UI/FloatingCircle.svelte';
 </script>
 
