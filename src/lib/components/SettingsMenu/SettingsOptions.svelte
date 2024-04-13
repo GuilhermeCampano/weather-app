@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { fly } from 'svelte/transition';
+	import { sineInOut } from 'svelte/easing';
 	import Icon from '../UI/Icon.svelte';
 
 	let temperatureMetric = 'Celsius';
@@ -16,11 +18,20 @@
 	function handleThemeChange(event: Event) {
 		theme = (event.target as HTMLInputElement)?.value;
 	}
+
+	const getAnimation = (order: number = 1) => {
+		return {
+			y: 50,
+			delay: order * 200,
+			duration: 400,
+			easing: sineInOut
+		};
+	};
 </script>
 
 <div class="options">
 	<!--Temperature-->
-	<div class="options__group">
+	<div class="options__group" in:fly="{getAnimation(1)}">
 		<label for="temperature">
 			<Icon name="thermostat" color="blue" , size="default" label="temperature" /> Temperature Units
 		</label>
@@ -46,7 +57,7 @@
 		</label>
 	</div>
 	<!--Fonts-->
-	<div class="options__group">
+	<div class="options__group" in:fly="{getAnimation(2)}">
 		<label for="font">
 			<Icon name="font" color="blue" , size="default" label="font" /> Font Style
 		</label>
@@ -72,7 +83,7 @@
 		</label>
 	</div>
 	<!--Theme-->
-	<div class="options__group">
+	<div class="options__group" in:fly="{getAnimation(3)}">
 		<label for="theme">
 			<Icon name="theme" color="blue" , size="default" label="theme" /> Theme
 		</label>
