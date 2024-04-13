@@ -2,21 +2,32 @@
 	import { fly } from 'svelte/transition';
 	import { sineInOut } from 'svelte/easing';
 	import Icon from '../UI/Icon.svelte';
+	import { LocalStorage } from '$lib/utils/localstorage';
+	import type { UserPreferencesTheme, UserPreferencesUnit } from '$lib/models';
 
-	let temperatureMetric = 'Celsius';
-	let fontStyle = 'Open Sans';
-	let theme = 'light';
+	const userPreferences = LocalStorage.userPreferences.retrieve();
+
+	let units = userPreferences?.units ?? 'metric';
+	let font = userPreferences?.font ?? 'Open Sans';
+	let theme = userPreferences?.theme ?? 'light';
+
+	function updatedPreferences() {
+		LocalStorage.userPreferences.save({ ...userPreferences, units, font, theme });
+	}
 
 	function handleTemperatureChange(event: Event) {
-		temperatureMetric = (event.target as HTMLInputElement)?.value;
+		units = <UserPreferencesUnit>(event.target as HTMLInputElement)?.value;
+		updatedPreferences();
 	}
 
 	function handleFontChange(event: Event) {
-		fontStyle = (event.target as HTMLInputElement)?.value;
+		font = (event.target as HTMLInputElement)?.value;
+		updatedPreferences();
 	}
 
 	function handleThemeChange(event: Event) {
-		theme = (event.target as HTMLInputElement)?.value;
+		theme = <UserPreferencesTheme>(event.target as HTMLInputElement)?.value;
+		updatedPreferences();
 	}
 
 	const getAnimation = (order: number = 1) => {
@@ -31,7 +42,7 @@
 
 <div class="options">
 	<!--Temperature-->
-	<div class="options__group" in:fly="{getAnimation(1)}">
+	<div class="options__group" in:fly={getAnimation(1)}>
 		<label for="temperature">
 			<Icon name="thermostat" color="blue" , size="default" label="temperature" /> Temperature Units
 		</label>
@@ -39,8 +50,8 @@
 			<input
 				type="radio"
 				name="temperature"
-				value="Celsius"
-				bind:group={temperatureMetric}
+				value="metric"
+				bind:group={units}
 				on:change={handleTemperatureChange}
 			/>
 			Celsius
@@ -49,15 +60,15 @@
 			<input
 				type="radio"
 				name="temperature"
-				value="Fahrenheit"
-				bind:group={temperatureMetric}
+				value="imperial"
+				bind:group={units}
 				on:change={handleTemperatureChange}
 			/>
 			Fahrenheit
 		</label>
 	</div>
 	<!--Fonts-->
-	<div class="options__group" in:fly="{getAnimation(2)}">
+	<div class="options__group" in:fly={getAnimation(2)}>
 		<label for="font">
 			<Icon name="font" color="blue" , size="default" label="font" /> Font Style
 		</label>
@@ -66,7 +77,7 @@
 				type="radio"
 				name="font"
 				value="Open Sans"
-				bind:group={fontStyle}
+				bind:group={font}
 				on:change={handleFontChange}
 			/>
 			Open Sans
@@ -76,14 +87,14 @@
 				type="radio"
 				name="font"
 				value="Open Dyslexic"
-				bind:group={fontStyle}
+				bind:group={font}
 				on:change={handleFontChange}
 			/>
 			Open Dyslexic
 		</label>
 	</div>
 	<!--Theme-->
-	<div class="options__group" in:fly="{getAnimation(3)}">
+	<div class="options__group" in:fly={getAnimation(3)}>
 		<label for="theme">
 			<Icon name="theme" color="blue" , size="default" label="theme" /> Theme
 		</label>
