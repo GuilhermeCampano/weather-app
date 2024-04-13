@@ -71,11 +71,12 @@
 		position: absolute;
 		z-index: 20;
 		width: 400px;
-		height: 400px;
+		height: auto;
+    min-height: 300px;
 		top: 0px;
 		right: 0px;
 		list-style: none;
-		padding: var(--spacing-sm);
+		padding: var(--spacing-sm) var(--spacing-md);
 		background-color: var(--color-background);
 		box-shadow: var(--box-shadow);
 		border-radius: var(--border-radius-md);
