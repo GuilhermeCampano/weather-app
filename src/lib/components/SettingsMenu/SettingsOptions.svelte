@@ -4,30 +4,21 @@
 	import Icon from '../UI/Icon.svelte';
 	import { LocalStorage } from '$lib/utils/localstorage';
 	import type { UserPreferencesTheme, UserPreferencesUnit } from '$lib/models';
-
-	const userPreferences = LocalStorage.userPreferences.retrieve();
-
-	let units = userPreferences?.units ?? 'metric';
-	let font = userPreferences?.font ?? 'Open Sans';
-	let theme = userPreferences?.theme ?? 'light';
-
-	function updatedPreferences() {
-		LocalStorage.userPreferences.save({ ...userPreferences, units, font, theme });
-	}
+	import { units, language, font, theme } from '$lib/stores/user-settings.store';
 
 	function handleTemperatureChange(event: Event) {
-		units = <UserPreferencesUnit>(event.target as HTMLInputElement)?.value;
-		updatedPreferences();
+		const newUnit = (event.target as HTMLInputElement)?.value;
+		units.set(newUnit);
 	}
 
 	function handleFontChange(event: Event) {
-		font = (event.target as HTMLInputElement)?.value;
-		updatedPreferences();
+		const newFont = (event.target as HTMLInputElement)?.value;
+		font.set(newFont);
 	}
 
 	function handleThemeChange(event: Event) {
-		theme = <UserPreferencesTheme>(event.target as HTMLInputElement)?.value;
-		updatedPreferences();
+		const newTheme = <UserPreferencesTheme>(event.target as HTMLInputElement)?.value;
+		theme.set(newTheme);
 	}
 
 	const getAnimation = (order: number = 1) => {
@@ -51,7 +42,7 @@
 				type="radio"
 				name="temperature"
 				value="metric"
-				bind:group={units}
+				bind:group={$units}
 				on:change={handleTemperatureChange}
 			/>
 			Celsius
@@ -61,7 +52,7 @@
 				type="radio"
 				name="temperature"
 				value="imperial"
-				bind:group={units}
+				bind:group={$units}
 				on:change={handleTemperatureChange}
 			/>
 			Fahrenheit
@@ -77,7 +68,7 @@
 				type="radio"
 				name="font"
 				value="Open Sans"
-				bind:group={font}
+				bind:group={$font}
 				on:change={handleFontChange}
 			/>
 			Open Sans
@@ -87,7 +78,7 @@
 				type="radio"
 				name="font"
 				value="Open Dyslexic"
-				bind:group={font}
+				bind:group={$font}
 				on:change={handleFontChange}
 			/>
 			Open Dyslexic
@@ -103,7 +94,7 @@
 				type="radio"
 				name="theme"
 				value="light"
-				bind:group={theme}
+				bind:group={$theme}
 				on:change={handleThemeChange}
 			/>
 			Light
@@ -113,7 +104,7 @@
 				type="radio"
 				name="theme"
 				value="dark"
-				bind:group={theme}
+				bind:group={$theme}
 				on:change={handleThemeChange}
 			/>
 			Dark
