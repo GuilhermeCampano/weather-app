@@ -21,7 +21,7 @@
 		justify-content: space-between;
 		align-items: start;
 		height: min-content;
-		margin-bottom: var(--spacing-sm);
+		margin-bottom: var(--spacing-md);
 	}
 
 	.header__logo {

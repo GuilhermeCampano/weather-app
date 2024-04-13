@@ -69,6 +69,7 @@
 		position: relative;
 	}
 	.autocomplete__input {
+		color: inherit;
 		background-color: var(--color-background-off-white);
 		box-shadow: var(--box-shadow);
 		width: 100%;

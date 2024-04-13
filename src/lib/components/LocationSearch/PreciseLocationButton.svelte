@@ -41,6 +41,7 @@
 		font-weight: var(--font-weight-regular);
 		font-family: inherit;
 		margin-top: var(--spacing-md);
+		color: var(--color-text);
 	}
 
 	.precise-location:hover .precise-location__text {

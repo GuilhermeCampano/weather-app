@@ -4,6 +4,10 @@
 @import './styles/fonts.css';
 
 
+html {
+  scrollbar-color: unset;
+}
+
 body {
   background-color: var(--color-primary);
   color: var(--color-text-dark);
@@ -13,21 +17,11 @@ body {
   width: 100%;
   max-width: 920px;
   margin-inline: auto;
-  scrollbar-color: var(--color-primary) var(--color-background-light);
+  scrollbar-color: var(--color-icon-tertiary) var(--color-background-light);
+  transition: background-color 0.3s ease;
 }
 
 
-
-@media (prefers-color-scheme: dark) {
-  body {
-    --color-primary: #C7D9EE;
-    --color-secondary: #8AF7F0;
-    --color-tertiary: #6F9DF8;
-    --color-background-off-white: #eef4fa;
-    scrollbar-color: var(--color-tertiary) var(--color-background-light);
-
-  }
-}
 
 * {
   box-sizing: border-box;

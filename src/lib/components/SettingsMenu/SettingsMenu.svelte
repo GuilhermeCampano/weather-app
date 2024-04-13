@@ -53,6 +53,7 @@
 	.settings {
 		position: relative;
 		display: inline-block;
+		color: var(--color-text);
 	}
 
 	.settings__button {
@@ -60,6 +61,7 @@
 		background: none;
 		border: none;
 		padding: 0;
+		color: var(--color-text);
 	}
 	.settings__button--close {
 		width: 100%;

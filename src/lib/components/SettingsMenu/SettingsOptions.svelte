@@ -71,15 +71,6 @@
 				on:change={handleFontChange}
 			/> Default
 		</label>
-		<label class="options__font--sans-serif">
-			<input
-				type="radio"
-				name="font"
-				value="sans-serif"
-				bind:group={$font}
-				on:change={handleFontChange}
-			/> Sans-Serif
-		</label>
 		<label class="options__font--dyslexic">
 			<input
 				type="radio"
@@ -99,17 +90,27 @@
 			<input
 				type="radio"
 				name="theme"
-				value="light"
+				value="warm"
 				bind:group={$theme}
 				on:change={handleThemeChange}
 			/>
-			Light
+			Warm
 		</label>
 		<label>
 			<input
 				type="radio"
 				name="theme"
-				value="dark"
+				value="cold-theme"
+				bind:group={$theme}
+				on:change={handleThemeChange}
+			/>
+			Cold
+		</label>
+		<label>
+			<input
+				type="radio"
+				name="theme"
+				value="dark-theme"
 				bind:group={$theme}
 				on:change={handleThemeChange}
 			/>
@@ -138,10 +139,7 @@
 	}
 
 	.options__font--default {
-		font-family: 'system-ui';
+		font-family: 'system-ui, sans-serif';
 	}
 
-	.options__font--sans-serif {
-		font-family: sans-serif;
-	}
 </style>
