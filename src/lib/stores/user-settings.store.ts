@@ -15,8 +15,11 @@ export const theme = writable(initialPreferences.theme);
 export const language = writable(initialPreferences.language);
 
 if (isBrowser) {
-  language.subscribe(value => localStorage.setItem('language', value));
+language.subscribe(value => localStorage.setItem('language', value));
   units.subscribe(value => localStorage.setItem('units', value));
-  font.subscribe(value => localStorage.setItem('font', value));
+  font.subscribe(value => {
+    localStorage.setItem('font', value);
+    document.body.style.fontFamily = `${value}`
+  });
   theme.subscribe(value => localStorage.setItem('theme', value));
 }

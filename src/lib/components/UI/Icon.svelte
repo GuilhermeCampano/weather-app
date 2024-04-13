@@ -17,7 +17,7 @@
 	function parseIconContent(svgContent: string) {
 		return svgContent.replace(
 			'<svg ',
-			`<svg style="width: ${iconSize}; height: ${iconSize}; fill: ${iconColor}; vertical-align: bottom;" `
+			`<svg style="width: ${iconSize}; height: ${iconSize}; fill: ${iconColor}; vertical-align: middle;" `
 		);
 	}
 </script>

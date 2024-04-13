@@ -2,9 +2,8 @@
 	import { fly } from 'svelte/transition';
 	import { sineInOut } from 'svelte/easing';
 	import Icon from '../UI/Icon.svelte';
-	import { LocalStorage } from '$lib/utils/localstorage';
-	import type { UserPreferencesTheme, UserPreferencesUnit } from '$lib/models';
-	import { units, language, font, theme } from '$lib/stores/user-settings.store';
+	import type { UserPreferencesTheme } from '$lib/models';
+	import { units, font, theme } from '$lib/stores/user-settings.store';
 
 	function handleTemperatureChange(event: Event) {
 		const newUnit = (event.target as HTMLInputElement)?.value;
@@ -63,25 +62,32 @@
 		<label for="font">
 			<Icon name="font" color="blue" , size="default" label="font" /> Font Style
 		</label>
-		<label>
+		<label class="options__font--default">
+			<input
+				type="radio"
+				name="font"
+				value="system-ui"
+				bind:group={$font}
+				on:change={handleFontChange}
+			/> Default
+		</label>
+		<label class="options__font--open-sans">
 			<input
 				type="radio"
 				name="font"
 				value="Open Sans"
 				bind:group={$font}
 				on:change={handleFontChange}
-			/>
-			Open Sans
+			/> Open Sans
 		</label>
-		<label>
+		<label class="options__font--dyslexic">
 			<input
 				type="radio"
 				name="font"
 				value="Open Dyslexic"
 				bind:group={$font}
 				on:change={handleFontChange}
-			/>
-			Open Dyslexic
+			/> Open Dyslexic
 		</label>
 	</div>
 	<!--Theme-->
@@ -123,5 +129,19 @@
 		gap: var(--spacing-sm);
 		justify-content: space-between;
 		margin-bottom: var(--spacing-md);
+	}
+
+	.options__font--dyslexic {
+		font-family: 'Open Dyslexic';
+		word-spacing: -4px;
+    line-height:var(--font-md);
+	}
+
+	.options__font--default {
+		font-family: 'system-ui';
+	}
+
+	.options__font--open-sans {
+		font-family: 'Open Sans';
 	}
 </style>
