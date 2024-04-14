@@ -2,6 +2,7 @@
 @import './styles/helpers.css';
 @import './styles/skeleton.css';
 @import './styles/fonts.css';
+@import './styles/themes.css';
 
 
 html {
@@ -18,9 +19,8 @@ body {
   max-width: 920px;
   margin-inline: auto;
   scrollbar-color: var(--color-icon-tertiary) var(--color-background-light);
-  transition: background-color 0.3s ease;
+  transition: background-color .5s ease-out;
 }
-
 
 
 * {

@@ -7,7 +7,7 @@ declare let self: ServiceWorkerGlobalScope;
 import { build, files, version } from '$service-worker';
 
 
-const CACHE = `assets-cache-v${version}`;
+const CACHE = `assets-cache-${version}`;
 const ASSETS = [...build, ...files];
 
 

@@ -43,27 +43,3 @@
   --letter-spacing: 0.1rem;
 }
 
-
-html[data-theme="cold-theme"] {
-  --color-primary: #C7D9EE;
-  --color-secondary: #8AF7F0;
-  --color-tertiary: #6F9DF8;
-  --color-background-off-white: #eef4fa;
-}
-
-html[data-theme="dark-theme"] {
-  --color-background: #000000;
-  --color-background-light: #27292b;
-  --color-background-off-white: #101019;
-  --color-background-transparent: rgb(34 34 34 / 97%);
-
-  --color-text: #FFFFFF;
-  --color-text-dark: #FFFFFF;
-  --color-shadow: #ffc0812b;
-
-  --color-primary: #343a40;
-  --color-secondary: #ff9400;
-  --color-tertiary: #bfbfbf;
-  scrollbar-color: unset;
-
-}
