@@ -34,7 +34,7 @@
 	<!--Temperature-->
 	<div class="options__group" in:fly={getAnimation(1)}>
 		<label for="temperature">
-			<Icon name="thermostat" color="blue" , size="default" label="temperature" /> Temperature Units
+			<Icon name="thermostat" color="blue" , size="default" label="temperature" class="options__icon"  /> Temperature Units
 		</label>
 		<label>
 			<input
@@ -60,7 +60,7 @@
 	<!--Fonts-->
 	<div class="options__group" in:fly={getAnimation(2)}>
 		<label for="font">
-			<Icon name="font" color="blue" , size="default" label="font" /> Font Style
+			<Icon name="font" color="blue" , size="default" label="font" class="options__icon" /> Font Style
 		</label>
 		<label class="options__font--default">
 			<input
@@ -84,7 +84,7 @@
 	<!--Theme-->
 	<div class="options__group" in:fly={getAnimation(3)}>
 		<label for="theme">
-			<Icon name="theme" color="blue" , size="default" label="theme" /> Theme
+			<Icon name="theme" color="blue" , size="default" label="theme" class="options__icon" /> Theme
 		</label>
 		<label>
 			<input
@@ -140,6 +140,12 @@
 
 	.options__font--default {
 		font-family: 'system-ui, sans-serif';
+	}
+
+	
+	.options :global(.options__icon) {
+		position: relative;
+		top: -2px;
 	}
 
 </style>

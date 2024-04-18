@@ -29,7 +29,7 @@
 		height: auto;
 	}
 
-	:global(.header__icon) {
+	.header :global(.header__icon) {
 		padding-top: 8px;
 	}
 </style>
