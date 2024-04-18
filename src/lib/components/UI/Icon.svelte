@@ -1,7 +1,3 @@
-<!--
-	Usage:
-	<Icon name="icon-name" color="blue" size="large" label="icon-label" />
--->
 <script lang="ts">
 	import { IconColors, IconSizes, type IconName } from '$lib/models/icon.model';
 	import { IconService } from '$lib/utils/icon-service';
