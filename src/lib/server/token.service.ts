@@ -25,3 +25,8 @@ export async function verifyToken(token: string) {
     return false;
   }
 }
+
+export function extractToken(request: Request): string {
+  const authHeader = request.headers.get('Authorization');
+  return authHeader?.split('Bearer ')[1] || '';
+}

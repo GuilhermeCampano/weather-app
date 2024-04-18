@@ -38,7 +38,7 @@ self.addEventListener('activate', event => {
 
 // listen for fetch event
 self.addEventListener('fetch', event => {
-  if (event.request.method !== 'GET') {
+  if (event.request.method !== 'GET' || event.request.url.includes('/api/')) {
     return;
   }
 

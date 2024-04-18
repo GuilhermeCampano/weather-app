@@ -1,6 +1,29 @@
 <script lang="ts">
 	import SettingsMenu from '$lib/components/SettingsMenu/SettingsMenu.svelte';
 	import FloatingCircle from '$lib/components/UI/FloatingCircle.svelte';
+	import ApiService from '$lib/utils/api-service.js';
+	import { onMount } from 'svelte';
+
+	export let data: { token: string };
+
+	onMount(async () => {
+		saveToken(data.token);
+		await detectSWUpdate();
+	});
+
+	function saveToken(token: string) {
+		ApiService.token = token;
+	}
+
+	async function detectSWUpdate() {
+		if ('serviceWorker' in navigator) {
+			const registration = await navigator.serviceWorker.getRegistration();
+			if (registration && registration.waiting) {
+				registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+			}
+		}
+	}
+
 </script>
 
 <header class="header">
