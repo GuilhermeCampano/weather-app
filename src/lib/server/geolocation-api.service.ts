@@ -30,7 +30,7 @@ export class GeolocationService {
       });
   }
 
-  public getPlaceDetails(placeId: string): Promise<PlaceGeolocationDetails | null> {
+  public getPlaceDetailsByPlaceId(placeId: string): Promise<PlaceGeolocationDetails | null> {
     const cachedDetails = PlaceDetailsCache.getFromCache(placeId);
     if (cachedDetails) {
       console.log('Returning cached details for:', placeId);
@@ -88,6 +88,27 @@ export class GeolocationService {
       .catch(error => {
         console.error(error);
         throw new Error('Error fetching geolocation from address');
+      });
+  }
+
+  public getPlaceDetailsByCoordinates(latitude: string, longitude: string): Promise<PlaceGeolocationDetails | null> {
+    const cachedGeolocation = GeolocationCache.getFromCache(`${latitude},${longitude}`);
+    if (cachedGeolocation) {
+      console.log('Returning cached geolocation for:', latitude, longitude);
+      return Promise.resolve(cachedGeolocation);
+    }
+    return fetch(`${this.#GEOCODE_ENDPOINT}?latlng=${latitude},${longitude}&key=${PRIVATE_GOOGLE_API_KEY}`)
+      .then(response => response.json())
+      .then(data => data.results.length ? this.normalizePlaceDetails(data.results[0]) : null)
+      .then((details: PlaceGeolocationDetails | null) => {
+        if (details) {
+          GeolocationCache.addToCache(`${latitude},${longitude}`, details);
+        }
+        return details;
+      })
+      .catch(error => {
+        console.error(error);
+        throw new Error('Error fetching geolocation from coordinates');
       });
   }
 }

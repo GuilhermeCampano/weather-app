@@ -1,19 +1,33 @@
+import type { PlaceGeolocationDetails } from "$lib/models";
 import { GeolocationService } from "$lib/server/geolocation-api.service";
 
 export async function GET({ url }: { url: URL }) {
+  console.log(`GET ${url.pathname}, query: ${url.searchParams}`);
   const placeId = <string>url.searchParams.get('placeId');
-  if (!placeId) {
-    console.error('Error: placeId is required');
-    return new Response('Error: placeId is required', {
+  const latitude = <string>url.searchParams.get('latitude');
+  const longitude = <string>url.searchParams.get('longitude');
+
+  if (!placeId && (!latitude || !longitude)) {
+    console.error('Error: placeId or latitude and longitude are required');
+    return new Response('Error: placeId or latitude and longitude are required', {
       headers: { 'content-type': 'application/json' },
       status: 400
     });
   }
 
-  console.log(`GET /api/geolocation for placeId: ${placeId}`);
+  const geolocationService = new GeolocationService();
+  let fetchStrategy: () => Promise<PlaceGeolocationDetails | null> = async () => null;
+
+  if (placeId) {
+    fetchStrategy = () => geolocationService.getPlaceDetailsByPlaceId(placeId);
+  }
+
+  if (latitude && longitude) {
+    fetchStrategy = () => geolocationService.getPlaceDetailsByCoordinates(latitude, longitude);
+  }
+
   try {
-    const geolocationService = new GeolocationService();
-    const response = await geolocationService.getPlaceDetails(placeId);
+    const response = await fetchStrategy();
     return new Response(JSON.stringify(response), {
       headers: { 'content-type': 'application/json' },
       status: 200
@@ -27,3 +41,4 @@ export async function GET({ url }: { url: URL }) {
     });
   }
 }
+

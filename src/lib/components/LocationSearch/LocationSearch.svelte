@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
 	import {
 		searchInput,
 		autoCompleteResults,
@@ -33,7 +32,7 @@
 	async function onSelectLocation(autocompleteItem: AutocompleteItem) {
 		const placeDetails = await ApiService.getGeolocation(autocompleteItem.placeId);
 		if (placeDetails) {
-			selectPlaceResult(placeDetails, autocompleteItem);
+			selectPlaceResult(placeDetails, autocompleteItem.description);
 			LocalStorage.lastSearch.save({ placeDetails, autocompleteItem });
 			goto(`/forecast/${placeDetails.formattedAddress}`);
 		}
