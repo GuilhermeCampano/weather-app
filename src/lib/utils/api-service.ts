@@ -42,4 +42,8 @@ export default class ApiService {
   static async getGeolocationFromAddress(address: string): Promise<PlaceGeolocationDetails> {
     return await this.fetch(`${Endpoints.ADDRESS_GEOLOCATION}?address=${address}`);
   }
+
+  static async getGeolocationByCoordinates(latitude: number, longitude: number): Promise<PlaceGeolocationDetails> {
+    return await this.fetch(`${Endpoints.GEOLOCATION}?latitude=${latitude.toFixed(6)}&longitude=${longitude.toFixed(6)}`);
+  }
 }

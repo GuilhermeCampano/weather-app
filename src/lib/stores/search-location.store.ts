@@ -15,9 +15,10 @@ export function resetSearchInput() {
   autoCompleteResults.set([]);
 }
 
-export function selectPlaceResult(placeDetails: PlaceGeolocationDetails, autocompleteItem: AutocompleteItem) {
-  searchInput.set(autocompleteItem.description);
-  lastSelectedSearchInput.set(autocompleteItem.description);
+export function selectPlaceResult(placeDetails: PlaceGeolocationDetails, inputText?: string) {
+  const displayLocationLabel = inputText || placeDetails.formattedAddress;
+  searchInput.set(displayLocationLabel);
+  lastSelectedSearchInput.set(displayLocationLabel);
   latitude.set(placeDetails.latitude);
   longitude.set(placeDetails.longitude);
   searchedOnce.set(true);

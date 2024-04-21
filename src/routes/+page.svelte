@@ -17,7 +17,7 @@
 			lastSearch = LocalStorage.lastSearch.retrieve();
 		}
 		if (lastSearch) {
-			selectPlaceResult(lastSearch.placeDetails, lastSearch.autocompleteItem);
+			selectPlaceResult(lastSearch.placeDetails, lastSearch.autocompleteItem.description);
 		}
 	}
 	

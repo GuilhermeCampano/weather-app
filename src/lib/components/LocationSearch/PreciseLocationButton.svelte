@@ -1,19 +1,21 @@
 <script lang="ts">
-	import { latitude, longitude, resetSearchInput } from '$lib/stores/search-location.store';
+	import { selectPlaceResult } from '$lib/stores/search-location.store';
 	import { debounce } from '$lib/utils/debounce';
 	import Icon from '$lib/components/UI/Icon.svelte';
+	import ApiService from '$lib/utils/api-service';
 
 	function getLocation() {
 		try {
-			navigator.geolocation.getCurrentPosition((position) => {
-				latitude.set(position.coords.latitude);
-				longitude.set(position.coords.longitude);
-				resetSearchInput();
+			navigator.geolocation.getCurrentPosition(async (position) => {
+				const { latitude, longitude } = position.coords;
+				const response = await ApiService.getGeolocationByCoordinates(latitude, longitude);
+				selectPlaceResult(response);
 			});
 		} catch (error) {
 			console.error(error);
 		}
 	}
+
 </script>
 
 <button on:click={debounce(getLocation)} class="precise-location" tabindex="0">
