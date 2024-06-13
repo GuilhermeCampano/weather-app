@@ -16,7 +16,7 @@ export async function GET({ url }: { url: URL }) {
     const response = await weatherApiService.getForecast(latitude, longitude);
     const headers = new Headers();
     headers.set('Content-Type', 'application/json');
-    // headers.set('Cache-Control', 'max-age=300'); // 5 minutes
+    headers.set('Cache-Control', 'max-age=300'); // 5 minutes
     return new Response(JSON.stringify(response), {
       headers,
       status: 200

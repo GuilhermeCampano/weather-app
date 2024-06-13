@@ -39,6 +39,7 @@ export class WeatherApiService {
 
 
   public async getForecast(latitude: string, longitude: string): Promise<ForecastApiResponse> {
+    console.log(`getForecast`, this.getForecastUrl(latitude, longitude));
     return fetch(this.getForecastUrl(latitude, longitude))
       .then(response => response.json())
       .then((data: OpenMeteoApiResponse) => this.normalizeForecastData(data))
@@ -49,11 +50,12 @@ export class WeatherApiService {
   }
 
   private normalizeMetadata(data: OpenMeteoApiResponse): ForecastApiMetadata {
+    console.log('normalizeMetadata', data);
     return {
       latitude: data.latitude,
       longitude: data.longitude,
       timezone: data.timezone,
-      localTime: data.current.time,
+      localTime: data.current?.time,
     };
   }
   
