@@ -25,7 +25,9 @@
 <div class="hourly-card__content">
 	{#each hourlyForecastCards as hourForecastCard, index}
 		<div class="hourly-card__item">
-			<div>{formatTime(hourForecastCard.time, index)}</div>
+			{#if hourForecastCard?.time}
+				<div>{formatTime(hourForecastCard?.time, index)}</div>
+			{/if}
 			<Icon {...getIconProperties(hourForecastCard.weatherCode)} />
 			<div>{getTemperatureFormatted(hourForecastCard.temperature, $units)}</div>
 		</div>
